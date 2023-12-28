@@ -44,7 +44,7 @@ const Footer: React.FC = () => {
               <WechatOutlined/> 联系作者
             </Tooltip>
           ),
-          href: 'https://img.qimuu.icu/typory/WeChat.jpg',
+          href: 'https://github.com/which0113',
           blankTarget: true,
         },
       ]}

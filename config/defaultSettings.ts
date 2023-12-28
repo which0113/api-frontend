@@ -15,7 +15,7 @@ const Settings: ProLayoutProps & {
   splitMenus: false,
   title: '咸鱼-API 接口开放平台',
   pwa: false,
-  // logo: 'https://img.qimuu.icu/typory/logo.gif',
-  iconfontUrl: 'https://img.qimuu.icu/typory/logo.gif',
+  // logo: 'public/logo.ico',
+  iconfontUrl: 'public/logo.ico',
 };
 export default Settings;

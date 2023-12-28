@@ -3,7 +3,7 @@ import {SettingDrawer} from '@ant-design/pro-components';
 import type {RunTimeLayoutConfig} from '@umijs/max';
 import {history} from '@umijs/max';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
-import logo from '../public/logo.gif';
+import logo from '../public/logo.ico';
 import Footer from '@/components/Footer';
 import {requestConfig} from '@/requestConfig';
 import Settings from '../config/defaultSettings';

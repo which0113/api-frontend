@@ -133,7 +133,7 @@ const Register: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.gif"/>}
+          logo={<img alt="logo" src="/logo.ico"/>}
           title="咸鱼-API平台"
           subTitle={'稳定、安全、高效'}
           initialValues={{
