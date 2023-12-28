@@ -243,32 +243,6 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
     sorter: (a, b) => a.balance - b.balance,
   },
   {
-    title: '邀请码',
-    dataIndex: 'invitationCode',
-    valueType: 'text',
-    copyable: true,
-    key: 'invitationCode',
-    search: false
-  },
-  {
-    title: 'SecretKey',
-    dataIndex: 'secretKey',
-    valueType: 'textarea',
-    copyable: true,
-    ellipsis: true,
-    key: 'secretKey',
-    search: false
-  },
-  {
-    title: 'AccessKey',
-    dataIndex: 'accessKey',
-    valueType: 'textarea',
-    copyable: true,
-    ellipsis: true,
-    key: 'accessKey',
-    search: false
-  },
-  {
     title: '角色/权限',
     dataIndex: 'userRole',
     key: 'userRole',
@@ -299,20 +273,6 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
         text: '女',
       }
     }
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'updateTime',
-    valueType: 'dateTime',
-    key: 'updateTime',
-    search: false
-  },
-  {
-    title: '创建时间',
-    dataIndex: 'createTime',
-    valueType: 'dateTime',
-    key: 'createTime',
-    search: false
   },
 ];
 
