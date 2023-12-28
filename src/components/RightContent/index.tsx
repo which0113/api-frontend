@@ -1,7 +1,7 @@
 import {PlusOutlined} from '@ant-design/icons';
 import '@umijs/max';
 import React from 'react';
-import {Button} from "antd";
+import {Button, Tooltip} from "antd";
 
 export type SiderTheme = 'light' | 'dark';
 export const Release = () => {
@@ -15,10 +15,12 @@ export const Docs = () => {
       className="anticon"
       style={{fontSize: 14, fontWeight: "bold"}}
       onClick={() => {
-        window.open('https://doc.qimuu.icu', '_blank')
+        window.open('https://github.com/which0113', '_blank')
       }}
     >
-        📘 开发者文档
+      <Tooltip title="正在开发中~">
+              📘 开发者文档
+      </Tooltip>
     </span>
   );
 };
