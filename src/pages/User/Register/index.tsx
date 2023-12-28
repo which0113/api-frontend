@@ -139,7 +139,6 @@ const Register: React.FC = () => {
           initialValues={{
             invitationCode: invitationCode
           }}
-          actions={['其他登录方式 :', <ActionIcons key="icons"/>]}
           onFinish={async (values) => {
             if (type === "account") {
               await handleSubmit(values as API.UserRegisterRequest);
@@ -280,13 +279,14 @@ const Register: React.FC = () => {
           )}
           <div
             style={{
-              marginTop: -18,
+              marginTop: 20,
             }}
           >
             <Link
               to={'/user/login'}
               style={{
                 float: 'right',
+                marginBottom: 20
               }}
             >
               已有账号?点击前往登录
