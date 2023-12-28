@@ -283,6 +283,15 @@ const Register: React.FC = () => {
             }}
           >
             <Link
+              to={'/'}
+              style={{
+                float: 'left',
+                marginBottom: 20
+              }}
+            >
+              首页
+            </Link>
+            <Link
               to={'/user/login'}
               style={{
                 float: 'right',
