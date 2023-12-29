@@ -3,6 +3,7 @@ import {SettingDrawer} from '@ant-design/pro-components';
 import type {RunTimeLayoutConfig} from '@umijs/max';
 import {history} from '@umijs/max';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
+// @ts-ignore
 import logo from '../public/logo.ico';
 import Footer from '@/components/Footer';
 import {requestConfig} from '@/requestConfig';
@@ -18,8 +19,6 @@ import SendGift from "@/components/Gift/SendGift";
 import NoFoundPage from "@/pages/404";
 
 const loginPath = '/user/login';
-const whiteList = [loginPath, "/", "/account/center"]
-
 const baiduStatistics = () => {
   const hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?1c3c7a064d6a39da5a90bf71821b4a9a";
