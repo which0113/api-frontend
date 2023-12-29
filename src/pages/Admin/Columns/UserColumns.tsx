@@ -62,6 +62,9 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserVO, "text">[] =
     key: "gender",
     valueType: "radio",
     valueEnum: {
+      "2": {
+        text: '保密',
+      },
       "0": {
         text: '男',
       },
@@ -73,19 +76,26 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserVO, "text">[] =
     colProps: {
       span: 24,
     },
+    formItemProps: {
+      initialValue: "2", // 设置初始值为"2"，即保密
+    },
   }, {
     title: '角色/权限',
     dataIndex: 'userRole',
     valueType: "radio",
     key: 'userRole',
     valueEnum: {
-      "admin": {
-        text: '管理员',
-      },
       "user": {
         text: '普通用户',
+      },
+      "admin": {
+        text: '管理员',
+        status: 'default'
       }
-    }
+    },
+    formItemProps: {
+      initialValue: "user", // 设置初始值为"user"，即普通用户
+    },
   },
   {
     title: '余额',
@@ -131,6 +141,9 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserVO, "text">[
     key: "gender",
     valueType: "radio",
     valueEnum: {
+      "2": {
+        text: '保密',
+      },
       "0": {
         text: '男',
       },
@@ -148,11 +161,12 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserVO, "text">[
     valueType: "radio",
     key: 'userRole',
     valueEnum: {
-      "admin": {
-        text: '管理员',
-      },
       "user": {
         text: '普通用户',
+      },
+      "admin": {
+        text: '管理员',
+        status: 'default'
       }
     }
   },
@@ -249,13 +263,13 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
     filters: true,
     onFilter: true,
     valueEnum: {
-      "admin": {
-        text: '管理员',
-        status: 'success'
-      },
       "user": {
         text: '普通用户',
         status: 'default'
+      },
+      "admin": {
+        text: '管理员',
+        status: 'success'
       }
     }
   },
@@ -266,10 +280,13 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
     onFilter: true,
     key: 'gender',
     valueEnum: {
-      0: {
+      "2": {
+        text: '保密',
+      },
+      "0": {
         text: '男',
       },
-      1: {
+      "1": {
         text: '女',
       }
     }
