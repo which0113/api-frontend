@@ -366,6 +366,14 @@ const UserInfo: React.FC = () => {
                 {valueLength(loginUser?.email) ? loginUser?.email : '未绑定邮箱'}
               </Paragraph>
             </div>
+            <div>
+              <h4>我的积分：</h4>
+              <Paragraph
+                copyable={valueLength(loginUser?.balance)}
+              >
+                {valueLength(loginUser?.balance) ? loginUser?.balance : 0}
+              </Paragraph>
+            </div>
           </Descriptions>
         </ProCard>
         <br/>
