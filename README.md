@@ -31,7 +31,7 @@
 安装依赖：
 
 ```bash
-yarn or  npm install
+yarn or npm install
 ```
 
 启动：
