@@ -46,7 +46,7 @@ const ActionIcons = () => {
 };
 
 const Register: React.FC = () => {
-  const [type, setType] = useState<string>('email');
+  const [type, setType] = useState<string>('account');
   const [invitationCode, setInvitationCode] = useState<string>('');
   const [form] = Form.useForm();
   const params = useParams()
@@ -153,12 +153,12 @@ const Register: React.FC = () => {
             centered
             items={[
               {
-                key: 'email',
-                label: '邮箱账号注册',
-              },
-              {
                 key: 'account',
                 label: '平台账号注册',
+              },
+              {
+                key: 'email',
+                label: '邮箱账号注册',
               },
             ]}
           />
