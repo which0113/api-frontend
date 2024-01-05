@@ -28,7 +28,6 @@ const baiduStatistics = () => {
   s.parentNode.insertBefore(hm, s);
 };
 
-
 const stats: InitialState = {
   loginUser: undefined,
   settings: Settings,
