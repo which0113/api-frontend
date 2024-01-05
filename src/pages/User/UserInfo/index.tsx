@@ -412,7 +412,7 @@ const UserInfo: React.FC = () => {
           bordered
         >
           <Button size={"large"}>
-            <a target={"_blank"} href={"https://github.com/qimu666/qi-api-sdk"}
+            <a target={"_blank"} href={"https://github.com/which0113/api-sdk"}
                rel="noreferrer"><VerticalAlignBottomOutlined/> Java SDK</a>
           </Button>
         </ProCard>

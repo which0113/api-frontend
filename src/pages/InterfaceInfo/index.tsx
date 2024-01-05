@@ -46,7 +46,7 @@ const InterfaceInfo: React.FC = () => {
   const [totalInvokes, setTotalInvokes] = useState<number>(0);
   const [javaCode, setJavaCode] = useState<any>();
   const [returnCode, setReturnCode] = useState<any>(returnExample);
-  const docUrl = process.env.NODE_ENV === 'production' ? "https://doc.qimuu.icu" : 'http://localhost:9001'
+  const docUrl = process.env.NODE_ENV === 'production' ? "https://doc.freefish.love" : 'http://localhost:9001'
   const {initialState} = useModel('@@initialState');
   const {loginUser} = initialState || {}
   const loadedData = async () => {
@@ -216,11 +216,11 @@ const InterfaceInfo: React.FC = () => {
           </Descriptions.Item>
         </Descriptions>
       </Card>
-      <Card>
-        <p className="highlightLine">接口详细描述请前往开发者在线文档查看：</p>
-        <a href={`${docUrl}/pages/${data?.id}/#${data?.name}`} target={"_blank"} rel="noreferrer">📘
-          接口在线文档：{data?.name}</a>
-      </Card>
+      {/*<Card>*/}
+      {/*  <p className="highlightLine">接口详细描述请前往开发者在线文档查看：</p>*/}
+      {/*  <a href={`${docUrl}/pages/${data?.id}/#${data?.name}`} target={"_blank"} rel="noreferrer">📘*/}
+      {/*    接口在线文档：{data?.name}</a>*/}
+      {/*</Card>*/}
       <br/>
       <Card
         style={{width: '100%'}}
@@ -240,7 +240,7 @@ const InterfaceInfo: React.FC = () => {
         </Link>}
       >
         <Button size={"large"}>
-          <a target={"_blank"} href={"https://github.com/qimu666/qi-api-sdk"}
+          <a target={"_blank"} href={"https://github.com/which0113/api-sdk"}
              rel="noreferrer"><VerticalAlignBottomOutlined/> Java SDK</a>
         </Button>
       </ProCard>)}

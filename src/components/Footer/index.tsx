@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               <GithubOutlined/> 支持项目
             </Tooltip>
           ),
-          href: 'https://github.com/which0113',
+          href: 'https://github.com/which0113/api-backend',
           blankTarget: true,
         },
         {
@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
               <WechatOutlined/> 联系作者
             </Tooltip>
           ),
-          href: 'https://github.com/which0113',
+          href: 'https://github.com/which0113/api-backend',
           blankTarget: true,
         },
       ]}
