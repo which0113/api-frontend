@@ -24,7 +24,7 @@ export const javaExample = (url?: string, method?: string) =>
             CurrencyRequest currencyRequest = new CurrencyRequest();
             currencyRequest.setPath("${url}");
             currencyRequest.setMethod("${method}");
-            currencyRequest.setRequestParams("你的请求参数,详细请前往开发者在线文档📘查看");
+            currencyRequest.setRequestParams("详细参数请参考API文档");
             baseResponse = apiService.request(currencyRequest);
             System.out.println("data = " + baseResponse.getData());
         } catch (BusinessException e) {
