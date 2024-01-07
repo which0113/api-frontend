@@ -46,7 +46,6 @@ const InterfaceInfo: React.FC = () => {
   const [totalInvokes, setTotalInvokes] = useState<number>(0);
   const [javaCode, setJavaCode] = useState<any>();
   const [returnCode, setReturnCode] = useState<any>(returnExample);
-  const docUrl = process.env.NODE_ENV === 'production' ? "https://doc.freefish.love" : 'http://localhost:9001'
   const {initialState} = useModel('@@initialState');
   const {loginUser} = initialState || {}
   const loadedData = async () => {
