@@ -119,7 +119,7 @@ export default defineConfig({
   openAPI: [
     {
       requestLibPath: "import { request } from '@umijs/max'",
-      schemaPath: 'http://localhost:9001/api/v3/api-docs',
+      schemaPath: 'https://freefish.love/api/v3/api-docs',
       projectName: 'api-backend',
     },
   ],

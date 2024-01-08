@@ -3,8 +3,6 @@ import {BarsOutlined, GithubOutlined, WechatOutlined} from '@ant-design/icons';
 import type {RunTimeLayoutConfig} from '@umijs/max';
 import {history} from '@umijs/max';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
-// @ts-ignore
-import logo from '../public/logo.ico';
 import Footer from '@/components/Footer';
 import {requestConfig} from '@/requestConfig';
 import Settings from '../config/defaultSettings';
@@ -54,7 +52,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
     waterMarkProps: {
       content: initialState?.loginUser?.userName,
     },
-    logo: logo,
+    logo: 'https://img.freefish.love/logo.png',
     footerRender: () => <>
       <Footer/>
       <FloatButton.Group

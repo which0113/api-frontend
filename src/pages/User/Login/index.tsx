@@ -17,6 +17,7 @@ import Settings from '../../../../config/defaultSettings';
 import {ProFormCaptcha} from "@ant-design/pro-form";
 import {getCaptchaUsingGET, userEmailLoginUsingPOST, userLoginUsingPOST} from "@/services/api-backend/userController";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ActionIcons = () => {
   const langClassName = useEmotionCss(({token}) => {
     return {
@@ -108,7 +109,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.ico"/>}
+          logo={<img alt="logo" src="https://img.freefish.love/logo.png"/>}
           title="咸鱼-API平台"
           subTitle={'稳定、安全、高效'}
           initialValues={{
