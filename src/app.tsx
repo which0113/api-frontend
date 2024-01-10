@@ -13,7 +13,6 @@ import React from "react";
 import wechat from '@/../public/assets/WeChat.jpg';
 import LightColor from "@/components/Icon/LightColor";
 // import {Docs, helloWord} from "@/components/RightContent";
-import {helloWord} from "@/components/RightContent";
 import SendGift from "@/components/Gift/SendGift";
 import NoFoundPage from "@/pages/404";
 
@@ -33,7 +32,7 @@ const stats: InitialState = {
 };
 
 export async function getInitialState(): Promise<InitialState> {
-  console.log(`%c${helloWord}`, 'color:#e59de3')
+  // console.log(`%c${helloWord}`, 'color:#e59de3')
   try {
     const res = await getLoginUserUsingGET();
     if (res.data && res.code === 0) {
