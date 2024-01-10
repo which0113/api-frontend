@@ -12,8 +12,7 @@ interface ResponseStructure {
 }
 
 /**
- * @name 错误处理
- * pro 自带的错误处理， 可以在这里做自己的改动
+ * @name 请求拦截处理
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const requestConfig: RequestConfig = {
@@ -23,9 +22,11 @@ export const requestConfig: RequestConfig = {
   // 请求拦截器
   requestInterceptors: [
     (config: RequestOptions) => {
-      // 拦截请求配置，进行个性化处理。
-      const url = config?.url?.concat('?token = 123');
-      return {...config, url};
+      const token = localStorage.getItem("token");
+      if (config && config.headers && token) {
+        config.headers.token = JSON.parse(token);
+      }
+      return config;
     },
   ],
 
