@@ -56,7 +56,6 @@ const Login: React.FC = () => {
     };
   });
   const doLogin = (res: any) => {
-    console.log(res.data)
     if (res.data && res.code === 0) {
       message.success('登陆成功');
       localStorage.setItem("token", JSON.stringify(res.data.token));
