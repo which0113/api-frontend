@@ -39,7 +39,6 @@ const UserInfo: React.FC = () => {
   const {loginUser} = initialState || {}
   const [previewOpen, setPreviewOpen] = useState(false);
   const [voucherLoading, setVoucherLoading] = useState<boolean>(false);
-  const [dailyCheckInLoading, setDailyCheckInLoading] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [previewTitle, setPreviewTitle] = useState('');
@@ -52,7 +51,6 @@ const UserInfo: React.FC = () => {
   const ref1 = useRef(null);
   const ref2 = useRef(null);
   const ref3 = useRef(null);
-  const ref4 = useRef(null);
 
   const [openTour, setOpenTour] = useState<boolean>(false);
 
@@ -65,12 +63,12 @@ const UserInfo: React.FC = () => {
     {
       title: '接口调用凭证',
       description: '这里是您调用接口的凭证，没有凭证将无法调用接口',
-      target: () => ref3.current,
+      target: () => ref2.current,
     },
     {
       title: '开发者SDK',
       description: '您可以使用开发者SDK，快速高效的接入接口到您的项目中',
-      target: () => ref4.current,
+      target: () => ref3.current,
     }
   ];
 
@@ -378,7 +376,7 @@ const UserInfo: React.FC = () => {
         </ProCard>
         <br/>
         <ProCard
-          ref={ref3}
+          ref={ref2}
           bordered
           type="inner"
           title={"开发者凭证（调用接口的凭证）"}
@@ -406,7 +404,7 @@ const UserInfo: React.FC = () => {
         </ProCard>
         <br/>
         <ProCard
-          ref={ref4}
+          ref={ref3}
           type="inner"
           title={<strong>开发者 SDK（快速接入API接口）</strong>}
           bordered

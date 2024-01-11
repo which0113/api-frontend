@@ -98,7 +98,7 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserVO, "text">[] =
     },
   },
   {
-    title: '余额',
+    title: '积分',
     key: "balance",
     dataIndex: 'balance',
     width: 'lg',
@@ -110,7 +110,7 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserVO, "text">[] =
         () => ({
           validator(_, value) {
             if (value && value < 0) {
-              return Promise.reject(new Error("余额不能为负数"));
+              return Promise.reject(new Error("积分不能为负数"));
             }
             return Promise.resolve();
           },
@@ -171,7 +171,7 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserVO, "text">[
     }
   },
   {
-    title: '余额',
+    title: '积分',
     key: "balance",
     dataIndex: 'balance',
     width: 'lg',
@@ -183,7 +183,7 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserVO, "text">[
         () => ({
           validator(_, value) {
             if (value && value < 0) {
-              return Promise.reject(new Error("余额不能为负数"));
+              return Promise.reject(new Error("积分不能为负数"));
             }
             return Promise.resolve();
           },
