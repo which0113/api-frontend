@@ -99,7 +99,6 @@ const InterfaceInfoList: React.FC = () => {
     }
   };
 
-
   /**
    * @en-US Update node
    * @zh-CN 更新接口图片
@@ -281,15 +280,15 @@ const InterfaceInfoList: React.FC = () => {
             删除
           </a>
         </Popconfirm>,
-        <a
-          key="upload"
-          onClick={async () => {
-            setCurrentRow(record);
-            setModalOpen(true)
-          }}
-        >
-          更新图片
-        </a>
+        // <a
+        //   key="upload"
+        //   onClick={async () => {
+        //     setCurrentRow(record);
+        //     setModalOpen(true)
+        //   }}
+        // >
+        //   更新图片
+        // </a>
       ],
     },
   ];

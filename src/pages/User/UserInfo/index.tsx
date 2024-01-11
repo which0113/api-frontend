@@ -196,6 +196,11 @@ const UserInfo: React.FC = () => {
     }
   }
 
+  const token = localStorage.getItem("token")
+  const headers = {
+    token: JSON.parse(token === null ? "" : token)
+  }
+
   const props: UploadProps = {
     name: 'file',
     withCredentials: true,
@@ -234,6 +239,7 @@ const UserInfo: React.FC = () => {
         setFileList(newFileList);
       }
     },
+    headers: headers,
     listType: "picture-circle",
     onPreview: handlePreview,
     fileList: fileList,
