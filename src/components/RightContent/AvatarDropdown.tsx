@@ -8,6 +8,7 @@ import HeaderDropdown from '../HeaderDropdown';
 import {valueLength} from "@/pages/User/UserInfo";
 import {userLogoutUsingPOST} from "@/services/api-backend/userController";
 import Settings from "../../../config/defaultSettings";
+import {message} from "antd";
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
@@ -27,7 +28,11 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({children}) => 
    * 退出登录，并且将当前的 url 保存
    */
   const loginOut = async () => {
-    await userLogoutUsingPOST();
+    const res = await userLogoutUsingPOST();
+    if (!res.data) {
+      return;
+    }
+    message.success("已退出");
     const {search, pathname} = window.location;
     const urlParams = new URL(window.location.href).searchParams;
     /** 此方法会跳转到 redirect 参数所在的位置 */
@@ -47,7 +52,6 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({children}) => 
       });
     }
   };
-
 
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
