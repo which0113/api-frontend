@@ -57,7 +57,7 @@ const Login: React.FC = () => {
   });
   const doLogin = (res: any) => {
     if (res.data && res.code === 0) {
-      message.success('登陆成功').then(() => {
+      message.success('登录成功').then(() => {
         localStorage.setItem("token", JSON.stringify(res.data.token));
       });
       setTimeout(() => {
