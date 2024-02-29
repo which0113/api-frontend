@@ -37,7 +37,7 @@ const Footer: React.FC = () => {
               <WechatOutlined/> 联系作者
             </Tooltip>
           ),
-          href: 'https://github.com/which0113/api-backend',
+          href: 'https://github.com/which0113',
           blankTarget: true,
         },
       ]}

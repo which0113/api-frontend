@@ -62,6 +62,14 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
         <FloatButton
           tooltip={<img src={wechat} alt="微信 code_nav" width="120"/>}
           icon={<WechatOutlined/>}
+          onClick={() => {
+            if (initialState?.settings.navTheme === "light") {
+              setInitialState({loginUser: initialState?.loginUser, settings: {...Settings, navTheme: "realDark"}})
+            } else {
+              setInitialState({loginUser: initialState?.loginUser, settings: {...Settings, navTheme: "light"}})
+            }
+          }
+          }
         />
         {/*<FloatButton*/}
         {/*  tooltip={"📘 接口在线文档"}*/}
