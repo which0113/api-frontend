@@ -63,11 +63,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
           tooltip={<img src={wechat} alt="微信 code_nav" width="120"/>}
           icon={<WechatOutlined/>}
           onClick={() => {
-            if (initialState?.settings.navTheme === "light") {
-              setInitialState({loginUser: initialState?.loginUser, settings: {...Settings, navTheme: "realDark"}})
-            } else {
-              setInitialState({loginUser: initialState?.loginUser, settings: {...Settings, navTheme: "light"}})
-            }
+            location.href = "https://github.com/which0113"
           }
           }
         />
