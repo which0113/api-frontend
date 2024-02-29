@@ -72,7 +72,7 @@ const ToolsTab: React.FC<Props> = (props) => {
     <Spin spinning={resultLoading}>
       {result ?
         <CodeHighlighting codeString={result} language={requestExampleActiveTabKey}/>
-        : <Empty description={"未发起调用，暂无请求信息"}/>
+        : <Empty description={"初次加载时间较长，请耐心等待哦~"}/>
       }
     </Spin>
   </>
