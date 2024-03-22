@@ -270,6 +270,10 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
       "admin": {
         text: '管理员',
         status: 'success'
+      },
+      "demo": {
+        text: '仅查询',
+        status: 'error'
       }
     }
   },
