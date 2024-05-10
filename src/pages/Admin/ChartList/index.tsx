@@ -82,7 +82,7 @@ const ChartList: React.FC = () => {
    *
    * @param record
    */
-  const handleRemove = async (record: API.Chart) => {
+  const handleRemove = async (record: API.DeleteRequest) => {
     const hide = message.loading('正在删除');
     if (!record) return true;
     try {

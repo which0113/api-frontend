@@ -1,6 +1,6 @@
 import {ProColumns, ProFormColumnsType} from '@ant-design/pro-components';
 
-export const UserAddModalFormColumns: ProFormColumnsType<API.UserVO, "text">[] = [
+export const UserAddModalFormColumns: ProFormColumnsType<API.UserAddRequest, "text">[] = [
   {
     title: 'id',
     dataIndex: 'id',
@@ -118,7 +118,7 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserVO, "text">[] =
     },
   },
 ];
-export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserVO, "text">[] = [
+export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserUpdateRequest, "text">[] = [
   {
     title: 'id',
     dataIndex: 'id',

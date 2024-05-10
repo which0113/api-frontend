@@ -129,13 +129,14 @@ const UserList: React.FC = () => {
       return false;
     }
   };
+  
   /**
    *  Delete node
    * @zh-CN 删除节点
    *
    * @param record
    */
-  const handleRemove = async (record: API.UserVO) => {
+  const handleRemove = async (record: API.DeleteRequest) => {
     const hide = message.loading('正在删除');
     if (!record) return true;
     try {

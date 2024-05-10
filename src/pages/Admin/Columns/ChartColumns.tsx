@@ -1,6 +1,6 @@
 import {ProColumns, ProFormColumnsType} from '@ant-design/pro-components';
 
-export const ChartAddModalFormColumns: ProFormColumnsType<API.Chart, "text">[] = [
+export const ChartAddModalFormColumns: ProFormColumnsType<API.ChartAddRequest, "text">[] = [
   {
     title: 'id',
     dataIndex: 'id',
@@ -58,7 +58,7 @@ export const ChartAddModalFormColumns: ProFormColumnsType<API.Chart, "text">[] =
   },
 ];
 
-export const ChartUpdateModalFormColumns: ProFormColumnsType<API.Chart, "text">[] = [
+export const ChartUpdateModalFormColumns: ProFormColumnsType<API.ChartUpdateRequest, "text">[] = [
   {
     title: 'id',
     dataIndex: 'id',

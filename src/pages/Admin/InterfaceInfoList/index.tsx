@@ -66,32 +66,12 @@ const InterfaceInfoList: React.FC = () => {
   const handleUpdate = async (fields: API.InterfaceInfoUpdateRequest) => {
     const hide = message.loading('修改中');
     try {
-      if (fields) {
-        if (fields.responseParams) {
-          if (typeof fields.responseParams === "string") {
-            const parseValue = JSON.parse(fields.responseParams);
-            fields.responseParams = [...parseValue];
-          }
-        } else {
-          fields.responseParams = []
-        }
-        if (fields.requestParams) {
-          if (typeof fields.requestParams === "string") {
-            const parseValue = JSON.parse(fields.requestParams);
-            fields.requestParams = [...parseValue];
-          }
-        } else {
-          fields.requestParams = []
-        }
-
-        const res = await updateInterfaceInfoUsingPost({id: currentRow?.id, ...fields});
-        if (res.data && res.code === 0) {
-          hide();
-          message.success('修改成功');
-          return true;
-        }
+      const res = await updateInterfaceInfoUsingPost({id: currentRow?.id, ...fields});
+      if (res.data && res.code === 0) {
+        hide();
+        message.success('修改成功');
+        return true;
       }
-
     } catch (error: any) {
       hide();
       message.error('修改失败' + error.message);
@@ -184,7 +164,7 @@ const InterfaceInfoList: React.FC = () => {
    *
    * @param record
    */
-  const handleRemove = async (record: API.InterfaceInfo) => {
+  const handleRemove = async (record: API.IdRequest) => {
     const hide = message.loading('正在删除');
     if (!record) return true;
     try {
@@ -205,7 +185,7 @@ const InterfaceInfoList: React.FC = () => {
   };
 
   const confirm = async () => {
-    await handleRemove(currentRow as API.InterfaceInfo);
+    await handleRemove(currentRow as API.IdRequest);
   };
 
   const cancel = () => {
