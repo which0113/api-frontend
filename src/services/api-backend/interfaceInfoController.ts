@@ -1,14 +1,14 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from '@umijs/max';
+import { request } from '@umijs/max';
 
-/** addInterfaceInfo POST /api/interfaceInfo/add */
-export async function addInterfaceInfoUsingPOST(
+/** addInterfaceInfo Post /api/interfaceInfo/add */
+export async function addInterfaceInfoUsingPost(
   body: API.InterfaceInfoAddRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponselong>('/api/interfaceInfo/add', {
-    method: 'POST',
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -17,13 +17,13 @@ export async function addInterfaceInfoUsingPOST(
   });
 }
 
-/** deleteInterfaceInfo POST /api/interfaceInfo/delete */
-export async function deleteInterfaceInfoUsingPOST(
+/** deleteInterfaceInfo Post /api/interfaceInfo/delete */
+export async function deleteInterfaceInfoUsingPost(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseboolean>('/api/interfaceInfo/delete', {
-    method: 'POST',
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -33,9 +33,9 @@ export async function deleteInterfaceInfoUsingPOST(
 }
 
 /** getInterfaceInfoById GET /api/interfaceInfo/get */
-export async function getInterfaceInfoByIdUsingGET(
+export async function getInterfaceInfoByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getInterfaceInfoByIdUsingGETParams,
+  params: API.getInterfaceInfoByIdUsingGetParams,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseInterfaceInfo>('/api/interfaceInfo/get', {
@@ -48,9 +48,9 @@ export async function getInterfaceInfoByIdUsingGET(
 }
 
 /** listInterfaceInfoBySearchTextPage GET /api/interfaceInfo/get/searchText */
-export async function listInterfaceInfoBySearchTextPageUsingGET(
+export async function listInterfaceInfoBySearchTextPageUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.listInterfaceInfoBySearchTextPageUsingGETParams,
+  params: API.listInterfaceInfoBySearchTextPageUsingGetParams,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponsePageInterfaceInfo>('/api/interfaceInfo/get/searchText', {
@@ -62,13 +62,13 @@ export async function listInterfaceInfoBySearchTextPageUsingGET(
   });
 }
 
-/** invokeInterface POST /api/interfaceInfo/invoke */
-export async function invokeInterfaceUsingPOST(
+/** invokeInterface Post /api/interfaceInfo/invoke */
+export async function invokeInterfaceUsingPost(
   body: API.InvokeRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseobject>('/api/interfaceInfo/invoke', {
-    method: 'POST',
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -78,9 +78,9 @@ export async function invokeInterfaceUsingPOST(
 }
 
 /** listInterfaceInfo GET /api/interfaceInfo/list */
-export async function listInterfaceInfoUsingGET(
+export async function listInterfaceInfoUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.listInterfaceInfoUsingGETParams,
+  params: API.listInterfaceInfoUsingGetParams,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseListInterfaceInfo>('/api/interfaceInfo/list', {
@@ -93,9 +93,9 @@ export async function listInterfaceInfoUsingGET(
 }
 
 /** listInterfaceInfoByPage GET /api/interfaceInfo/list/page */
-export async function listInterfaceInfoByPageUsingGET(
+export async function listInterfaceInfoByPageUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.listInterfaceInfoByPageUsingGETParams,
+  params: API.listInterfaceInfoByPageUsingGetParams,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponsePageInterfaceInfo>('/api/interfaceInfo/list/page', {
@@ -107,13 +107,13 @@ export async function listInterfaceInfoByPageUsingGET(
   });
 }
 
-/** offlineInterfaceInfo POST /api/interfaceInfo/offline */
-export async function offlineInterfaceInfoUsingPOST(
+/** offlineInterfaceInfo Post /api/interfaceInfo/offline */
+export async function offlineInterfaceInfoUsingPost(
   body: API.IdRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseboolean>('/api/interfaceInfo/offline', {
-    method: 'POST',
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -122,13 +122,13 @@ export async function offlineInterfaceInfoUsingPOST(
   });
 }
 
-/** onlineInterfaceInfo POST /api/interfaceInfo/online */
-export async function onlineInterfaceInfoUsingPOST(
+/** onlineInterfaceInfo Post /api/interfaceInfo/online */
+export async function onlineInterfaceInfoUsingPost(
   body: API.IdRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseboolean>('/api/interfaceInfo/online', {
-    method: 'POST',
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -137,13 +137,13 @@ export async function onlineInterfaceInfoUsingPOST(
   });
 }
 
-/** updateInterfaceInfo POST /api/interfaceInfo/update */
-export async function updateInterfaceInfoUsingPOST(
+/** updateInterfaceInfo Post /api/interfaceInfo/update */
+export async function updateInterfaceInfoUsingPost(
   body: API.InterfaceInfoUpdateRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseboolean>('/api/interfaceInfo/update', {
-    method: 'POST',
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -152,13 +152,13 @@ export async function updateInterfaceInfoUsingPOST(
   });
 }
 
-/** updateInterfaceInfoAvatarUrl POST /api/interfaceInfo/updateInterfaceInfoAvatar */
-export async function updateInterfaceInfoAvatarUrlUsingPOST(
+/** updateInterfaceInfoAvatarUrl Post /api/interfaceInfo/updateInterfaceInfoAvatar */
+export async function updateInterfaceInfoAvatarUrlUsingPost(
   body: API.InterfaceInfoUpdateAvatarRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseboolean>('/api/interfaceInfo/updateInterfaceInfoAvatar', {
-    method: 'POST',
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },

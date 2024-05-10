@@ -31,7 +31,7 @@ const ModalForm: React.FC<Props> = (props) => {
   }, [value]);
   return (
     <>
-      <BetaSchemaForm<API.ProductInfo>
+      <BetaSchemaForm<API.InterfaceInfo>
         width={width}
         title={title}
         size={size}

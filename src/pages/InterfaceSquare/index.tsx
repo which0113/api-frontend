@@ -4,8 +4,8 @@ import {Badge, Card, Image, List, Spin} from "antd";
 import Search from "antd/es/input/Search";
 import {history} from "@umijs/max";
 import {
-  listInterfaceInfoByPageUsingGET,
-  listInterfaceInfoBySearchTextPageUsingGET
+  listInterfaceInfoByPageUsingGet,
+  listInterfaceInfoBySearchTextPageUsingGet
 } from "@/services/api-backend/interfaceInfoController";
 
 const InterfaceSquare: React.FC = () => {
@@ -17,16 +17,17 @@ const InterfaceSquare: React.FC = () => {
 
   const loadData = async (current = 1) => {
     setLoading(true)
-    const res = await listInterfaceInfoByPageUsingGET({
-      current: current,
+    const res = await listInterfaceInfoByPageUsingGet({
+      current: current.toString(),
       name: searchText,
-      pageSize: pageSize,
+      pageSize: pageSize.toString(),
       sortField: 'totalInvokes',
       sortOrder: 'descend',
       description: searchText,
     });
     if (res.code === 0 && res.data) {
       setData(res?.data?.records || []);
+      // @ts-ignore
       setTotal(res.data.total)
       setLoading(false)
     } else {
@@ -39,12 +40,14 @@ const InterfaceSquare: React.FC = () => {
   }, []);
 
   const onSearch = async () => {
-    const res = await listInterfaceInfoBySearchTextPageUsingGET({
+    const res = await listInterfaceInfoBySearchTextPageUsingGet({
+      // @ts-ignore
       current: 1,
       searchText: searchText,
     });
     if (res.data) {
       setData(res?.data?.records || []);
+      // @ts-ignore
       setTotal(res?.data?.total || 0)
     }
   };

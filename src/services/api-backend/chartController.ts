@@ -1,14 +1,14 @@
 // @ts-ignore
 /* eslint-disable */
-import {request} from '@umijs/max';
+import { request } from '@umijs/max';
 
-/** addChart POST /api/chart/add */
-export async function addChartUsingPOST(
+/** addChart Post /api/chart/add */
+export async function addChartUsingPost(
   body: API.ChartAddRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseLong_>('/api/chart/add', {
-    method: 'POST',
+  return request<API.BaseResponselong>('/api/chart/add', {
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -17,13 +17,13 @@ export async function addChartUsingPOST(
   });
 }
 
-/** deleteChart POST /api/chart/delete */
-export async function deleteChartUsingPOST(
+/** deleteChart Post /api/chart/delete */
+export async function deleteChartUsingPost(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseBoolean_>('/api/chart/delete', {
-    method: 'POST',
+  return request<API.BaseResponseboolean>('/api/chart/delete', {
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -32,13 +32,13 @@ export async function deleteChartUsingPOST(
   });
 }
 
-/** editChart POST /api/chart/edit */
-export async function editChartUsingPOST(
+/** editChart Post /api/chart/edit */
+export async function editChartUsingPost(
   body: API.ChartEditRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseBoolean_>('/api/chart/edit', {
-    method: 'POST',
+  return request<API.BaseResponseboolean>('/api/chart/edit', {
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -47,10 +47,10 @@ export async function editChartUsingPOST(
   });
 }
 
-/** genChartByAi POST /api/chart/gen */
-export async function genChartByAiUsingPOST(
+/** genChartByAi Post /api/chart/gen/async */
+export async function genChartByAiUsingPost(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.genChartByAiUsingPOSTParams,
+  params: API.genChartByAiUsingPostParams,
   body: {},
   file?: File,
   options?: { [key: string]: any },
@@ -65,87 +65,20 @@ export async function genChartByAiUsingPOST(
     const item = (body as any)[ele];
 
     if (item !== undefined && item !== null) {
-      formData.append(
-        ele,
-        typeof item === 'object' && !(item instanceof File) ? JSON.stringify(item) : item,
-      );
+      if (typeof item === 'object' && !(item instanceof File)) {
+        if (item instanceof Array) {
+          item.forEach((f) => formData.append(ele, f || ''));
+        } else {
+          formData.append(ele, JSON.stringify(item));
+        }
+      } else {
+        formData.append(ele, item);
+      }
     }
   });
 
-  return request<API.BaseResponseBiResponse_>('/api/chart/gen', {
-    method: 'POST',
-    params: {
-      ...params,
-    },
-    data: formData,
-    requestType: 'form',
-    ...(options || {}),
-  });
-}
-
-/** genChartByAiAsync POST /api/chart/gen/async */
-export async function genChartByAiAsyncUsingPOST(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.genChartByAiAsyncUsingPOSTParams,
-  body: {},
-  file?: File,
-  options?: { [key: string]: any },
-) {
-  const formData = new FormData();
-
-  if (file) {
-    formData.append('file', file);
-  }
-
-  Object.keys(body).forEach((ele) => {
-    const item = (body as any)[ele];
-
-    if (item !== undefined && item !== null) {
-      formData.append(
-        ele,
-        typeof item === 'object' && !(item instanceof File) ? JSON.stringify(item) : item,
-      );
-    }
-  });
-
-  return request<API.BaseResponseBiResponse_>('/api/chart/gen/async', {
-    method: 'POST',
-    params: {
-      ...params,
-    },
-    data: formData,
-    requestType: 'form',
-    ...(options || {}),
-  });
-}
-
-/** genChartByAiAsyncMq POST /api/chart/gen/async/mq */
-export async function genChartByAiAsyncMqUsingPOST(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.genChartByAiAsyncMqUsingPOSTParams,
-  body: {},
-  file?: File,
-  options?: { [key: string]: any },
-) {
-  const formData = new FormData();
-
-  if (file) {
-    formData.append('file', file);
-  }
-
-  Object.keys(body).forEach((ele) => {
-    const item = (body as any)[ele];
-
-    if (item !== undefined && item !== null) {
-      formData.append(
-        ele,
-        typeof item === 'object' && !(item instanceof File) ? JSON.stringify(item) : item,
-      );
-    }
-  });
-
-  return request<API.BaseResponseBiResponse_>('/api/chart/gen/async/mq', {
-    method: 'POST',
+  return request<API.BaseResponseBiVO>('/api/chart/gen/async', {
+    method: 'Post',
     params: {
       ...params,
     },
@@ -156,12 +89,12 @@ export async function genChartByAiAsyncMqUsingPOST(
 }
 
 /** getChartById GET /api/chart/get */
-export async function getChartByIdUsingGET(
+export async function getChartByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getChartByIdUsingGETParams,
+  params: API.getChartByIdUsingGetParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseChart_>('/api/chart/get', {
+  return request<API.BaseResponseChart>('/api/chart/get', {
     method: 'GET',
     params: {
       ...params,
@@ -170,43 +103,58 @@ export async function getChartByIdUsingGET(
   });
 }
 
-/** listChartByPage POST /api/chart/list/page */
-export async function listChartByPageUsingPOST(
-  body: API.ChartQueryRequest,
+/** listChart GET /api/chart/list */
+export async function listChartUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.listChartUsingGetParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageChart_>('/api/chart/list/page', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  return request<API.BaseResponseListChart>('/api/chart/list', {
+    method: 'GET',
+    params: {
+      ...params,
     },
-    data: body,
     ...(options || {}),
   });
 }
 
-/** listMyChartByPage POST /api/chart/my/list/page */
-export async function listMyChartByPageUsingPOST(
-  body: API.ChartQueryRequest,
+/** listChartByPage GET /api/chart/list/page */
+export async function listChartByPageUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.listChartByPageUsingGetParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageChart_>('/api/chart/my/list/page', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+  return request<API.BaseResponsePageChart>('/api/chart/list/page', {
+    method: 'GET',
+    params: {
+      ...params,
     },
-    data: body,
     ...(options || {}),
   });
 }
 
-/** updateChart POST /api/chart/update */
-export async function updateChartUsingPOST(
+/** listMyChartByPage GET /api/chart/my/list/page */
+export async function listMyChartByPageUsingGet(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.listMyChartByPageUsingGetParams,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponsePageChart>('/api/chart/my/list/page', {
+    method: 'GET',
+    params: {
+      ...params,
+    },
+    ...(options || {}),
+  });
+}
+
+/** updateChart Post /api/chart/update */
+export async function updateChartUsingPost(
   body: API.ChartUpdateRequest,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseBoolean_>('/api/chart/update', {
-    method: 'POST',
+  return request<API.BaseResponseboolean>('/api/chart/update', {
+    method: 'Post',
     headers: {
       'Content-Type': 'application/json',
     },

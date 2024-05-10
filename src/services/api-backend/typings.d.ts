@@ -1,13 +1,25 @@
 declare namespace API {
+  type BaseResponseBiVO = {
+    code?: number;
+    data?: BiVO;
+    message?: string;
+  };
+
   type BaseResponseboolean = {
     code?: number;
     data?: boolean;
     message?: string;
   };
 
-  type BaseResponseImageVo = {
+  type BaseResponseChart = {
     code?: number;
-    data?: ImageVo;
+    data?: Chart;
+    message?: string;
+  };
+
+  type BaseResponseImageVO = {
+    code?: number;
+    data?: ImageVO;
     message?: string;
   };
 
@@ -17,15 +29,15 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseListInterfaceInfo = {
+  type BaseResponseListChart = {
     code?: number;
-    data?: InterfaceInfo[];
+    data?: Chart[];
     message?: string;
   };
 
-  type BaseResponseListProductInfo = {
+  type BaseResponseListInterfaceInfo = {
     code?: number;
-    data?: ProductInfo[];
+    data?: InterfaceInfo[];
     message?: string;
   };
 
@@ -37,7 +49,7 @@ declare namespace API {
 
   type BaseResponselong = {
     code?: number;
-    data?: number;
+    data?: string;
     message?: string;
   };
 
@@ -47,9 +59,9 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseOrderVo = {
+  type BaseResponsePageChart = {
     code?: number;
-    data?: OrderVo;
+    data?: PageChart;
     message?: string;
   };
 
@@ -59,27 +71,15 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponsePageProductInfo = {
-    code?: number;
-    data?: PageProductInfo;
-    message?: string;
-  };
-
   type BaseResponsePageUserVO = {
     code?: number;
     data?: PageUserVO;
     message?: string;
   };
 
-  type BaseResponseProductInfo = {
+  type BaseResponseUserLoginVO = {
     code?: number;
-    data?: ProductInfo;
-    message?: string;
-  };
-
-  type BaseResponseProductOrderVo = {
-    code?: number;
-    data?: ProductOrderVo;
+    data?: UserLoginVO;
     message?: string;
   };
 
@@ -89,18 +89,50 @@ declare namespace API {
     message?: string;
   };
 
-  type closedProductOrderUsingPOSTParams = {
-    /** orderNo */
-    orderNo?: string;
+  type BiVO = {
+    chartId?: string;
+    genChat?: string;
+    genResult?: string;
   };
 
-  type deleteProductOrderUsingPOSTParams = {
-    /** id */
-    id?: number;
+  type Chart = {
+    chartData?: string;
+    chartStatus?: string;
+    chartType?: string;
+    createTime?: string;
+    execMessage?: string;
+    genChart?: string;
+    genResult?: string;
+    goal?: string;
+    id?: string;
+    isDelete?: number;
+    name?: string;
+    updateTime?: string;
+    userId?: string;
+  };
+
+  type ChartAddRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+  };
+
+  type ChartEditRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+    id?: string;
+  };
+
+  type ChartUpdateRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+    id?: string;
   };
 
   type DeleteRequest = {
-    id?: number;
+    id?: string;
   };
 
   type Field = {
@@ -108,41 +140,37 @@ declare namespace API {
     value?: string;
   };
 
-  type getCaptchaUsingGETParams = {
+  type genChartByAiUsingPostParams = {
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
+  type getCaptchaUsingGetParams = {
     /** emailAccount */
     emailAccount?: string;
   };
 
-  type getInterfaceInfoByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getProductInfoByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type getProductOrderByIdUsingGETParams = {
+  type getChartByIdUsingGetParams = {
     /** id */
     id?: string;
   };
 
-  type getUserByIdUsingGETParams = {
+  type getInterfaceInfoByIdUsingGetParams = {
     /** id */
-    id?: number;
+    id?: string;
   };
 
-  type getUserByInvitationCodeUsingPOSTParams = {
-    /** invitationCode */
-    invitationCode?: string;
+  type getUserByIdUsingGetParams = {
+    /** id */
+    id?: string;
   };
 
   type IdRequest = {
-    id?: number;
+    id?: string;
   };
 
-  type ImageVo = {
+  type ImageVO = {
     name?: string;
     status?: string;
     uid?: string;
@@ -153,11 +181,11 @@ declare namespace API {
     avatarUrl?: string;
     createTime?: string;
     description?: string;
-    id?: number;
+    id?: string;
     isDelete?: number;
     method?: string;
     name?: string;
-    reduceScore?: number;
+    reduceScore?: string;
     requestExample?: string;
     requestHeader?: string;
     requestParams?: string;
@@ -165,10 +193,10 @@ declare namespace API {
     responseParams?: string;
     returnFormat?: string;
     status?: number;
-    totalInvokes?: number;
+    totalInvokes?: string;
     updateTime?: string;
     url?: string;
-    userId?: number;
+    userId?: string;
   };
 
   type InterfaceInfoAddRequest = {
@@ -187,13 +215,13 @@ declare namespace API {
 
   type InterfaceInfoUpdateAvatarRequest = {
     avatarUrl?: string;
-    id?: number;
+    id?: string;
   };
 
   type InterfaceInfoUpdateRequest = {
     avatarUrl?: string;
     description?: string;
-    id?: number;
+    id?: string;
     method?: string;
     name?: string;
     reduceScore?: number;
@@ -208,17 +236,41 @@ declare namespace API {
   };
 
   type InvokeRequest = {
-    id?: number;
+    id?: string;
     requestParams?: Field[];
     userRequestParams?: string;
   };
 
-  type listInterfaceInfoByPageUsingGETParams = {
-    current?: number;
+  type listChartByPageUsingGetParams = {
+    chartType?: string;
+    current?: string;
+    goal?: string;
+    id?: string;
+    name?: string;
+    pageSize?: string;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: string;
+  };
+
+  type listChartUsingGetParams = {
+    chartType?: string;
+    current?: string;
+    goal?: string;
+    id?: string;
+    name?: string;
+    pageSize?: string;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: string;
+  };
+
+  type listInterfaceInfoByPageUsingGetParams = {
+    current?: string;
     description?: string;
     method?: string;
     name?: string;
-    pageSize?: number;
+    pageSize?: string;
     reduceScore?: number;
     'responseParams[0].desc'?: string;
     'responseParams[0].fieldName'?: string;
@@ -229,23 +281,23 @@ declare namespace API {
     sortOrder?: string;
     status?: number;
     url?: string;
-    userId?: number;
+    userId?: string;
   };
 
-  type listInterfaceInfoBySearchTextPageUsingGETParams = {
-    current?: number;
-    pageSize?: number;
+  type listInterfaceInfoBySearchTextPageUsingGetParams = {
+    current?: string;
+    pageSize?: string;
     searchText?: string;
     sortField?: string;
     sortOrder?: string;
   };
 
-  type listInterfaceInfoUsingGETParams = {
-    current?: number;
+  type listInterfaceInfoUsingGetParams = {
+    current?: string;
     description?: string;
     method?: string;
     name?: string;
-    pageSize?: number;
+    pageSize?: string;
     reduceScore?: number;
     'responseParams[0].desc'?: string;
     'responseParams[0].fieldName'?: string;
@@ -256,60 +308,26 @@ declare namespace API {
     sortOrder?: string;
     status?: number;
     url?: string;
-    userId?: number;
+    userId?: string;
   };
 
-  type listProductInfoByPageUsingGETParams = {
-    addPoints?: number;
-    current?: number;
-    description?: string;
+  type listMyChartByPageUsingGetParams = {
+    chartType?: string;
+    current?: string;
+    goal?: string;
+    id?: string;
     name?: string;
-    pageSize?: number;
-    productType?: string;
+    pageSize?: string;
     sortField?: string;
     sortOrder?: string;
-    total?: number;
+    userId?: string;
   };
 
-  type listProductInfoBySearchTextPageUsingGETParams = {
-    current?: number;
-    pageSize?: number;
-    searchText?: string;
-    sortField?: string;
-    sortOrder?: string;
-  };
-
-  type listProductInfoUsingGETParams = {
-    addPoints?: number;
-    current?: number;
-    description?: string;
-    name?: string;
-    pageSize?: number;
-    productType?: string;
-    sortField?: string;
-    sortOrder?: string;
-    total?: number;
-  };
-
-  type listProductOrderByPageUsingGETParams = {
-    addPoints?: number;
-    current?: number;
-    orderName?: string;
-    orderNo?: string;
-    pageSize?: number;
-    payType?: string;
-    productInfo?: string;
-    sortField?: string;
-    sortOrder?: string;
-    status?: string;
-    total?: number;
-  };
-
-  type listUserByPageUsingGETParams = {
-    current?: number;
+  type listUserByPageUsingGetParams = {
+    current?: string;
     gender?: string;
-    id?: number;
-    pageSize?: number;
+    id?: string;
+    pageSize?: string;
     sortField?: string;
     sortOrder?: string;
     userAccount?: string;
@@ -317,11 +335,11 @@ declare namespace API {
     userRole?: string;
   };
 
-  type listUserUsingGETParams = {
-    current?: number;
+  type listUserUsingGetParams = {
+    current?: string;
     gender?: string;
-    id?: number;
-    pageSize?: number;
+    id?: string;
+    pageSize?: string;
     sortField?: string;
     sortOrder?: string;
     userAccount?: string;
@@ -334,126 +352,42 @@ declare namespace API {
     column?: string;
   };
 
-  type OrderVo = {
+  type PageChart = {
     countId?: string;
-    current?: number;
-    maxLimit?: number;
+    current?: string;
+    maxLimit?: string;
     optimizeCountSql?: boolean;
-    optimizeJoinOfCountSql?: boolean;
     orders?: OrderItem[];
-    records?: ProductOrderVo[];
+    pages?: string;
+    records?: Chart[];
     searchCount?: boolean;
-    size?: number;
-    total?: number;
+    size?: string;
+    total?: string;
   };
 
   type PageInterfaceInfo = {
     countId?: string;
-    current?: number;
-    maxLimit?: number;
+    current?: string;
+    maxLimit?: string;
     optimizeCountSql?: boolean;
     orders?: OrderItem[];
-    pages?: number;
+    pages?: string;
     records?: InterfaceInfo[];
     searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PageProductInfo = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: ProductInfo[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
+    size?: string;
+    total?: string;
   };
 
   type PageUserVO = {
     countId?: string;
-    current?: number;
-    maxLimit?: number;
+    current?: string;
+    maxLimit?: string;
     optimizeCountSql?: boolean;
     orders?: OrderItem[];
-    pages?: number;
+    pages?: string;
     records?: UserVO[];
     searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type PayCreateRequest = {
-    payType?: string;
-    productId?: string;
-  };
-
-  type ProductInfo = {
-    addPoints?: number;
-    createTime?: string;
-    description?: string;
-    expirationTime?: string;
-    id?: number;
-    isDelete?: number;
-    name?: string;
-    productType?: string;
-    status?: number;
-    total?: number;
-    updateTime?: string;
-    userId?: number;
-  };
-
-  type ProductInfoAddRequest = {
-    addPoints?: number;
-    description?: string;
-    expirationTime?: string;
-    name?: string;
-    productType?: string;
-    total?: number;
-  };
-
-  type ProductInfoUpdateRequest = {
-    addPoints?: number;
-    description?: string;
-    expirationTime?: string;
-    id?: number;
-    name?: string;
-    productType?: string;
-    total?: number;
-  };
-
-  type ProductOrderQueryRequest = {
-    addPoints?: number;
-    current?: number;
-    orderName?: string;
-    orderNo?: string;
-    pageSize?: number;
-    payType?: string;
-    productInfo?: string;
-    sortField?: string;
-    sortOrder?: string;
-    status?: string;
-    total?: number;
-  };
-
-  type ProductOrderVo = {
-    addPoints?: number;
-    codeUrl?: string;
-    createTime?: string;
-    description?: string;
-    expirationTime?: string;
-    formData?: string;
-    id?: number;
-    orderName?: string;
-    orderNo?: string;
-    payType?: string;
-    productId?: number;
-    productInfo?: ProductInfo;
-    productType?: string;
-    status?: string;
+    size?: string;
     total?: string;
   };
 
@@ -472,12 +406,12 @@ declare namespace API {
     type?: string;
   };
 
-  type uploadFileUsingPOSTParams = {
+  type uploadFileUsingPostParams = {
     biz?: string;
   };
 
   type UserAddRequest = {
-    balance?: number;
+    balance?: string;
     gender?: string;
     userAccount?: string;
     userAvatar?: string;
@@ -509,6 +443,24 @@ declare namespace API {
     userPassword?: string;
   };
 
+  type UserLoginVO = {
+    accessKey?: string;
+    balance?: string;
+    createTime?: string;
+    email?: string;
+    gender?: string;
+    id?: string;
+    invitationCode?: string;
+    secretKey?: string;
+    status?: number;
+    token?: string;
+    updateTime?: string;
+    userAccount?: string;
+    userAvatar?: string;
+    userName?: string;
+    userRole?: string;
+  };
+
   type UserRegisterRequest = {
     agreeToAnAgreement?: string;
     checkPassword?: string;
@@ -524,9 +476,9 @@ declare namespace API {
   };
 
   type UserUpdateRequest = {
-    balance?: number;
+    balance?: string;
     gender?: string;
-    id?: number;
+    id?: string;
     status?: number;
     userAccount?: string;
     userAvatar?: string;
@@ -537,11 +489,11 @@ declare namespace API {
 
   type UserVO = {
     accessKey?: string;
-    balance?: number;
+    balance?: string;
     createTime?: string;
     email?: string;
     gender?: string;
-    id?: number;
+    id?: string;
     invitationCode?: string;
     secretKey?: string;
     status?: number;
@@ -551,133 +503,4 @@ declare namespace API {
     userName?: string;
     userRole?: string;
   };
-
-  type BiResponse = {
-    chartId?: number;
-    genChart?: string;
-    genResult?: string;
-  };
-
-  type Chart = {
-    chartData?: string;
-    chartType?: string;
-    createTime?: string;
-    execMessage?: string;
-    genChart?: string;
-    genResult?: string;
-    goal?: string;
-    id?: number;
-    isDelete?: number;
-    name?: string;
-    chartStatus?: string;
-    updateTime?: string;
-    userId?: number;
-  };
-
-  type ChartAddRequest = {
-    chartData?: string;
-    chartType?: string;
-    goal?: string;
-    name?: string;
-  };
-
-  type ChartEditRequest = {
-    chartData?: string;
-    chartType?: string;
-    goal?: string;
-    id?: number;
-    name?: string;
-  };
-
-  type ChartQueryRequest = {
-    chartType?: string;
-    current?: number;
-    goal?: string;
-    id?: number;
-    name?: string;
-    pageSize?: number;
-    sortField?: string;
-    sortOrder?: string;
-    userId?: number;
-  };
-
-  type ChartUpdateRequest = {
-    chartData?: string;
-    chartType?: string;
-    createTime?: string;
-    genChart?: string;
-    genResult?: string;
-    goal?: string;
-    id?: number;
-    isDelete?: number;
-    name?: string;
-    updateTime?: string;
-  };
-
-  type genChartByAiAsyncMqUsingPOSTParams = {
-    chartType?: string;
-    goal?: string;
-    name?: string;
-  };
-
-  type genChartByAiAsyncUsingPOSTParams = {
-    chartType?: string;
-    goal?: string;
-    name?: string;
-  };
-
-  type genChartByAiUsingPOSTParams = {
-    chartType?: string;
-    goal?: string;
-    name?: string;
-  };
-
-  type getChartByIdUsingGETParams = {
-    /** id */
-    id?: number;
-  };
-
-  type PageChart_ = {
-    countId?: string;
-    current?: number;
-    maxLimit?: number;
-    optimizeCountSql?: boolean;
-    orders?: OrderItem[];
-    pages?: number;
-    records?: Chart[];
-    searchCount?: boolean;
-    size?: number;
-    total?: number;
-  };
-
-  type BaseResponseChart_ = {
-    code?: number;
-    data?: Chart;
-    message?: string;
-  };
-
-  type BaseResponseLong_ = {
-    code?: number;
-    data?: number;
-    message?: string;
-  };
-
-  type BaseResponsePageChart_ = {
-    code?: number;
-    data?: PageChart_;
-    message?: string;
-  };
-
-  type BaseResponseBiResponse_ = {
-    code?: number;
-    data?: BiResponse;
-    message?: string;
-  };
-
-  type BaseResponseBoolean_ = {
-    code?: number;
-    data?: boolean;
-    message?: string;
-  };
-
 }

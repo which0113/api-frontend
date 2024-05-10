@@ -119,7 +119,7 @@ export const responseParam: ProColumns[] = [
   },
 ]
 
-export const InterfaceInfoModalFormColumns: ProFormColumnsType<API.ProductInfo, "text">[] = [
+export const InterfaceInfoModalFormColumns: ProFormColumnsType<API.InterfaceInfo, "text">[] = [
   {
     dataIndex: 'id',
     valueType: 'index',
@@ -165,8 +165,8 @@ export const InterfaceInfoModalFormColumns: ProFormColumnsType<API.ProductInfo, 
       GET: {
         text: 'GET',
       },
-      POST: {
-        text: 'POST',
+      Post: {
+        text: 'Post',
       },
       PUT: {
         text: 'PUT',
@@ -415,8 +415,8 @@ const InterfaceInfoColumns: ProColumns<API.InterfaceInfo>[] = [
       GET: {
         text: 'GET',
       },
-      POST: {
-        text: 'POST',
+      Post: {
+        text: 'Post',
       },
       PUT: {
         text: 'PUT',

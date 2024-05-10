@@ -15,7 +15,7 @@ import {message, Tabs} from 'antd';
 import React, {useState} from 'react';
 import Settings from '../../../../config/defaultSettings';
 import {ProFormCaptcha} from "@ant-design/pro-form";
-import {getCaptchaUsingGET, userEmailLoginUsingPOST, userLoginUsingPOST} from "@/services/api-backend/userController";
+import {getCaptchaUsingGet, userEmailLoginUsingPost, userLoginUsingPost} from "@/services/api-backend/userController";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ActionIcons = () => {
@@ -70,7 +70,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: API.UserLoginRequest) => {
     try {
       // 登录
-      const res = await userLoginUsingPOST({
+      const res = await userLoginUsingPost({
         ...values,
       });
       doLogin(res)
@@ -83,7 +83,7 @@ const Login: React.FC = () => {
   const handleEmailSubmit = async (values: API.UserEmailLoginRequest) => {
     try {
       // 登录
-      const res = await userEmailLoginUsingPOST({
+      const res = await userEmailLoginUsingPost({
         ...values,
       });
       doLogin(res)
@@ -216,7 +216,7 @@ const Login: React.FC = () => {
                   },
                 ]}
                 onGetCaptcha={async (emailAccount) => {
-                  const res = await getCaptchaUsingGET({emailAccount})
+                  const res = await getCaptchaUsingGet({emailAccount})
                   if (res.data && res.code === 0) {
                     message.success("验证码发送成功")
                     return

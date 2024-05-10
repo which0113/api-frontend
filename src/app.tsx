@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import {requestConfig} from '@/requestConfig';
 import Settings from '../config/defaultSettings';
 import {valueLength} from "@/pages/User/UserInfo";
-import {getLoginUserUsingGET} from "@/services/api-backend/userController";
+import {getLoginUserUsingGet} from "@/services/api-backend/userController";
 import {FloatButton} from 'antd';
 import React from "react";
 import wechat from '@/../public/assets/WeChat.jpg';
@@ -34,7 +34,7 @@ const stats: InitialState = {
 export async function getInitialState(): Promise<InitialState> {
   // console.log(`%c${helloWord}`, 'color:#e59de3')
   try {
-    const res = await getLoginUserUsingGET();
+    const res = await getLoginUserUsingGet();
     if (res.data && res.code === 0) {
       stats.loginUser = res.data;
     }

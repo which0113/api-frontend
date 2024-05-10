@@ -6,7 +6,7 @@ import React, {useCallback} from 'react';
 import {flushSync} from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
 import {valueLength} from "@/pages/User/UserInfo";
-import {userLogoutUsingPOST} from "@/services/api-backend/userController";
+import {userLogoutUsingPost} from "@/services/api-backend/userController";
 import Settings from "../../../config/defaultSettings";
 import {message} from "antd";
 
@@ -28,7 +28,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({children}) => 
    * 退出登录，并且将当前的 url 保存
    */
   const loginOut = async () => {
-    const res = await userLogoutUsingPOST();
+    const res = await userLogoutUsingPost();
     if (!res.data) {
       return;
     }

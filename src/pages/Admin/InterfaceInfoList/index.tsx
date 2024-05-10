@@ -1,12 +1,12 @@
 import InterfaceInfoColumns, {InterfaceInfoModalFormColumns} from '@/pages/Admin/Columns/InterfaceInfoColumns';
 import {
-  addInterfaceInfoUsingPOST,
-  deleteInterfaceInfoUsingPOST,
-  listInterfaceInfoByPageUsingGET,
-  offlineInterfaceInfoUsingPOST,
-  onlineInterfaceInfoUsingPOST,
-  updateInterfaceInfoAvatarUrlUsingPOST,
-  updateInterfaceInfoUsingPOST,
+  addInterfaceInfoUsingPost,
+  deleteInterfaceInfoUsingPost,
+  listInterfaceInfoByPageUsingGet,
+  offlineInterfaceInfoUsingPost,
+  onlineInterfaceInfoUsingPost,
+  updateInterfaceInfoAvatarUrlUsingPost,
+  updateInterfaceInfoUsingPost,
 } from '@/services/api-backend/interfaceInfoController';
 import {PlusOutlined} from '@ant-design/icons';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
@@ -14,8 +14,8 @@ import {ProTable} from '@ant-design/pro-components';
 import '@umijs/max';
 import {Button, Card, message, Popconfirm} from 'antd';
 import React, {useRef, useState} from 'react';
-import ModalForm from "@/pages/Admin/Components/ModalForm";
 import UploadModal from "@/components/UploadModal";
+import ModalForm from "@/pages/Admin/Components/ModalForm";
 
 const InterfaceInfoList: React.FC = () => {
 
@@ -42,7 +42,7 @@ const InterfaceInfoList: React.FC = () => {
   const handleAdd = async (fields: API.InterfaceInfoAddRequest) => {
     const hide = message.loading('正在添加');
     try {
-      const res = await addInterfaceInfoUsingPOST({
+      const res = await addInterfaceInfoUsingPost({
         ...fields,
       });
       if (res.data && res.code === 0) {
@@ -84,7 +84,7 @@ const InterfaceInfoList: React.FC = () => {
           fields.requestParams = []
         }
 
-        const res = await updateInterfaceInfoUsingPOST({id: currentRow?.id, ...fields});
+        const res = await updateInterfaceInfoUsingPost({id: currentRow?.id, ...fields});
         if (res.data && res.code === 0) {
           hide();
           message.success('修改成功');
@@ -107,7 +107,7 @@ const InterfaceInfoList: React.FC = () => {
   const handleUpdateAvatar = async (url: string) => {
     const hide = message.loading('修改中');
     try {
-      const res = await updateInterfaceInfoAvatarUrlUsingPOST(
+      const res = await updateInterfaceInfoAvatarUrlUsingPost(
         {
           id: currentRow?.id,
           avatarUrl: url
@@ -136,7 +136,7 @@ const InterfaceInfoList: React.FC = () => {
     const hide = message.loading('发布中');
     if (!record) return true;
     try {
-      const res = await onlineInterfaceInfoUsingPOST({
+      const res = await onlineInterfaceInfoUsingPost({
         id: record.id,
       });
       hide();
@@ -162,7 +162,7 @@ const InterfaceInfoList: React.FC = () => {
     const hide = message.loading('下线中');
     if (!record) return true;
     try {
-      const res = await offlineInterfaceInfoUsingPOST({
+      const res = await offlineInterfaceInfoUsingPost({
         id: record.id,
       });
       hide();
@@ -188,7 +188,7 @@ const InterfaceInfoList: React.FC = () => {
     const hide = message.loading('正在删除');
     if (!record) return true;
     try {
-      const res = await deleteInterfaceInfoUsingPOST({
+      const res = await deleteInterfaceInfoUsingPost({
         id: record.id,
       });
       hide();
@@ -314,9 +314,11 @@ const InterfaceInfoList: React.FC = () => {
           </Button>,
         ]}
         pagination={{defaultPageSize: 10}}
+        // @ts-ignore
         request={async (params) => {
           setLoading(true)
-          const res = await listInterfaceInfoByPageUsingGET({...params});
+          // @ts-ignore
+          const res = await listInterfaceInfoByPageUsingGet({...params});
           if (res.data) {
             setLoading(false)
             return {

@@ -1,6 +1,6 @@
 import {Badge, Button, Card, Descriptions, Form, message, Spin, Table, Tabs, Tag} from 'antd';
 import React, {useEffect, useState} from 'react';
-import {getInterfaceInfoByIdUsingGET, invokeInterfaceUsingPOST} from "@/services/api-backend/interfaceInfoController";
+import {getInterfaceInfoByIdUsingGet, invokeInterfaceUsingPost} from "@/services/api-backend/interfaceInfoController";
 
 import CodeHighlighting from "@/components/CodeHighlighting";
 import {InterfaceRequestMethodEnum, statusEnum} from "@/enum/commonEnum";
@@ -56,9 +56,10 @@ const InterfaceInfo: React.FC = () => {
     setLoading(true);
     try {
       // @ts-ignore
-      const res = await getInterfaceInfoByIdUsingGET({id: params.id});
+      const res = await getInterfaceInfoByIdUsingGet({id: params.id});
       if (res.data && res.code === 0) {
         setDate(res.data || {});
+        // @ts-ignore
         setTotalInvokes(res.data.totalInvokes || 0)
         let requestParams = res.data.requestParams
         let responseParams = res.data.responseParams
@@ -121,7 +122,7 @@ const InterfaceInfo: React.FC = () => {
     }
 
     setResultLoading(true)
-    const res = await invokeInterfaceUsingPOST({
+    const res = await invokeInterfaceUsingPost({
       id: data?.id,
       ...values
     })

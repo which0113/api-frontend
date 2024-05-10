@@ -1,9 +1,7 @@
 import {useModel} from '@umijs/max';
 import {Card, theme, Typography} from 'antd';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Link, useParams} from "@@/exports";
-import GetGiftModal from "@/components/Gift/GetGift";
-import {getUserByInvitationCodeUsingPOST} from "@/services/api-backend/userController";
 
 const {Text, Title} = Typography;
 /**
@@ -86,25 +84,10 @@ const InfoCard: React.FC<{
 const Welcome: React.FC = () => {
   const {token} = theme.useToken();
   const {initialState} = useModel('@@initialState');
-  const [open, setOpen] = useState(false);
-  const [data, setData] = useState<API.UserVO>()
   const params = useParams()
-  const getUserByInvitationCode = async () => {
-    const res = await getUserByInvitationCodeUsingPOST({invitationCode: params.id})
-    if (res.code === 0 && res.data) {
-      if (initialState?.loginUser && initialState?.loginUser.invitationCode === params.id) {
-        // message.error("不能邀请自己")
-        return
-      }
-      if (!initialState?.loginUser) {
-        setOpen(true)
-        setData(res.data)
-      }
-    }
-  }
+
   useEffect(() => {
     if (params.id) {
-      getUserByInvitationCode()
     }
   }, [])
 
@@ -217,7 +200,6 @@ const Welcome: React.FC = () => {
             />
           </div>
         </div>
-        <GetGiftModal data={data} onCancel={() => setOpen(false)} open={open}/>
       </Card>
 
     </>

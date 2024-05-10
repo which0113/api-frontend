@@ -5,18 +5,17 @@ import '@umijs/max';
 import {Button, Card, message, Popconfirm} from 'antd';
 import React, {useRef, useState} from 'react';
 import ModalForm from "@/pages/Admin/Components/ModalForm";
-import ProductInfoModalFormColumns, {ProductInfoColumns} from "@/pages/Admin/Columns/ProductInfoColumns";
+
+import ChartColumns, {ChartAddModalFormColumns, ChartUpdateModalFormColumns} from "@/pages/Admin/Columns/ChartColumns";
 import {
-  addProductInfoUsingPOST,
-  deleteProductInfoUsingPOST,
-  listProductInfoByPageUsingGET,
-  offlineProductInfoUsingPOST,
-  onlineProductInfoUsingPOST,
-  updateProductInfoUsingPOST
-} from "@/services/api-backend/productInfoController";
+  addChartUsingPost,
+  deleteChartUsingPost,
+  updateChartUsingPost,
+  listChartByPageUsingGet
+} from '@/services/api-backend/chartController';
 
 
-const ProductInfoList: React.FC = () => {
+const ChartList: React.FC = () => {
 
   /**
    * @en-US Pop-up window of new window
@@ -30,17 +29,17 @@ const ProductInfoList: React.FC = () => {
   const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.ProductInfo>();
+  const [currentRow, setCurrentRow] = useState<API.Chart>();
 
   /**
    * @en-US Add node
    * @zh-CN 添加节点
    * @param fields
    */
-  const handleAdd = async (fields: API.ProductInfoAddRequest) => {
+  const handleAdd = async (fields: API.ChartAddRequest) => {
     const hide = message.loading('正在添加');
     try {
-      const res = await addProductInfoUsingPOST({
+      const res = await addChartUsingPost({
         ...fields,
       });
       if (res.data && res.code === 0) {
@@ -61,10 +60,10 @@ const ProductInfoList: React.FC = () => {
    *
    * @param fields
    */
-  const handleUpdate = async (fields: API.ProductInfoUpdateRequest) => {
+  const handleUpdate = async (fields: API.ChartUpdateRequest) => {
     const hide = message.loading('修改中');
     try {
-      const res = await updateProductInfoUsingPOST({id: currentRow?.id, ...fields});
+      const res = await updateChartUsingPost({id: currentRow?.id, ...fields});
       if (res.data && res.code === 0) {
         hide();
         message.success('修改成功');
@@ -77,70 +76,17 @@ const ProductInfoList: React.FC = () => {
     }
   };
 
-
-  /**
-   * @en-US Update node
-   * @zh-CN 发布
-   *
-   * @param record
-   */
-  const handleOnline = async (record: API.IdRequest) => {
-    const hide = message.loading('发布中');
-    if (!record) return true;
-    try {
-      const res = await onlineProductInfoUsingPOST({
-        id: record.id,
-      });
-      hide();
-      if (res.data) {
-        message.success('发布成功');
-        actionRef.current?.reload();
-      }
-      return true;
-    } catch (error: any) {
-      hide();
-      message.error(error.message);
-      return false;
-    }
-  };
-
-  /**
-   * @en-US Update node
-   * @zh-CN 下线
-   *
-   * @param record
-   */
-  const handleOffline = async (record: API.IdRequest) => {
-    const hide = message.loading('下线中');
-    if (!record) return true;
-    try {
-      const res = await offlineProductInfoUsingPOST({
-        id: record.id,
-      });
-      hide();
-      if (res.data) {
-        message.success('下线成功');
-        actionRef.current?.reload();
-      }
-      return true;
-    } catch (error: any) {
-      hide();
-      message.error(error.message);
-      return false;
-    }
-  };
-
   /**
    *  Delete node
    * @zh-CN 删除节点
    *
    * @param record
    */
-  const handleRemove = async (record: API.ProductInfo) => {
+  const handleRemove = async (record: API.Chart) => {
     const hide = message.loading('正在删除');
     if (!record) return true;
     try {
-      const res = await deleteProductInfoUsingPOST({
+      const res = await deleteChartUsingPost({
         id: record.id,
       });
       hide();
@@ -157,15 +103,15 @@ const ProductInfoList: React.FC = () => {
   };
 
   const confirm = async () => {
-    await handleRemove(currentRow as API.ProductInfo);
+    await handleRemove(currentRow as API.Chart);
   };
 
   const cancel = () => {
     message.success('取消成功');
   };
 
-  const columns: ProColumns<API.ProductInfo>[] = [
-    ...ProductInfoColumns,
+  const columns: ProColumns<API.Chart>[] = [
+    ...ChartColumns,
     {
       title: '操作',
       dataIndex: 'option',
@@ -180,43 +126,9 @@ const ProductInfoList: React.FC = () => {
         >
           修改
         </a>,
-        record.status === 0 ? (
-          <a
-            type="text"
-            key="auditing"
-            onClick={() => {
-              handleOnline(record);
-            }}
-          >
-            审核通过
-          </a>
-        ) : null,
-        record.status === 2 ? (
-          <a
-            type="text"
-            key="online"
-            onClick={() => {
-              handleOnline(record);
-            }}
-          >
-            上线
-          </a>
-        ) : null,
-        record.status === 1 ? (
-          <a
-            type="text"
-            key="offline"
-            style={{color: "red"}}
-            onClick={() => {
-              handleOffline(record);
-            }}
-          >
-            下线
-          </a>
-        ) : null,
         <Popconfirm
           key={'Delete'}
-          title="请确认是否删除该商品!"
+          title="请确认是否删除该用户!"
           onConfirm={confirm}
           onCancel={cancel}
           okText="Yes"
@@ -238,10 +150,10 @@ const ProductInfoList: React.FC = () => {
   return (
     <Card>
 
-      <ProTable<API.ProductInfo>
-        headerTitle={'商品管理'}
+      <ProTable<API.Chart>
+        headerTitle={'图表管理'}
         actionRef={actionRef}
-        rowKey="key"
+        rowKey="user"
         loading={loading}
         search={{
           labelWidth: 120,
@@ -258,9 +170,11 @@ const ProductInfoList: React.FC = () => {
           </Button>,
         ]}
         pagination={{defaultPageSize: 10}}
+        // @ts-ignore
         request={async (params) => {
           setLoading(true)
-          const res = await listProductInfoByPageUsingGET({...params});
+          // @ts-ignore
+          const res = await listChartByPageUsingGet({...params});
           if (res.data) {
             setLoading(false)
             return {
@@ -279,14 +193,14 @@ const ProductInfoList: React.FC = () => {
         columns={columns}
       />
       <ModalForm
-        title={"添加商品"}
+        title={"添加图表"}
         value={{}}
         open={() => {
           return createModalOpen;
         }}
         onOpenChange={handleModalOpen}
         onSubmit={async (value) => {
-          const success = await handleAdd(value as API.ProductInfo);
+          const success = await handleAdd(value as API.Chart);
           if (success) {
             handleModalOpen(false);
             if (actionRef.current) {
@@ -295,18 +209,18 @@ const ProductInfoList: React.FC = () => {
           }
         }}
         onCancel={() => handleModalOpen(false)}
-        columns={ProductInfoModalFormColumns} width={"480px"}
+        columns={ChartAddModalFormColumns} width={"480px"}
         size={"large"}
       />
       <ModalForm
-        title={"修改商品信息"}
+        title={"修改图表信息"}
         open={() => {
           return updateModalOpen;
         }}
         value={currentRow}
         onOpenChange={handleUpdateModalOpen}
         onSubmit={async (value) => {
-          const success = await handleUpdate(value as API.ProductInfo);
+          const success = await handleUpdate(value as API.Chart);
           if (success) {
             handleUpdateModalOpen(false);
             if (actionRef.current) {
@@ -315,11 +229,11 @@ const ProductInfoList: React.FC = () => {
           }
         }}
         onCancel={() => handleUpdateModalOpen(false)}
-        columns={ProductInfoModalFormColumns} width={"480px"}
+        columns={ChartUpdateModalFormColumns} width={"480px"}
         size={"large"}
       />
 
     </Card>
   );
 };
-export default ProductInfoList;
+export default ChartList;

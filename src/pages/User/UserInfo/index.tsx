@@ -17,12 +17,12 @@ import {RcFile} from "antd/es/upload";
 import {EditOutlined, PlusOutlined, VerticalAlignBottomOutlined} from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import {
-  getLoginUserUsingGET,
-  updateUserUsingPOST,
-  updateVoucherUsingPOST,
-  userBindEmailUsingPOST,
-  userCheckInUsingPOST,
-  userUnBindEmailUsingPOST
+  getLoginUserUsingGet,
+  updateUserUsingPost,
+  updateVoucherUsingPost,
+  userBindEmailUsingPost,
+  userCheckInUsingPost,
+  userUnBindEmailUsingPost
 } from "@/services/api-backend/userController";
 import Settings from '../../../../config/defaultSettings';
 import Paragraph from "antd/lib/typography/Paragraph";
@@ -75,7 +75,7 @@ const UserInfo: React.FC = () => {
 
   const loadData = async () => {
     setLoading(true)
-    const res = await getLoginUserUsingGET();
+    const res = await getLoginUserUsingGet();
     if (res.data && res.code === 0) {
       if (initialState?.settings.navTheme === "light") {
         setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "light"}})
@@ -167,7 +167,7 @@ const UserInfo: React.FC = () => {
 
   const updateVoucher = async () => {
     setVoucherLoading(true)
-    const res = await updateVoucherUsingPOST();
+    const res = await updateVoucherUsingPost();
     if (res.data && res.code === 0) {
       setInitialState({loginUser: res.data, settings: Settings})
       setTimeout(() => {
@@ -183,7 +183,7 @@ const UserInfo: React.FC = () => {
       // @ts-ignore
       avatarUrl = fileList[0].url
     }
-    const res = await updateUserUsingPOST({
+    const res = await updateUserUsingPost({
       // @ts-ignore
       userAvatar: avatarUrl,
       id: loginUser?.id,
@@ -257,7 +257,7 @@ const UserInfo: React.FC = () => {
   const handleBindEmailSubmit = async (values: API.UserBindEmailRequest) => {
     try {
       // 绑定邮箱
-      const res = await userBindEmailUsingPOST({
+      const res = await userBindEmailUsingPost({
         ...values,
       });
       if (res.data && res.code === 0) {
@@ -278,7 +278,7 @@ const UserInfo: React.FC = () => {
   const handleUnBindEmailSubmit = async (values: API.UserUnBindEmailRequest) => {
     try {
       // 解定邮箱
-      const res = await userUnBindEmailUsingPOST({...values});
+      const res = await userUnBindEmailUsingPost({...values});
       if (res.data && res.code === 0) {
         if (initialState?.settings.navTheme === "light") {
           setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "light"}})
@@ -299,7 +299,7 @@ const UserInfo: React.FC = () => {
    */
   const handleCheckIn = async () => {
     try {
-      const res = await userCheckInUsingPOST();
+      const res = await userCheckInUsingPost();
       if (res.code === 0) {
         if (res.data) {
           message.success('签到成功 积分+5');

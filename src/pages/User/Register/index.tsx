@@ -1,8 +1,8 @@
 import Footer from '@/components/Footer';
 import {
-  getCaptchaUsingGET,
-  userEmailRegisterUsingPOST,
-  userRegisterUsingPOST
+  getCaptchaUsingGet,
+  userEmailRegisterUsingPost,
+  userRegisterUsingPost
 } from '@/services/api-backend/userController';
 import {Link, useParams} from '@@/exports';
 import {
@@ -86,7 +86,7 @@ const Register: React.FC = () => {
   const handleSubmit = async (values: API.UserRegisterRequest) => {
     try {
       // 登录
-      const res = await userRegisterUsingPOST({
+      const res = await userRegisterUsingPost({
         ...values,
       });
       doRegister(res)
@@ -99,7 +99,7 @@ const Register: React.FC = () => {
   const handleEmailSubmit = async (values: API.UserEmailRegisterRequest) => {
     try {
       // 登录
-      const res = await userEmailRegisterUsingPOST({
+      const res = await userEmailRegisterUsingPost({
         ...values,
       });
       doRegister(res)
@@ -269,7 +269,7 @@ const Register: React.FC = () => {
                   },
                 ]}
                 onGetCaptcha={async (emailAccount) => {
-                  const res = await getCaptchaUsingGET({emailAccount})
+                  const res = await getCaptchaUsingGet({emailAccount})
                   if (res.data && res.code === 0) {
                     message.success("验证码发送成功")
                     return

@@ -1,4 +1,4 @@
-import {deleteChartUsingPOST, listMyChartByPageUsingPOST} from '@/services/api-backend/chartController';
+import {deleteChartUsingPost, listMyChartByPageUsingGet} from '@/services/api-backend/chartController';
 
 import {useModel} from '@@/exports';
 import {Avatar, Button, Card, List, message, Popconfirm, Result, Tooltip} from 'antd';
@@ -20,7 +20,8 @@ const MyChartPage: React.FC = () => {
       sortOrder: 'desc',
     };
 
-    const [searchParams, setSearchParams] = useState<API.ChartQueryRequest>({...initSearchParams});
+    // @ts-ignore
+    const [searchParams, setSearchParams] = useState<API.listMyChartByPageUsingGetParams>({...initSearchParams});
     const {initialState} = useModel('@@initialState');
     const {loginUser} = initialState ?? {};
     const [chartList, setChartList] = useState<API.Chart[]>();
@@ -50,7 +51,7 @@ const MyChartPage: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        const res = await listMyChartByPageUsingPOST(searchParams);
+        const res = await listMyChartByPageUsingGet(searchParams);
         handleChartData(res);
       } catch (e: any) {
         message.error('获取图表失败，' + e.message);
@@ -113,7 +114,7 @@ const MyChartPage: React.FC = () => {
       const hide = message.loading('正在删除');
       if (!chart) return true;
       try {
-        const res = await deleteChartUsingPOST({
+        const res = await deleteChartUsingPost({
           id: chart.id,
         });
         hide();
@@ -202,6 +203,7 @@ const MyChartPage: React.FC = () => {
               placeholder={"请输入图表名称"}
               onSearch={(value) => {
                 // 设置搜索条件
+                // @ts-ignore
                 setSearchParams({
                   ...initSearchParams,
                   name: value,
@@ -227,11 +229,15 @@ const MyChartPage: React.FC = () => {
             onChange: (page, pageSize) => {
               setSearchParams({
                 ...searchParams,
+                // @ts-ignore
                 current: page,
+                // @ts-ignore
                 pageSize,
               })
             },
+            // @ts-ignore
             current: searchParams.current,
+            // @ts-ignore
             pageSize: searchParams.pageSize,
             total: total,
           }}

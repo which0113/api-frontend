@@ -42,6 +42,12 @@
         component: './Admin/InterfaceInfoList',
       },
       {
+        name: '图表管理',
+        icon: 'ApiOutlined',
+        path: '/admin/chart/list',
+        component: './Admin/ChartList',
+      },
+      {
         name: '用户管理',
         icon: 'TeamOutlined',
         path: '/admin/user/list',

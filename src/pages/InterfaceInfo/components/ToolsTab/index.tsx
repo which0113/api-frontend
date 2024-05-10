@@ -34,7 +34,7 @@ const ToolsTab: React.FC<Props> = (props) => {
       style={{width: 120}}
       options={[
         {value: 'GET', label: 'GET', disabled: true},
-        {value: 'POST', label: 'POST', disabled: true},
+        {value: 'Post', label: 'Post', disabled: true},
         {value: 'PUT', label: 'PUT', disabled: true},
         {value: 'DELETE', label: 'DELETE', disabled: true},
       ]}

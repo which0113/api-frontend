@@ -8,12 +8,12 @@ import ModalForm from "@/pages/Admin/Components/ModalForm";
 
 import UserColumns, {UserAddModalFormColumns, UserUpdateModalFormColumns} from "@/pages/Admin/Columns/UserColumns";
 import {
-  addUserUsingPOST,
-  banUserUsingPOST,
-  deleteUserUsingPOST,
-  listUserByPageUsingGET,
-  normalUserUsingPOST,
-  updateUserUsingPOST
+  addUserUsingPost,
+  banUserUsingPost,
+  deleteUserUsingPost,
+  listUserByPageUsingGet,
+  normalUserUsingPost,
+  updateUserUsingPost
 } from "@/services/api-backend/userController";
 
 
@@ -41,7 +41,7 @@ const UserList: React.FC = () => {
   const handleAdd = async (fields: API.UserAddRequest) => {
     const hide = message.loading('正在添加');
     try {
-      const res = await addUserUsingPOST({
+      const res = await addUserUsingPost({
         ...fields,
       });
       if (res.data && res.code === 0) {
@@ -66,7 +66,7 @@ const UserList: React.FC = () => {
     const hide = message.loading('解封中');
     if (!record) return true;
     try {
-      const res = await normalUserUsingPOST({
+      const res = await normalUserUsingPost({
         id: record.id,
       });
       hide();
@@ -92,7 +92,7 @@ const UserList: React.FC = () => {
     const hide = message.loading('封号中');
     if (!record) return true;
     try {
-      const res = await banUserUsingPOST({
+      const res = await banUserUsingPost({
         id: record.id,
       });
       hide();
@@ -117,7 +117,7 @@ const UserList: React.FC = () => {
   const handleUpdate = async (fields: API.UserUpdateRequest) => {
     const hide = message.loading('修改中');
     try {
-      const res = await updateUserUsingPOST({id: currentRow?.id, ...fields});
+      const res = await updateUserUsingPost({id: currentRow?.id, ...fields});
       if (res.data && res.code === 0) {
         hide();
         message.success('修改成功');
@@ -139,7 +139,7 @@ const UserList: React.FC = () => {
     const hide = message.loading('正在删除');
     if (!record) return true;
     try {
-      const res = await deleteUserUsingPOST({
+      const res = await deleteUserUsingPost({
         id: record.id,
       });
       hide();
@@ -246,9 +246,11 @@ const UserList: React.FC = () => {
           </Button>,
         ]}
         pagination={{defaultPageSize: 10}}
+        // @ts-ignore
         request={async (params) => {
           setLoading(true)
-          const res = await listUserByPageUsingGET({...params});
+          // @ts-ignore
+          const res = await listUserByPageUsingGet({...params});
           if (res.data) {
             setLoading(false)
             return {
