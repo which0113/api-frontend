@@ -1,7 +1,7 @@
 import {deleteChartUsingPOST, listMyChartByPageUsingPOST} from '@/services/api-backend/chartController';
 
 import {useModel} from '@@/exports';
-import {Avatar, Button, Card, List, message, Popconfirm, Result} from 'antd';
+import {Avatar, Button, Card, List, message, Popconfirm, Result, Tooltip} from 'antd';
 import ReactECharts from 'echarts-for-react';
 import React, {useEffect, useState} from 'react';
 import Search from "antd/es/input/Search";
@@ -74,7 +74,7 @@ const MyChartPage: React.FC = () => {
 
       if (!socket) {
         // 建立 WebSocket 连接
-        const socketUrl = "ws://localhost:9001/api/ws/" + loginUser?.id;
+        const socketUrl = "ws://101.43.54.167:9001/api/ws/" + loginUser?.id;
         try {
           socket = new WebSocket(socketUrl);
         } catch (e: any) {
@@ -84,8 +84,9 @@ const MyChartPage: React.FC = () => {
       }
       socket.onmessage = function (e: any) {
         if (e) {
-          console.log(e.data);
+          // console.log(e.data);
         }
+        // message.success('消息来喽~');
         // 收到消息时重新加载数据
         loadData();
       };
@@ -285,7 +286,12 @@ const MyChartPage: React.FC = () => {
                   }
                 </>
                 <div id={"b-" + item.id?.toString()} style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <Button type="primary" onClick={() => downloadCardAsImage(item)}>下载</Button>
+                  <Tooltip color="green" title="放缩页面试试~">
+                    <Button
+                      type="primary"
+                      onClick={() => downloadCardAsImage(item)}>下载
+                    </Button>
+                  </Tooltip>
                   <Popconfirm
                     title="请确认是否删除！"
                     onConfirm={() => confirm(item)}
