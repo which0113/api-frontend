@@ -234,6 +234,14 @@ export async function userUnBindEmailUsingPOST(
   });
 }
 
+/** userCheckIn POST /api/user/checkIn */
+export async function userCheckInUsingPOST(options?: { [key: string]: any }) {
+  return request<API.BaseResponseboolean>('/api/user/checkIn', {
+    method: 'POST',
+    ...(options || {}),
+  });
+}
+
 /** updateUser POST /api/user/update */
 export async function updateUserUsingPOST(
   body: API.UserUpdateRequest,

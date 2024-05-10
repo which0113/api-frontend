@@ -21,6 +21,7 @@ import {
   updateUserUsingPOST,
   updateVoucherUsingPOST,
   userBindEmailUsingPOST,
+  userCheckInUsingPOST,
   userUnBindEmailUsingPOST
 } from "@/services/api-backend/userController";
 import Settings from '../../../../config/defaultSettings';
@@ -110,10 +111,8 @@ const UserInfo: React.FC = () => {
   }
 
   useEffect(() => {
-      loadData()
-
-    },
-    [])
+    loadData();
+  }, [])
 
   const getBase64 = (file: RcFile): Promise<string> =>
     new Promise((resolve, reject) => {
@@ -275,9 +274,10 @@ const UserInfo: React.FC = () => {
       message.error(defaultLoginFailureMessage);
     }
   };
+
   const handleUnBindEmailSubmit = async (values: API.UserUnBindEmailRequest) => {
     try {
-      // 绑定邮箱
+      // 解定邮箱
       const res = await userUnBindEmailUsingPOST({...values});
       if (res.data && res.code === 0) {
         if (initialState?.settings.navTheme === "light") {
@@ -293,6 +293,26 @@ const UserInfo: React.FC = () => {
       message.error(defaultLoginFailureMessage);
     }
   };
+
+  /**
+   * 签到
+   */
+  const handleCheckIn = async () => {
+    try {
+      const res = await userCheckInUsingPOST();
+      if (res.code === 0) {
+        if (res.data) {
+          message.success('签到成功 积分+5');
+          loadData();
+        } else {
+          message.info('今日已签到');
+        }
+      }
+    } catch (e: any) {
+      message.error('签到失败');
+    }
+  };
+
   return (
     <Spin spinning={loading}>
       <ProCard
@@ -377,6 +397,10 @@ const UserInfo: React.FC = () => {
               >
                 {valueLength(loginUser?.balance) ? loginUser?.balance : 0}
               </Paragraph>
+              <Button
+                style={{marginLeft: "10px"}}
+                size={"small"}
+                onClick={handleCheckIn}>每日签到</Button>
             </div>
           </Descriptions>
         </ProCard>
