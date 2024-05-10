@@ -47,6 +47,8 @@
     "antd": "^5.2.2",
     "antd-img-crop": "^4.12.2",
     "classnames": "^2.3.2",
+    "echarts-for-react": "^3.0.2",
+    "html2canvas": "^1.4.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "omit.js": "^2.0.2",

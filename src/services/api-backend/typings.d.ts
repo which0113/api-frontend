@@ -551,4 +551,133 @@ declare namespace API {
     userName?: string;
     userRole?: string;
   };
+
+  type BiResponse = {
+    chartId?: number;
+    genChart?: string;
+    genResult?: string;
+  };
+
+  type Chart = {
+    chartData?: string;
+    chartType?: string;
+    createTime?: string;
+    execMessage?: string;
+    genChart?: string;
+    genResult?: string;
+    goal?: string;
+    id?: number;
+    isDelete?: number;
+    name?: string;
+    chartStatus?: string;
+    updateTime?: string;
+    userId?: number;
+  };
+
+  type ChartAddRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
+  type ChartEditRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+    id?: number;
+    name?: string;
+  };
+
+  type ChartQueryRequest = {
+    chartType?: string;
+    current?: number;
+    goal?: string;
+    id?: number;
+    name?: string;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: number;
+  };
+
+  type ChartUpdateRequest = {
+    chartData?: string;
+    chartType?: string;
+    createTime?: string;
+    genChart?: string;
+    genResult?: string;
+    goal?: string;
+    id?: number;
+    isDelete?: number;
+    name?: string;
+    updateTime?: string;
+  };
+
+  type genChartByAiAsyncMqUsingPOSTParams = {
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
+  type genChartByAiAsyncUsingPOSTParams = {
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
+  type genChartByAiUsingPOSTParams = {
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
+  type getChartByIdUsingGETParams = {
+    /** id */
+    id?: number;
+  };
+
+  type PageChart_ = {
+    countId?: string;
+    current?: number;
+    maxLimit?: number;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: number;
+    records?: Chart[];
+    searchCount?: boolean;
+    size?: number;
+    total?: number;
+  };
+
+  type BaseResponseChart_ = {
+    code?: number;
+    data?: Chart;
+    message?: string;
+  };
+
+  type BaseResponseLong_ = {
+    code?: number;
+    data?: number;
+    message?: string;
+  };
+
+  type BaseResponsePageChart_ = {
+    code?: number;
+    data?: PageChart_;
+    message?: string;
+  };
+
+  type BaseResponseBiResponse_ = {
+    code?: number;
+    data?: BiResponse;
+    message?: string;
+  };
+
+  type BaseResponseBoolean_ = {
+    code?: number;
+    data?: boolean;
+    message?: string;
+  };
+
 }

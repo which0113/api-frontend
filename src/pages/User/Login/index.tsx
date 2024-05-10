@@ -57,8 +57,8 @@ const Login: React.FC = () => {
   });
   const doLogin = (res: any) => {
     if (res.data && res.code === 0) {
+      localStorage.setItem("token", JSON.stringify(res.data.token));
       message.success('登录成功').then(() => {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
       });
       setTimeout(() => {
         const urlParams = new URL(window.location.href).searchParams;

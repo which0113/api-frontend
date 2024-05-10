@@ -5,6 +5,7 @@
 export default function access(initialState: InitialState | undefined) {
   const {loginUser} = initialState ?? {};
   return {
+    canUser: loginUser && loginUser.userRole,
     canAdmin: loginUser && (loginUser.userRole === 'admin' || loginUser.userRole === 'demo'),
   };
 }
