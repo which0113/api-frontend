@@ -65,7 +65,7 @@ const InterfaceSquare: React.FC = () => {
             enterButton="搜索"
             placeholder={"没有找到心仪的接口？快搜索一下吧"}
             onSearch={onSearch}
-            style={{maxWidth: 600, height: 60}}/>
+            style={{maxWidth: 600, height: 40}}/>
         </ProCard>
       </Card>
       <br/>
