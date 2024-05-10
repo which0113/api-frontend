@@ -50,6 +50,17 @@ const AddChartAsync: React.FC = () => {
     setSubmitting(false);
   };
 
+  /**
+   * 自动填充文件名
+   * @param info
+   */
+  const handleFileUpload = (info: any) => {
+    if (info.fileList.length > 0) {
+      const fileName = info.fileList[0].name.split('.')[0];
+      form.setFieldsValue({name: fileName});
+    }
+  };
+
   return (
     <div className="add-chart-async">
       <Card title="智能分析">
@@ -84,7 +95,7 @@ const AddChartAsync: React.FC = () => {
             />
           </Form.Item>
           <Form.Item name="file" label="原始数据">
-            <Upload name="file" maxCount={1}>
+            <Upload name="file" maxCount={1} onChange={handleFileUpload}>
               <Button icon={<UploadOutlined/>}>上传 CSV 文件</Button>
             </Upload>
           </Form.Item>

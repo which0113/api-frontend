@@ -6,7 +6,6 @@ import ReactECharts from 'echarts-for-react';
 import React, {useEffect, useState} from 'react';
 import Search from "antd/es/input/Search";
 import ProCard from "@ant-design/pro-card";
-import {requestConfig} from "@/requestConfig";
 import html2canvas from "html2canvas";
 
 /**
@@ -75,7 +74,7 @@ const MyChartPage: React.FC = () => {
 
       if (!socket) {
         // 建立 WebSocket 连接
-        const socketUrl = requestConfig.baseURL?.replace(/^https?:/, 'ws:') + '/api/ws/' + loginUser?.id;
+        const socketUrl = "ws://localhost:9001/api/ws/" + loginUser?.id;
         try {
           socket = new WebSocket(socketUrl);
         } catch (e: any) {
