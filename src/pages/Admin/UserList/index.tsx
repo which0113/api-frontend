@@ -161,7 +161,7 @@ const UserList: React.FC = () => {
   };
 
   const cancel = () => {
-    message.success('取消成功');
+    message.success('已取消');
   };
 
   const columns: ProColumns<API.UserVO>[] = [
