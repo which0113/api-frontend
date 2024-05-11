@@ -1,5 +1,4 @@
 import {ProColumns, ProFormColumnsType} from '@ant-design/pro-components';
-import moment from "moment";
 
 export const ChartAddModalFormColumns: ProFormColumnsType<API.ChartAddRequest, "text">[] = [
   {

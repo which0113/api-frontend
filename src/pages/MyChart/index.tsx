@@ -7,7 +7,6 @@ import React, {useEffect, useState} from 'react';
 import Search from "antd/es/input/Search";
 import ProCard from "@ant-design/pro-card";
 import html2canvas from "html2canvas";
-import moment from "moment";
 
 /**
  * 我的图表页面
@@ -253,7 +252,12 @@ const MyChartPage: React.FC = () => {
               <Card id={item.id?.toString()} hoverable style={{width: '100%'}}>
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
                   <List.Item.Meta
-                    avatar={<Avatar src={loginUser && loginUser.userAvatar}/>}
+                    avatar={
+                      <Avatar
+                        crossOrigin={'anonymous'}
+                        src={loginUser && loginUser.userAvatar + '?' + new Date().getTime()}
+                      />
+                    }
                     title={item.name}
                     description={item.chartType ? '图表类型：' + item.chartType : undefined}
                   />
