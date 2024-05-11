@@ -16,7 +16,7 @@ interface ResponseStructure {
  * @doc https://umijs.org/docs/max/request#配置
  */
 export const requestConfig: RequestConfig = {
-  baseURL: process.env.NODE_ENV === 'production' ? "https://back.freefish.love/" : 'https://back.freefish.love/',
+  baseURL: process.env.NODE_ENV === 'production' ? "https://back.freefish.love/" : 'http://localhost:9001/',
   withCredentials: true,
 
   // 请求拦截器
