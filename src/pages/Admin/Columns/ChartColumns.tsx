@@ -190,6 +190,12 @@ export const ChartColumns: ProColumns<API.Chart>[] = [
       }
     },
   },
+  {
+    title: '创建用户',
+    dataIndex: 'createUser',
+    key: "createUser",
+    valueType: "text",
+  },
 ];
 
 export default ChartColumns;
