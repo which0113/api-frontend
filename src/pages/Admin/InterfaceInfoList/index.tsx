@@ -32,7 +32,7 @@ const InterfaceInfoList: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
   const [modalOpen, setModalOpen] = useState(false);
-  const [currentRow, setCurrentRow] = useState<API.InterfaceInfo>();
+  const [currentRow, setCurrentRow] = useState<API.InterfaceInfoVO>();
 
   /**
    * @en-US Add node
@@ -192,7 +192,7 @@ const InterfaceInfoList: React.FC = () => {
     message.success('取消成功');
   };
 
-  const columns: ProColumns<API.InterfaceInfo>[] = [
+  const columns: ProColumns<API.InterfaceInfoVO>[] = [
     ...InterfaceInfoColumns,
     {
       title: '操作',
@@ -274,7 +274,7 @@ const InterfaceInfoList: React.FC = () => {
   ];
   return (
     <Card>
-      <ProTable<API.InterfaceInfo>
+      <ProTable<API.InterfaceInfoVO>
         headerTitle={'接口管理'}
         actionRef={actionRef}
         rowKey="key"

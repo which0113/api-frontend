@@ -82,15 +82,23 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserAddRequest, "te
   }, {
     title: '角色/权限',
     dataIndex: 'userRole',
-    valueType: "radio",
+    valueType: "select",
     key: 'userRole',
+    // 用户角色：visitor / user / admin / demo
     valueEnum: {
+      "visitor": {
+        text: '游客',
+      },
       "user": {
         text: '普通用户',
       },
       "admin": {
         text: '管理员',
-        status: 'default'
+        status: 'success'
+      },
+      "demo": {
+        text: '演示账号',
+        status: 'error'
       }
     },
     formItemProps: {
@@ -160,15 +168,23 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserUpdateReques
     dataIndex: 'userRole',
     valueType: "radio",
     key: 'userRole',
+    // 用户角色：visitor / user / admin / demo
     valueEnum: {
+      "visitor": {
+        text: '游客',
+      },
       "user": {
         text: '普通用户',
       },
       "admin": {
         text: '管理员',
-        status: 'default'
+        status: 'success'
+      },
+      "demo": {
+        text: '演示账号',
+        status: 'error'
       }
-    }
+    },
   },
   {
     title: '积分',
@@ -210,7 +226,6 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserUpdateReques
     },
   },
 ];
-
 
 export const UserColumns: ProColumns<API.UserVO>[] = [
   {
@@ -262,20 +277,23 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
     key: 'userRole',
     filters: true,
     onFilter: true,
+    // 用户角色：visitor / user / admin / demo
     valueEnum: {
+      "visitor": {
+        text: '游客',
+      },
       "user": {
         text: '普通用户',
-        status: 'default'
       },
       "admin": {
         text: '管理员',
         status: 'success'
       },
       "demo": {
-        text: '仅查询',
+        text: '演示账号',
         status: 'error'
       }
-    }
+    },
   },
   {
     title: '性别',

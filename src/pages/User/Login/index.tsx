@@ -15,7 +15,7 @@ import {message, Tabs} from 'antd';
 import React, {useState} from 'react';
 import Settings from '../../../../config/defaultSettings';
 import {ProFormCaptcha} from "@ant-design/pro-form";
-import {getCaptchaUsingGet, userEmailLoginUsingPost, userLoginUsingPost} from "@/services/api-backend/userController";
+import {getEmailCaptchaUsingGet, userEmailLoginUsingPost, userLoginUsingPost} from "@/services/api-backend/userController";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ActionIcons = () => {
@@ -216,7 +216,7 @@ const Login: React.FC = () => {
                   },
                 ]}
                 onGetCaptcha={async (emailAccount) => {
-                  const res = await getCaptchaUsingGet({emailAccount})
+                  const res = await getEmailCaptchaUsingGet({emailAccount})
                   if (res.data && res.code === 0) {
                     message.success("验证码发送成功")
                     return

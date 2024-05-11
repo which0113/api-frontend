@@ -5,13 +5,13 @@ import {ProFormInstance} from "@ant-design/pro-form/lib";
 import {SizeType} from "@ant-design/pro-form/es/BaseForm";
 
 export type Props = {
-  value?: API.InterfaceInfo;
+  value?: API.InterfaceInfoVO;
   title: string
   open: () => boolean;
   width: string
   onOpenChange: React.Dispatch<React.SetStateAction<boolean>>;
   onCancel: () => void;
-  onSubmit: (values: API.InterfaceInfo) => Promise<void>;
+  onSubmit: (values: API.InterfaceInfoVO) => Promise<void>;
   columns: any[]
   size?: SizeType
 };
@@ -31,7 +31,7 @@ const ModalForm: React.FC<Props> = (props) => {
   }, [value]);
   return (
     <>
-      <BetaSchemaForm<API.InterfaceInfo>
+      <BetaSchemaForm<API.InterfaceInfoVO>
         width={width}
         title={title}
         size={size}

@@ -2,13 +2,13 @@
 /* eslint-disable */
 import { request } from '@umijs/max';
 
-/** addChart Post /api/chart/add */
+/** addChart POST /api/chart/add */
 export async function addChartUsingPost(
   body: API.ChartAddRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponselong>('/api/chart/add', {
-    method: 'Post',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -17,13 +17,13 @@ export async function addChartUsingPost(
   });
 }
 
-/** deleteChart Post /api/chart/delete */
+/** deleteChart POST /api/chart/delete */
 export async function deleteChartUsingPost(
   body: API.DeleteRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseboolean>('/api/chart/delete', {
-    method: 'Post',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -32,25 +32,10 @@ export async function deleteChartUsingPost(
   });
 }
 
-/** editChart Post /api/chart/edit */
-export async function editChartUsingPost(
-  body: API.ChartEditRequest,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseboolean>('/api/chart/edit', {
-    method: 'Post',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    data: body,
-    ...(options || {}),
-  });
-}
-
-/** genChartByAi Post /api/chart/gen/async */
+/** genChartByAi POST /api/chart/gen/async */
 export async function genChartByAiUsingPost(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.genChartByAiUsingPostParams,
+  params: API.genChartByAiUsingPOSTParams,
   body: {},
   file?: File,
   options?: { [key: string]: any },
@@ -78,7 +63,7 @@ export async function genChartByAiUsingPost(
   });
 
   return request<API.BaseResponseBiVO>('/api/chart/gen/async', {
-    method: 'Post',
+    method: 'POST',
     params: {
       ...params,
     },
@@ -91,25 +76,10 @@ export async function genChartByAiUsingPost(
 /** getChartById GET /api/chart/get */
 export async function getChartByIdUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getChartByIdUsingGetParams,
+  params: API.getChartByIdUsingGETParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponseChart>('/api/chart/get', {
-    method: 'GET',
-    params: {
-      ...params,
-    },
-    ...(options || {}),
-  });
-}
-
-/** listChart GET /api/chart/list */
-export async function listChartUsingGet(
-  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.listChartUsingGetParams,
-  options?: { [key: string]: any },
-) {
-  return request<API.BaseResponseListChart>('/api/chart/list', {
+  return request<API.BaseResponseChartVO>('/api/chart/get', {
     method: 'GET',
     params: {
       ...params,
@@ -121,10 +91,10 @@ export async function listChartUsingGet(
 /** listChartByPage GET /api/chart/list/page */
 export async function listChartByPageUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.listChartByPageUsingGetParams,
+  params: API.listChartByPageUsingGETParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageChart>('/api/chart/list/page', {
+  return request<API.BaseResponsePageChartVO>('/api/chart/list/page', {
     method: 'GET',
     params: {
       ...params,
@@ -133,13 +103,13 @@ export async function listChartByPageUsingGet(
   });
 }
 
-/** listMyChartByPage GET /api/chart/my/list/page */
-export async function listMyChartByPageUsingGet(
+/** listChartByMyPage GET /api/chart/my/list/page */
+export async function listChartByMyPageUsingGet(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.listMyChartByPageUsingGetParams,
+  params: API.listChartByMyPageUsingGETParams,
   options?: { [key: string]: any },
 ) {
-  return request<API.BaseResponsePageChart>('/api/chart/my/list/page', {
+  return request<API.BaseResponsePageChartVO>('/api/chart/my/list/page', {
     method: 'GET',
     params: {
       ...params,
@@ -148,13 +118,13 @@ export async function listMyChartByPageUsingGet(
   });
 }
 
-/** updateChart Post /api/chart/update */
+/** updateChart POST /api/chart/update */
 export async function updateChartUsingPost(
   body: API.ChartUpdateRequest,
   options?: { [key: string]: any },
 ) {
   return request<API.BaseResponseboolean>('/api/chart/update', {
-    method: 'Post',
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },

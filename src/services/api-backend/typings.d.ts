@@ -11,9 +11,9 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseChart = {
+  type BaseResponseChartVO = {
     code?: number;
-    data?: Chart;
+    data?: ChartVO;
     message?: string;
   };
 
@@ -23,27 +23,9 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponseInterfaceInfo = {
+  type BaseResponseInterfaceInfoVO = {
     code?: number;
-    data?: InterfaceInfo;
-    message?: string;
-  };
-
-  type BaseResponseListChart = {
-    code?: number;
-    data?: Chart[];
-    message?: string;
-  };
-
-  type BaseResponseListInterfaceInfo = {
-    code?: number;
-    data?: InterfaceInfo[];
-    message?: string;
-  };
-
-  type BaseResponseListUserVO = {
-    code?: number;
-    data?: UserVO[];
+    data?: InterfaceInfoVO;
     message?: string;
   };
 
@@ -59,15 +41,15 @@ declare namespace API {
     message?: string;
   };
 
-  type BaseResponsePageChart = {
+  type BaseResponsePageChartVO = {
     code?: number;
-    data?: PageChart;
+    data?: PageChartVO;
     message?: string;
   };
 
-  type BaseResponsePageInterfaceInfo = {
+  type BaseResponsePageInterfaceInfoVO = {
     code?: number;
-    data?: PageInterfaceInfo;
+    data?: PageInterfaceInfoVO;
     message?: string;
   };
 
@@ -95,33 +77,11 @@ declare namespace API {
     genResult?: string;
   };
 
-  type Chart = {
-    chartData?: string;
-    chartStatus?: string;
-    chartType?: string;
-    createTime?: string;
-    execMessage?: string;
-    genChart?: string;
-    genResult?: string;
-    goal?: string;
-    id?: string;
-    isDelete?: number;
-    name?: string;
-    updateTime?: string;
-    userId?: string;
-  };
-
   type ChartAddRequest = {
     chartData?: string;
     chartType?: string;
     goal?: string;
-  };
-
-  type ChartEditRequest = {
-    chartData?: string;
-    chartType?: string;
-    goal?: string;
-    id?: string;
+    name?: string;
   };
 
   type ChartUpdateRequest = {
@@ -129,6 +89,20 @@ declare namespace API {
     chartType?: string;
     goal?: string;
     id?: string;
+    name?: string;
+  };
+
+  type ChartVO = {
+    chartStatus?: string;
+    chartType?: string;
+    execMessage?: string;
+    genChart?: string;
+    genResult?: string;
+    goal?: string;
+    id?: string;
+    name?: string;
+    updateTime?: string;
+    userId?: string;
   };
 
   type DeleteRequest = {
@@ -140,28 +114,28 @@ declare namespace API {
     value?: string;
   };
 
-  type genChartByAiUsingPostParams = {
+  type genChartByAiUsingPOSTParams = {
     chartType?: string;
     goal?: string;
     name?: string;
   };
 
-  type getCaptchaUsingGetParams = {
+  type getChartByIdUsingGETParams = {
+    /** id */
+    id?: string;
+  };
+
+  type getEmailCaptchaUsingGETParams = {
     /** emailAccount */
     emailAccount?: string;
   };
 
-  type getChartByIdUsingGetParams = {
+  type getInterfaceInfoByIdUsingGETParams = {
     /** id */
     id?: string;
   };
 
-  type getInterfaceInfoByIdUsingGetParams = {
-    /** id */
-    id?: string;
-  };
-
-  type getUserByIdUsingGetParams = {
+  type getUserByIdUsingGETParams = {
     /** id */
     id?: string;
   };
@@ -175,28 +149,6 @@ declare namespace API {
     status?: string;
     uid?: string;
     url?: string;
-  };
-
-  type InterfaceInfo = {
-    avatarUrl?: string;
-    createTime?: string;
-    description?: string;
-    id?: string;
-    isDelete?: number;
-    method?: string;
-    name?: string;
-    reduceScore?: string;
-    requestExample?: string;
-    requestHeader?: string;
-    requestParams?: string;
-    responseHeader?: string;
-    responseParams?: string;
-    returnFormat?: string;
-    status?: number;
-    totalInvokes?: string;
-    updateTime?: string;
-    url?: string;
-    userId?: string;
   };
 
   type InterfaceInfoAddRequest = {
@@ -235,17 +187,32 @@ declare namespace API {
     url?: string;
   };
 
+  type InterfaceInfoVO = {
+    avatarUrl?: string;
+    description?: string;
+    id?: string;
+    method?: string;
+    name?: string;
+    reduceScore?: string;
+    status?: number;
+    totalInvokes?: string;
+    updateTime?: string;
+    url?: string;
+    userId?: string;
+  };
+
   type InvokeRequest = {
     id?: string;
     requestParams?: Field[];
     userRequestParams?: string;
   };
 
-  type listChartByPageUsingGetParams = {
+  type listChartByMyPageUsingGETParams = {
+    chartStatus?: string;
     chartType?: string;
     current?: string;
+    genResult?: string;
     goal?: string;
-    id?: string;
     name?: string;
     pageSize?: string;
     sortField?: string;
@@ -253,11 +220,12 @@ declare namespace API {
     userId?: string;
   };
 
-  type listChartUsingGetParams = {
+  type listChartByPageUsingGETParams = {
+    chartStatus?: string;
     chartType?: string;
     current?: string;
+    genResult?: string;
     goal?: string;
-    id?: string;
     name?: string;
     pageSize?: string;
     sortField?: string;
@@ -265,7 +233,7 @@ declare namespace API {
     userId?: string;
   };
 
-  type listInterfaceInfoByPageUsingGetParams = {
+  type listInterfaceInfoByPageUsingGETParams = {
     current?: string;
     description?: string;
     method?: string;
@@ -284,15 +252,7 @@ declare namespace API {
     userId?: string;
   };
 
-  type listInterfaceInfoBySearchTextPageUsingGetParams = {
-    current?: string;
-    pageSize?: string;
-    searchText?: string;
-    sortField?: string;
-    sortOrder?: string;
-  };
-
-  type listInterfaceInfoUsingGetParams = {
+  type listInterfaceInfoBySearchPageUsingGETParams = {
     current?: string;
     description?: string;
     method?: string;
@@ -311,22 +271,9 @@ declare namespace API {
     userId?: string;
   };
 
-  type listMyChartByPageUsingGetParams = {
-    chartType?: string;
-    current?: string;
-    goal?: string;
-    id?: string;
-    name?: string;
-    pageSize?: string;
-    sortField?: string;
-    sortOrder?: string;
-    userId?: string;
-  };
-
-  type listUserByPageUsingGetParams = {
+  type listUserByPageUsingGETParams = {
     current?: string;
     gender?: string;
-    id?: string;
     pageSize?: string;
     sortField?: string;
     sortOrder?: string;
@@ -335,10 +282,9 @@ declare namespace API {
     userRole?: string;
   };
 
-  type listUserUsingGetParams = {
+  type listUserBySearchPageUsingGETParams = {
     current?: string;
     gender?: string;
-    id?: string;
     pageSize?: string;
     sortField?: string;
     sortOrder?: string;
@@ -352,27 +298,27 @@ declare namespace API {
     column?: string;
   };
 
-  type PageChart = {
+  type PageChartVO = {
     countId?: string;
     current?: string;
     maxLimit?: string;
     optimizeCountSql?: boolean;
     orders?: OrderItem[];
     pages?: string;
-    records?: Chart[];
+    records?: ChartVO[];
     searchCount?: boolean;
     size?: string;
     total?: string;
   };
 
-  type PageInterfaceInfo = {
+  type PageInterfaceInfoVO = {
     countId?: string;
     current?: string;
     maxLimit?: string;
     optimizeCountSql?: boolean;
     orders?: OrderItem[];
     pages?: string;
-    records?: InterfaceInfo[];
+    records?: InterfaceInfoVO[];
     searchCount?: boolean;
     size?: string;
     total?: string;
@@ -406,7 +352,7 @@ declare namespace API {
     type?: string;
   };
 
-  type uploadFileUsingPostParams = {
+  type uploadFileUsingPOSTParams = {
     biz?: string;
   };
 

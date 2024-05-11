@@ -10,8 +10,8 @@ import ChartColumns, {ChartAddModalFormColumns, ChartUpdateModalFormColumns} fro
 import {
   addChartUsingPost,
   deleteChartUsingPost,
-  updateChartUsingPost,
-  listChartByPageUsingGet
+  listChartByPageUsingGet,
+  updateChartUsingPost
 } from '@/services/api-backend/chartController';
 
 
@@ -29,7 +29,7 @@ const ChartList: React.FC = () => {
   const [updateModalOpen, handleUpdateModalOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<API.Chart>();
+  const [currentRow, setCurrentRow] = useState<API.ChartVO>();
 
   /**
    * @en-US Add node
@@ -103,14 +103,14 @@ const ChartList: React.FC = () => {
   };
 
   const confirm = async () => {
-    await handleRemove(currentRow as API.Chart);
+    await handleRemove(currentRow as API.ChartVO);
   };
 
   const cancel = () => {
     message.success('取消成功');
   };
 
-  const columns: ProColumns<API.Chart>[] = [
+  const columns: ProColumns<API.ChartVO>[] = [
     ...ChartColumns,
     {
       title: '操作',
@@ -150,7 +150,7 @@ const ChartList: React.FC = () => {
   return (
     <Card>
 
-      <ProTable<API.Chart>
+      <ProTable<API.ChartVO>
         headerTitle={'图表管理'}
         actionRef={actionRef}
         rowKey="user"
@@ -200,7 +200,7 @@ const ChartList: React.FC = () => {
         }}
         onOpenChange={handleModalOpen}
         onSubmit={async (value) => {
-          const success = await handleAdd(value as API.Chart);
+          const success = await handleAdd(value as API.ChartVO);
           if (success) {
             handleModalOpen(false);
             if (actionRef.current) {
@@ -220,7 +220,7 @@ const ChartList: React.FC = () => {
         value={currentRow}
         onOpenChange={handleUpdateModalOpen}
         onSubmit={async (value) => {
-          const success = await handleUpdate(value as API.Chart);
+          const success = await handleUpdate(value as API.ChartVO);
           if (success) {
             handleUpdateModalOpen(false);
             if (actionRef.current) {

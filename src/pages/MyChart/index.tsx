@@ -1,4 +1,4 @@
-import {deleteChartUsingPost, listMyChartByPageUsingGet} from '@/services/api-backend/chartController';
+import {deleteChartUsingPost, listChartByMyPageUsingGet} from '@/services/api-backend/chartController';
 
 import {useModel} from '@@/exports';
 import {Avatar, Button, Card, List, message, Popconfirm, Result, Tooltip} from 'antd';
@@ -16,15 +16,14 @@ const MyChartPage: React.FC = () => {
     const initSearchParams = {
       current: 1,
       pageSize: 4,
-      sortField: 'createTime',
       sortOrder: 'desc',
     };
 
     // @ts-ignore
-    const [searchParams, setSearchParams] = useState<API.listMyChartByPageUsingGetParams>({...initSearchParams});
+    const [searchParams, setSearchParams] = useState<API.listChartByMyPageUsingGETParams>({...initSearchParams});
     const {initialState} = useModel('@@initialState');
     const {loginUser} = initialState ?? {};
-    const [chartList, setChartList] = useState<API.Chart[]>();
+    const [chartList, setChartList] = useState<API.ChartVO[]>();
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -51,7 +50,7 @@ const MyChartPage: React.FC = () => {
 
     const fetchData = async () => {
       try {
-        const res = await listMyChartByPageUsingGet(searchParams);
+        const res = await listChartByMyPageUsingGet(searchParams);
         handleChartData(res);
       } catch (e: any) {
         message.error('获取图表失败，' + e.message);
@@ -106,7 +105,7 @@ const MyChartPage: React.FC = () => {
      *
      * @param chart
      */
-    const handleRemove = async (chart: API.Chart) => {
+    const handleRemove = async (chart: API.ChartVO) => {
       if (chart.chartStatus === 'wait' || chart.chartStatus === 'running') {
         message.info('请稍等');
         return;
@@ -131,7 +130,7 @@ const MyChartPage: React.FC = () => {
       }
     };
 
-    const confirm = async (chart: API.Chart) => {
+    const confirm = async (chart: API.ChartVO) => {
       const result = await handleRemove(chart);
       if (result) {
         // console.log('删除成功！');
@@ -145,7 +144,7 @@ const MyChartPage: React.FC = () => {
     };
 
     // 定义一个函数来将卡片转换为图片并触发下载
-    const downloadCardAsImage = (chart: API.Chart) => {
+    const downloadCardAsImage = (chart: API.ChartVO) => {
       // if (chart.chartStatus === 'wait' || chart.chartStatus === 'running') {
       //   message.info('请稍等');
       //   return;
@@ -200,13 +199,16 @@ const MyChartPage: React.FC = () => {
               size={"large"}
               maxLength={50}
               enterButton="搜索"
-              placeholder={"请输入图表名称"}
+              placeholder={"请输入搜索词"}
               onSearch={(value) => {
                 // 设置搜索条件
                 // @ts-ignore
                 setSearchParams({
                   ...initSearchParams,
                   name: value,
+                  chartType: value,
+                  goal: value,
+                  genResult: value,
                 })
               }}
               style={{maxWidth: 600, height: 40}}/>
@@ -243,7 +245,7 @@ const MyChartPage: React.FC = () => {
           }}
           loading={loading}
           dataSource={chartList}
-          renderItem={(item: API.Chart) => (
+          renderItem={(item: API.ChartVO) => (
             <List.Item
               key={item.id}
             >

@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer';
 import {
-  getCaptchaUsingGet,
+  getEmailCaptchaUsingGet,
   userEmailRegisterUsingPost,
   userRegisterUsingPost
 } from '@/services/api-backend/userController';
@@ -269,7 +269,7 @@ const Register: React.FC = () => {
                   },
                 ]}
                 onGetCaptcha={async (emailAccount) => {
-                  const res = await getCaptchaUsingGet({emailAccount})
+                  const res = await getEmailCaptchaUsingGet({emailAccount})
                   if (res.data && res.code === 0) {
                     message.success("验证码发送成功")
                     return

@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Button, message, Modal} from "antd";
 import {ProFormCaptcha, ProFormText} from "@ant-design/pro-form";
 import {LockOutlined, MailOutlined} from "@ant-design/icons";
-import {getCaptchaUsingGet,} from "@/services/api-backend/userController";
+import {getEmailCaptchaUsingGet,} from "@/services/api-backend/userController";
 import {LoginForm} from "@ant-design/pro-components";
 import {ProFormInstance} from "@ant-design/pro-form/lib";
 import {valueLength} from "@/pages/User/UserInfo";
@@ -122,7 +122,7 @@ const EmailModal: React.FC<Props> = (props) => {
             },
           ]}
           onGetCaptcha={async (emailAccount) => {
-            const res = await getCaptchaUsingGet({emailAccount})
+            const res = await getEmailCaptchaUsingGet({emailAccount})
             if (res.data && res.code === 0) {
               message.success("验证码发送成功")
               return

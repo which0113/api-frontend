@@ -4,12 +4,11 @@ import {Badge, Card, Image, List, Spin} from "antd";
 import Search from "antd/es/input/Search";
 import {history} from "@umijs/max";
 import {
-  listInterfaceInfoByPageUsingGet,
-  listInterfaceInfoBySearchTextPageUsingGet
+  listInterfaceInfoBySearchPageUsingGet,
 } from "@/services/api-backend/interfaceInfoController";
 
 const InterfaceSquare: React.FC = () => {
-  const [data, setData] = useState<API.InterfaceInfo[]>([]);
+  const [data, setData] = useState<API.InterfaceInfoVO[]>([]);
   const [searchText, setSearchText] = useState<string>('');
   const [total, setTotal] = useState<number>();
   const [pageSize] = useState<number>(12);
@@ -17,7 +16,7 @@ const InterfaceSquare: React.FC = () => {
 
   const loadData = async (current = 1) => {
     setLoading(true)
-    const res = await listInterfaceInfoByPageUsingGet({
+    const res = await listInterfaceInfoBySearchPageUsingGet({
       current: current.toString(),
       name: searchText,
       pageSize: pageSize.toString(),
@@ -40,10 +39,11 @@ const InterfaceSquare: React.FC = () => {
   }, []);
 
   const onSearch = async () => {
-    const res = await listInterfaceInfoBySearchTextPageUsingGet({
+    const res = await listInterfaceInfoBySearchPageUsingGet({
       // @ts-ignore
       current: 1,
-      searchText: searchText,
+      name: searchText,
+      description: searchText,
     });
     if (res.data) {
       setData(res?.data?.records || []);
