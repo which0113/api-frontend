@@ -75,7 +75,7 @@ const MyChartPage: React.FC = () => {
 
       if (!socket) {
         // 建立 WebSocket 连接
-        const socketUrl = "ws://101.43.54.167:9001/api/ws/" + loginUser?.id;
+        const socketUrl = "wss://101.43.54.167:9001/api/ws/" + loginUser?.id;
         try {
           socket = new WebSocket(socketUrl);
         } catch (e: any) {
@@ -257,7 +257,7 @@ const MyChartPage: React.FC = () => {
                     title={item.name}
                     description={item.chartType ? '图表类型：' + item.chartType : undefined}
                   />
-                  <p>{item.updateTime ? moment(item.updateTime).format('YYYY-MM-DD') : ''}</p>
+                  <p>{item.updateTime ? moment.utc(item.updateTime).format('YYYY-MM-DD') : ''}</p>
                 </div>
                 <>
                   {

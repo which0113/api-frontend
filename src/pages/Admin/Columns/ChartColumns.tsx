@@ -166,7 +166,7 @@ export const ChartColumns: ProColumns<API.Chart>[] = [
     hideInSearch: true,
     valueType: "text",
     // @ts-ignore
-    render: (text: string) => moment(text).format('YYYY-MM-DD'),
+    render: (text: string) => moment.utc(text).format('YYYY-MM-DD'),
   },
   {
     title: '图表状态',

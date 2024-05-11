@@ -1,5 +1,4 @@
-import {Dropdown} from 'antd';
-import type {DropDownProps} from 'antd/es/dropdown';
+import {Dropdown, DropDownProps} from 'antd';
 import React from 'react';
 import {useEmotionCss} from '@ant-design/use-emotion-css';
 import classNames from 'classnames';
