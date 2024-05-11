@@ -9,7 +9,7 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserAddRequest, "te
     key: "id"
   },
   {
-    title: '名称',
+    title: '昵称',
     dataIndex: 'userName',
     key: "userName",
     width: 'lg',
@@ -135,7 +135,7 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserUpdateReques
     key: "id"
   },
   {
-    title: '名称',
+    title: '昵称',
     dataIndex: 'userName',
     key: "userName",
     width: 'lg',
