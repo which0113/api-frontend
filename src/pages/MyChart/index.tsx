@@ -74,7 +74,7 @@ const MyChartPage: React.FC = () => {
 
       if (!socket) {
         // 建立 WebSocket 连接
-        const socketUrl = "ws://101.43.54.167:9001/api/ws/" + loginUser?.id;
+        const socketUrl = "ws://127.0.0.1:9001/api/ws/" + loginUser?.id;
         try {
           const newSocket = new WebSocket(socketUrl);
           // newSocket.onopen = () => {
