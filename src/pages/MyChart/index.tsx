@@ -26,6 +26,7 @@ const MyChartPage: React.FC = () => {
     const [chartList, setChartList] = useState<API.ChartVO[]>();
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
+    const [socket, setSocket] = useState<WebSocket | undefined>();
 
     const handleChartData = (res: any) => {
       if (res.data) {
@@ -67,35 +68,39 @@ const MyChartPage: React.FC = () => {
       setLoading(false);
     };
 
-    let [socket, setSocket] = useState<WebSocket | undefined>();
     useEffect(() => {
       // 加载数据
       loadData();
 
       if (!socket) {
         // 建立 WebSocket 连接
-        const socketUrl = "wss://101.43.54.167:9001/api/ws/" + loginUser?.id;
+        const socketUrl = "ws://101.43.54.167:9001/api/ws/" + loginUser?.id;
         try {
-          socket = new WebSocket(socketUrl);
+          const newSocket = new WebSocket(socketUrl);
+          // newSocket.onopen = () => {
+          //     message.success('ws连接成功');
+          // };
+          // newSocket.onclose = () => {
+          //   message.info('ws连接断开');
+          // };
+          // newSocket.onmessage = () => {
+          //   message.success('消息来喽~');
+          //   // 收到消息时重新加载数据
+          //   loadData();
+          // };
+          setSocket(newSocket);
         } catch (e: any) {
-          console.log('WebSocket 连接失败：' + e.message);
-          return;
+          console.log('ws连接失败：' + e.message);
+          // message.error('ws连接失败');
         }
       }
-      socket.onmessage = function (e: any) {
-        if (e) {
-          // console.log(e.data);
-        }
-        // message.success('消息来喽~');
-        // 收到消息时重新加载数据
-        loadData();
-      };
-      setSocket(socket);
+
       // 组件卸载时关闭 WebSocket 连接
       return () => {
-        if (socket) {
-          socket.close();
-        }
+        // 可以不用关闭，浏览器关闭 WebSocket 连接会自动关闭
+        // if (socket) {
+        //   socket.close();
+        // }
       };
     }, [searchParams]);
 
