@@ -7,7 +7,6 @@ import React, {useEffect, useState} from 'react';
 import Search from "antd/es/input/Search";
 import ProCard from "@ant-design/pro-card";
 import html2canvas from "html2canvas";
-import {requestConfig} from "@/requestConfig";
 
 /**
  * 我的图表页面
