@@ -1,12 +1,13 @@
 import {deleteChartUsingPost, listChartByMyPageUsingGet} from '@/services/api-backend/chartController';
 
 import {useModel} from '@@/exports';
-import {Avatar, Button, Card, List, message, Popconfirm, Result, Tooltip} from 'antd';
+import {Avatar, Button, Card, List, message, Popconfirm, Result, Spin, Tooltip} from 'antd';
 import ReactECharts from 'echarts-for-react';
 import React, {useEffect, useState} from 'react';
 import Search from "antd/es/input/Search";
 import ProCard from "@ant-design/pro-card";
 import html2canvas from "html2canvas";
+import {requestConfig} from "@/requestConfig";
 
 /**
  * 我的图表页面
@@ -74,7 +75,10 @@ const MyChartPage: React.FC = () => {
 
       if (!socket) {
         // 建立 WebSocket 连接
-        const socketUrl = "ws://127.0.0.1:9001/api/ws/" + loginUser?.id;
+        const socketPreUrl = process.env.NODE_ENV === 'production' ?
+          "wss://back.freefish.love/api/ws/" :
+          "ws://localhost:9001/api/ws/";
+        const socketUrl = socketPreUrl + loginUser?.id;
         try {
           const newSocket = new WebSocket(socketUrl);
           // newSocket.onopen = () => {
@@ -222,111 +226,113 @@ const MyChartPage: React.FC = () => {
         <br/>
         <br/>
         <div className="margin-16"/>
-        <List
-          grid={{
-            gutter: 16,
-            xs: 1,
-            sm: 1,
-            md: 1,
-            lg: 2,
-            xl: 2,
-            xxl: 2,
-          }}
-          pagination={{
-            onChange: (page, pageSize) => {
-              setSearchParams({
-                ...searchParams,
-                // @ts-ignore
-                current: page,
-                // @ts-ignore
-                pageSize,
-              })
-            },
-            // @ts-ignore
-            current: searchParams.current,
-            // @ts-ignore
-            pageSize: searchParams.pageSize,
-            total: total,
-          }}
-          loading={loading}
-          dataSource={chartList}
-          renderItem={(item: API.ChartVO) => (
-            <List.Item
-              key={item.id}
-            >
-              <Card id={item.id?.toString()} hoverable style={{width: '100%'}}>
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar
-                        crossOrigin={'anonymous'}
-                        src={loginUser && loginUser.userAvatar + '?' + new Date().getTime()}
-                      />
+        <Spin spinning={loading}>
+          <List
+            grid={{
+              gutter: 16,
+              xs: 1,
+              sm: 1,
+              md: 1,
+              lg: 2,
+              xl: 2,
+              xxl: 2,
+            }}
+            pagination={{
+              onChange: (page, pageSize) => {
+                setSearchParams({
+                  ...searchParams,
+                  // @ts-ignore
+                  current: page,
+                  // @ts-ignore
+                  pageSize,
+                })
+              },
+              // @ts-ignore
+              current: searchParams.current,
+              // @ts-ignore
+              pageSize: searchParams.pageSize,
+              total: total,
+            }}
+            loading={loading}
+            dataSource={chartList}
+            renderItem={(item: API.ChartVO) => (
+              <List.Item
+                key={item.id}
+              >
+                <Card id={item.id?.toString()} hoverable style={{width: '100%'}}>
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <List.Item.Meta
+                      avatar={
+                        <Avatar
+                          crossOrigin={'anonymous'}
+                          src={loginUser && loginUser.userAvatar + '?' + new Date().getTime()}
+                        />
+                      }
+                      title={item.name}
+                      description={item.chartType ? '图表类型：' + item.chartType : undefined}
+                    />
+                    <p>{item.updateTime ? item.updateTime.split('T')[0] : ''}</p>
+                  </div>
+                  <>
+                    {
+                      item.chartStatus === 'wait' && <>
+                        <Result
+                          status="warning"
+                          title="待生成"
+                          subTitle={item.execMessage ?? '当前图表生成队列繁忙，请耐心等候'}
+                        />
+                      </>
                     }
-                    title={item.name}
-                    description={item.chartType ? '图表类型：' + item.chartType : undefined}
-                  />
-                  <p>{item.updateTime ? item.updateTime.split('T')[0] : ''}</p>
-                </div>
-                <>
-                  {
-                    item.chartStatus === 'wait' && <>
-                      <Result
-                        status="warning"
-                        title="待生成"
-                        subTitle={item.execMessage ?? '当前图表生成队列繁忙，请耐心等候'}
-                      />
-                    </>
-                  }
-                  {
-                    item.chartStatus === 'running' && <>
-                      <Result
-                        status="info"
-                        title="图表生成中"
-                        subTitle={item.execMessage}
-                      />
-                    </>
-                  }
-                  {
-                    item.chartStatus === 'succeed' && <>
-                      <div style={{marginBottom: 16}}/>
-                      <p>{'分析目标：' + item.goal}</p>
-                      <p>{'分析目标结论：' + item.genResult}</p>
-                      <div style={{marginBottom: 16}}/>
-                      <ReactECharts option={item.genChart && JSON.parse(item.genChart)}/>
-                    </>
-                  }
-                  {
-                    item.chartStatus === 'failed' && <>
-                      <Result
-                        status="error"
-                        title="图表生成失败"
-                        // subTitle={item.execMessage}
-                      />
-                    </>
-                  }
-                </>
-                <div id={"b-" + item.id?.toString()} style={{display: 'flex', justifyContent: 'space-between'}}>
-                  <Tooltip color="green" title="放缩页面试试~">
-                    <Button
-                      type="primary"
-                      onClick={() => downloadCardAsImage(item)}>下载
-                    </Button>
-                  </Tooltip>
-                  <Popconfirm
-                    title="请确认是否删除！"
-                    onConfirm={() => confirm(item)}
-                    onCancel={cancel}
-                    okText="Yes"
-                    cancelText="No"
-                  >
-                    <Button danger>删除</Button>
-                  </Popconfirm>
-                </div>
-              </Card>
-            </List.Item>
-          )}
-        />
+                    {
+                      item.chartStatus === 'running' && <>
+                        <Result
+                          status="info"
+                          title="图表生成中"
+                          subTitle={item.execMessage}
+                        />
+                      </>
+                    }
+                    {
+                      item.chartStatus === 'succeed' && <>
+                        <div style={{marginBottom: 16}}/>
+                        <p>{'分析目标：' + item.goal}</p>
+                        <p>{'分析目标结论：' + item.genResult}</p>
+                        <div style={{marginBottom: 16}}/>
+                        <ReactECharts option={item.genChart && JSON.parse(item.genChart)}/>
+                      </>
+                    }
+                    {
+                      item.chartStatus === 'failed' && <>
+                        <Result
+                          status="error"
+                          title="图表生成失败"
+                          // subTitle={item.execMessage}
+                        />
+                      </>
+                    }
+                  </>
+                  <div id={"b-" + item.id?.toString()} style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Tooltip color="green" title="放缩页面试试~">
+                      <Button
+                        type="primary"
+                        onClick={() => downloadCardAsImage(item)}>下载
+                      </Button>
+                    </Tooltip>
+                    <Popconfirm
+                      title="请确认是否删除！"
+                      onConfirm={() => confirm(item)}
+                      onCancel={cancel}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <Button danger>删除</Button>
+                    </Popconfirm>
+                  </div>
+                </Card>
+              </List.Item>
+            )}
+          />
+        </Spin>
       </div>
     );
   }
