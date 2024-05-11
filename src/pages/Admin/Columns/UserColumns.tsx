@@ -166,7 +166,7 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserUpdateReques
   }, {
     title: '角色/权限',
     dataIndex: 'userRole',
-    valueType: "radio",
+    valueType: "select",
     key: 'userRole',
     // 用户角色：visitor / user / admin / demo
     valueEnum: {
