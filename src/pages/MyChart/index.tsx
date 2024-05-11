@@ -257,7 +257,7 @@ const MyChartPage: React.FC = () => {
                     title={item.name}
                     description={item.chartType ? '图表类型：' + item.chartType : undefined}
                   />
-                  <p>{item.updateTime ? moment.utc(item.updateTime).format('YYYY-MM-DD') : ''}</p>
+                  <p>{item.updateTime ? item.updateTime.split('T')[0] : ''}</p>
                 </div>
                 <>
                   {

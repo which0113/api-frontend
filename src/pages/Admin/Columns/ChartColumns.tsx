@@ -165,8 +165,7 @@ export const ChartColumns: ProColumns<API.Chart>[] = [
     key: "updateTime",
     hideInSearch: true,
     valueType: "text",
-    // @ts-ignore
-    render: (text: string) => moment.utc(text).format('YYYY-MM-DD'),
+    render: (text: any) => text.split('T')[0],
   },
   {
     title: '图表状态',
