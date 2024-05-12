@@ -16,7 +16,7 @@ import {Column} from "rc-table";
 import './index.less'
 import ProCard from "@ant-design/pro-card";
 import {errorCode} from "@/enum/ErrorCodeEnum";
-import {history, Link, useModel, useParams} from "@@/exports";
+import {Link, useParams} from "@@/exports";
 import {
   axiosExample,
   convertResponseParams,
@@ -44,9 +44,6 @@ const InterfaceInfo: React.FC = () => {
   const [totalInvokes, setTotalInvokes] = useState<number>(0);
   const [javaCode, setJavaCode] = useState<any>();
   const [returnCode, setReturnCode] = useState<any>(returnExample);
-  const {initialState} = useModel('@@initialState');
-  const {loginUser} = initialState || {}
-  const loginPath = '/user/login';
 
   const loadedData = async () => {
     if (!params.id) {

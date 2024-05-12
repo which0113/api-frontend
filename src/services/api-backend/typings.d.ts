@@ -430,6 +430,12 @@ declare namespace API {
     emailAccount?: string;
   };
 
+  type UserUpdatePasswordRequest = {
+    id?: string;
+    userNewPassword?: string;
+    userOldPassword?: string;
+  };
+
   type UserUpdateRequest = {
     balance?: string;
     gender?: string;

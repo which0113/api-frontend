@@ -20,7 +20,14 @@
   {path: '/:id', name: '欢迎', icon: 'smile', component: './Welcome', hideInMenu: true,},
   {path: '/', name: '欢迎', icon: 'smile', component: './Welcome'},
   {path: '/interface/list', name: '接口广场', icon: 'RedditOutlined', component: './InterfaceSquare'},
-  {path: '/account/center', name: '个人中心', icon: 'UserOutlined', component: './User/UserInfo', hideInMenu: true,},
+  {
+    path: '/account/center',
+    name: '个人中心',
+    icon: 'UserOutlined',
+    access: 'canUser',
+    component: './User/UserInfo',
+    hideInMenu: true,
+  },
   {path: '/analyse', name: '智能分析', icon: 'barChart', component: './AddChartAsync'},
   {path: '/chart', name: '我的图表', icon: 'pieChart', access: 'canUser', component: './MyChart'},
   {

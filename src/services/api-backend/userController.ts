@@ -182,6 +182,21 @@ export async function normalUserUsingPost(body: API.IdRequest, options?: { [key:
   });
 }
 
+/** updateUserPassword POST /api/user/password/update */
+export async function updateUserPasswordUsingPost(
+  body: API.UserUpdatePasswordRequest,
+  options?: { [key: string]: any },
+) {
+  return request<API.BaseResponseboolean>('/api/user/password/update', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    data: body,
+    ...(options || {}),
+  });
+}
+
 /** userRegister POST /api/user/register */
 export async function userRegisterUsingPost(
   body: API.UserRegisterRequest,

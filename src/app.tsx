@@ -7,7 +7,7 @@ import {requestConfig} from '@/requestConfig';
 import Settings from '../config/defaultSettings';
 import {valueLength} from "@/pages/User/UserInfo";
 import {getLoginUserUsingGet} from "@/services/api-backend/userController";
-import {FloatButton, message} from 'antd';
+import {FloatButton} from 'antd';
 import React from "react";
 import wechat from '@/../public/assets/WeChat.jpg';
 import LightColor from "@/components/Icon/LightColor";
@@ -124,7 +124,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
         && pathname !== '/user/register'
         && pathname !== '/analyse'
       ) {
-        message.info('你被重定向了');
+        // message.info('你被重定向了');
         history.push(loginPath);
       }
     },

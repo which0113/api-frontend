@@ -49,7 +49,7 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserAddRequest, "te
         () => ({
           validator(_, value) {
             if (!value || value.length < 0) {
-              return Promise.reject(new Error("用户密码为必填项"));
+              return Promise.reject(new Error("密码为必填项"));
             }
             return Promise.resolve();
           },
@@ -218,7 +218,7 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserUpdateReques
         () => ({
           validator(_, value) {
             if (value && value.length < 0) {
-              return Promise.reject(new Error("用户密码为必填项"));
+              return Promise.reject(new Error("密码为必填项"));
             }
             return Promise.resolve();
           },

@@ -8,6 +8,8 @@ import Search from "antd/es/input/Search";
 import ProCard from "@ant-design/pro-card";
 import html2canvas from "html2canvas";
 
+const SOCKET_KEY = 'socket';
+
 /**
  * 我的图表页面
  * @constructor
@@ -26,7 +28,14 @@ const MyChartPage: React.FC = () => {
     const [chartList, setChartList] = useState<API.ChartVO[]>();
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
-    const [socket, setSocket] = useState<WebSocket | undefined>();
+    const [socket, setSocket] = useState<WebSocket | undefined>(() => {
+      // 从本地存储中获取 WebSocket 实例
+      const storedSocket = localStorage.getItem(SOCKET_KEY);
+      if (storedSocket) {
+        return JSON.parse(storedSocket);
+      }
+      return undefined;
+    });
 
     const handleChartData = (res: any) => {
       if (res.data) {
@@ -69,43 +78,52 @@ const MyChartPage: React.FC = () => {
     };
 
     useEffect(() => {
-      // 加载数据
-      loadData();
+        // 加载数据
+        loadData();
 
-      if (!socket) {
-        // 建立 WebSocket 连接
-        const socketPreUrl = process.env.NODE_ENV === 'production' ?
-          "wss://back.freefish.love/api/ws/" :
-          "ws://localhost:9001/api/ws/";
-        const socketUrl = socketPreUrl + loginUser?.id;
-        try {
-          const newSocket = new WebSocket(socketUrl);
-          newSocket.onopen = () => {
-            message.success('ws连接成功');
-          };
-          newSocket.onclose = () => {
-            message.info('ws连接断开');
-          };
-          newSocket.onmessage = () => {
-            message.success('消息来喽~');
+        if (!socket) {
+          // 建立 WebSocket 连接
+          const socketPreUrl = process.env.NODE_ENV === 'production' ?
+            "wss://back.freefish.love/api/ws/" :
+            "ws://localhost:9001/api/ws/";
+          const socketUrl = socketPreUrl + loginUser?.id;
+          try {
+            const newSocket = new WebSocket(socketUrl);
+            newSocket.onopen = () => {
+              message.success('ws连接成功');
+              // 将 WebSocket 实例保存到本地存储中
+              localStorage.setItem(SOCKET_KEY, JSON.stringify(newSocket));
+            };
+            newSocket.onclose = () => {
+              message.info('ws连接断开');
+              // 在连接关闭时，清除本地存储中的 WebSocket 实例
+              localStorage.removeItem(SOCKET_KEY);
+            };
             // 收到消息时重新加载数据
-            loadData();
-          };
-          setSocket(newSocket);
-        } catch (e: any) {
-          console.log('ws连接失败：' + e.message);
-          message.error('ws连接失败');
-        }
-      }
+            newSocket.onmessage = () => {
+              message.success('消息来喽~');
+              loadData();
+            };
+            setSocket(newSocket);
 
-      // 组件卸载时关闭 WebSocket 连接
-      return () => {
-        // 可以不用关闭，浏览器关闭 WebSocket 连接会自动关闭
-        if (socket) {
-          // socket.close();
+          } catch
+            (e: any) {
+            console.log('ws连接失败：' + e.message);
+            message.error('ws连接失败');
+          }
         }
-      };
-    }, [searchParams]);
+
+        // 组件卸载时关闭 WebSocket 连接
+        return () => {
+          // 可以不用关闭，浏览器关闭 WebSocket 连接会自动关闭
+          if (socket) {
+            // socket.close();
+            // message.info('ws连接断开');
+          }
+        };
+      }, [searchParams]
+    )
+    ;
 
     /**
      *  Delete node
@@ -151,7 +169,7 @@ const MyChartPage: React.FC = () => {
       message.success('已取消');
     };
 
-    // 定义一个函数来将卡片转换为图片并触发下载
+// 定义一个函数来将卡片转换为图片并触发下载
     const downloadCardAsImage = (chart: API.ChartVO) => {
       // if (chart.chartStatus === 'wait' || chart.chartStatus === 'running') {
       //   message.info('请稍等');

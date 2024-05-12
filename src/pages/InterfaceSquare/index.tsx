@@ -3,9 +3,7 @@ import ProCard from "@ant-design/pro-card";
 import {Badge, Card, Image, List, Spin} from "antd";
 import Search from "antd/es/input/Search";
 import {history} from "@umijs/max";
-import {
-  listInterfaceInfoBySearchPageUsingGet,
-} from "@/services/api-backend/interfaceInfoController";
+import {listInterfaceInfoBySearchPageUsingGet,} from "@/services/api-backend/interfaceInfoController";
 
 const InterfaceSquare: React.FC = () => {
   const [data, setData] = useState<API.InterfaceInfoVO[]>([]);
