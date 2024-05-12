@@ -95,6 +95,7 @@ declare namespace API {
   type ChartVO = {
     chartStatus?: string;
     chartType?: string;
+    createUser?: string;
     execMessage?: string;
     genChart?: string;
     genResult?: string;
@@ -194,6 +195,12 @@ declare namespace API {
     method?: string;
     name?: string;
     reduceScore?: string;
+    requestExample?: string;
+    requestHeader?: string;
+    requestParams?: string;
+    responseHeader?: string;
+    responseParams?: string;
+    returnFormat?: string;
     status?: number;
     totalInvokes?: string;
     updateTime?: string;
@@ -210,6 +217,7 @@ declare namespace API {
   type listChartByMyPageUsingGETParams = {
     chartStatus?: string;
     chartType?: string;
+    createUser?: string;
     current?: string;
     genResult?: string;
     goal?: string;
@@ -223,6 +231,7 @@ declare namespace API {
   type listChartByPageUsingGETParams = {
     chartStatus?: string;
     chartType?: string;
+    createUser?: string;
     current?: string;
     genResult?: string;
     goal?: string;

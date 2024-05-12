@@ -51,6 +51,7 @@ const Register: React.FC = () => {
   const [invitationCode, setInvitationCode] = useState<string>('');
   const [form] = Form.useForm();
   const params = useParams()
+  const loginPath = '/user/login';
 
   useEffect(() => {
     if (params.id) {
@@ -78,7 +79,7 @@ const Register: React.FC = () => {
     if (res.data && res.code === 0) {
       message.success('注册成功');
       setTimeout(() => {
-        history.push('/user/login');
+        history.push(loginPath);
       }, 100);
     }
   }

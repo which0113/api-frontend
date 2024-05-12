@@ -1,5 +1,4 @@
 import {BarsOutlined, GithubOutlined, WechatOutlined} from '@ant-design/icons';
-// import {SettingDrawer} from '@ant-design/pro-components';
 import type {RunTimeLayoutConfig} from '@umijs/max';
 import {history} from '@umijs/max';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
@@ -8,11 +7,10 @@ import {requestConfig} from '@/requestConfig';
 import Settings from '../config/defaultSettings';
 import {valueLength} from "@/pages/User/UserInfo";
 import {getLoginUserUsingGet} from "@/services/api-backend/userController";
-import {FloatButton} from 'antd';
+import {FloatButton, message} from 'antd';
 import React from "react";
 import wechat from '@/../public/assets/WeChat.jpg';
 import LightColor from "@/components/Icon/LightColor";
-// import {Docs, helloWord} from "@/components/RightContent";
 import SendGift from "@/components/Gift/SendGift";
 import NoFoundPage from "@/pages/404";
 
@@ -113,13 +111,20 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
     onPageChange: () => {
       // 百度统计
       baiduStatistics()
-      const {location} = history;
-      // if (!whiteList.includes(location.pathname)) {
+      const {pathname} = location;
+      // if (!whiteList.includes(pathname)) {
       //   getInitialState();
       // }
       // 如果没有登录，重定向到 login
-      if (!initialState?.loginUser && !/^\/\w+\/?$/.test(location.pathname) && location.pathname !== '/'
-        && location.pathname !== '/interface/list' && !location.pathname.includes("/interface_info/")) {
+      if (!initialState?.loginUser
+        && pathname !== '/'
+        && pathname !== '/interface/list'
+        && !pathname.includes('/interfaceInfo/')
+        && pathname !== '/user/login'
+        && pathname !== '/user/register'
+        && pathname !== '/analyse'
+      ) {
+        message.info('你被重定向了');
         history.push(loginPath);
       }
     },

@@ -286,7 +286,7 @@ const InterfaceInfoColumns: ProColumns<API.InterfaceInfoVO>[] = [
     copyable: true,
     valueType: 'text',
     render: (_, record) => (
-      <Link key={record.id} to={`/interface_info/${record.id}`}>
+      <Link key={record.id} to={`/interfaceInfo/${record.id}`}>
         {record.name}
       </Link>
     ),

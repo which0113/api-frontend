@@ -7,7 +7,7 @@ import Search from "antd/es/input/Search";
 import ParamsTable from "@/components/ParamsTable";
 
 export type Props = {
-  data?: API.InterfaceInfo;
+  data?: API.InterfaceInfoVO;
   temporaryParams: any
   requestExampleActiveTabKey: string
   onSearch: (values: any) => void;
@@ -34,7 +34,7 @@ const ToolsTab: React.FC<Props> = (props) => {
       style={{width: 120}}
       options={[
         {value: 'GET', label: 'GET', disabled: true},
-        {value: 'Post', label: 'Post', disabled: true},
+        {value: 'POST', label: 'POST', disabled: true},
         {value: 'PUT', label: 'PUT', disabled: true},
         {value: 'DELETE', label: 'DELETE', disabled: true},
       ]}

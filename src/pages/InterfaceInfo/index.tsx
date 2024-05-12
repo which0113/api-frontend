@@ -27,12 +27,10 @@ import {valueLength} from "@/pages/User/UserInfo";
 import Paragraph from "antd/lib/typography/Paragraph";
 import ApiTab from "@/pages/InterfaceInfo/components/ApiTab";
 import ToolsTab from "@/pages/InterfaceInfo/components/ToolsTab";
-import {stringify} from "querystring";
 
 const InterfaceInfo: React.FC = () => {
-  const {search, pathname} = window.location;
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setDate] = useState<API.InterfaceInfo>();
+  const [data, setDate] = useState<API.InterfaceInfoVO>();
   const [requestParams, setRequestParams] = useState<[]>();
   const [temporaryParams, setTemporaryParams] = useState<any>();
   const [responseParams, setResponseParams] = useState<[]>();
@@ -48,6 +46,8 @@ const InterfaceInfo: React.FC = () => {
   const [returnCode, setReturnCode] = useState<any>(returnExample);
   const {initialState} = useModel('@@initialState');
   const {loginUser} = initialState || {}
+  const loginPath = '/user/login';
+
   const loadedData = async () => {
     if (!params.id) {
       message.error('参数不存在');
@@ -112,14 +112,9 @@ const InterfaceInfo: React.FC = () => {
 
   const onSearch = async (values: any) => {
     // 未登录跳转到登录页面
-    if (!loginUser) {
-      history.replace({
-        pathname: '/user/login',
-        search: stringify({
-          redirect: pathname + search,
-        }),
-      });
-    }
+    // if (!loginUser) {
+    //   history.push(loginPath);
+    // }
 
     setResultLoading(true)
     const res = await invokeInterfaceUsingPost({

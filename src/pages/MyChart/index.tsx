@@ -80,30 +80,30 @@ const MyChartPage: React.FC = () => {
         const socketUrl = socketPreUrl + loginUser?.id;
         try {
           const newSocket = new WebSocket(socketUrl);
-          // newSocket.onopen = () => {
-          //     message.success('ws连接成功');
-          // };
-          // newSocket.onclose = () => {
-          //   message.info('ws连接断开');
-          // };
-          // newSocket.onmessage = () => {
-          //   message.success('消息来喽~');
-          //   // 收到消息时重新加载数据
-          //   loadData();
-          // };
+          newSocket.onopen = () => {
+            message.success('ws连接成功');
+          };
+          newSocket.onclose = () => {
+            message.info('ws连接断开');
+          };
+          newSocket.onmessage = () => {
+            message.success('消息来喽~');
+            // 收到消息时重新加载数据
+            loadData();
+          };
           setSocket(newSocket);
         } catch (e: any) {
           console.log('ws连接失败：' + e.message);
-          // message.error('ws连接失败');
+          message.error('ws连接失败');
         }
       }
 
       // 组件卸载时关闭 WebSocket 连接
       return () => {
         // 可以不用关闭，浏览器关闭 WebSocket 连接会自动关闭
-        // if (socket) {
-        //   socket.close();
-        // }
+        if (socket) {
+          // socket.close();
+        }
       };
     }, [searchParams]);
 
@@ -252,13 +252,10 @@ const MyChartPage: React.FC = () => {
               pageSize: searchParams.pageSize,
               total: total,
             }}
-            loading={loading}
             dataSource={chartList}
             renderItem={(item: API.ChartVO) => (
-              <List.Item
-                key={item.id}
-              >
-                <Card id={item.id?.toString()} hoverable style={{width: '100%'}}>
+              <List.Item>
+                <ProCard key={item.id} id={item.id?.toString()} hoverable style={{width: '100%'}}>
                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <List.Item.Meta
                       avatar={
@@ -327,7 +324,7 @@ const MyChartPage: React.FC = () => {
                       <Button danger>删除</Button>
                     </Popconfirm>
                   </div>
-                </Card>
+                </ProCard>
               </List.Item>
             )}
           />

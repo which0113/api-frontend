@@ -2,11 +2,12 @@
 enum ErrorCode {
   SUCCESS = 0,
   PARAMS_ERROR = 40000,
+  PROHIBITED_ERROR = 40001,
   NOT_LOGIN_ERROR = 40100,
   NO_AUTH_ERROR = 40101,
+  FORBIDDEN_ERROR = 40300,
   NOT_FOUND_ERROR = 40400,
   REQUEST_ERROR = 42900,
-  FORBIDDEN_ERROR = 40300,
   SYSTEM_ERROR = 50000,
   OPERATION_ERROR = 50001,
 }
@@ -16,6 +17,7 @@ const errorMessages = {
   [ErrorCode.SUCCESS]: "ok",
   [ErrorCode.PARAMS_ERROR]: "请求参数错误",
   [ErrorCode.NOT_LOGIN_ERROR]: "未登录",
+  [ErrorCode.PROHIBITED_ERROR]: "账号已封禁",
   [ErrorCode.NO_AUTH_ERROR]: "无权限",
   [ErrorCode.NOT_FOUND_ERROR]: "请求数据不存在",
   [ErrorCode.FORBIDDEN_ERROR]: "禁止访问",
@@ -34,6 +36,16 @@ export const errorCode = [
     code: 40000,
     name: 'PARAMS_ERROR',
     des: '请求参数错误',
+  },
+  {
+    code: 40001,
+    name: 'PROHIBITED_ERROR',
+    des: '账号已封禁',
+  },
+  {
+    code: 40100,
+    name: 'NOT_LOGIN_ERROR',
+    des: '未登录',
   },
   {
     code: 40101,

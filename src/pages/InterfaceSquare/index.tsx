@@ -96,7 +96,7 @@ const InterfaceSquare: React.FC = () => {
             <List.Item>
               <ProCard key={index} bordered hoverable direction="column" style={{height: 270}}>
                 <ProCard layout="center" onClick={() => {
-                  history.push(`/interface_info/${item.id}`)
+                  history.push(`/interfaceInfo/${item.id}`)
                 }}>
                   <Badge count={item.totalInvokes} overflowCount={999999999} color='#eb4d4b'>
                     <Image style={{width: 80, borderRadius: 8, marginLeft: 10}}
@@ -108,12 +108,12 @@ const InterfaceSquare: React.FC = () => {
                   </Badge>
                 </ProCard>
                 <ProCard onClick={() => {
-                  history.push(`/interface_info/${item.id}`)
+                  history.push(`/interfaceInfo/${item.id}`)
                 }} layout="center" style={{marginTop: -10, fontSize: 16}}>
                   {item.name}
                 </ProCard>
                 <ProCard onClick={() => {
-                  history.push(`/interface_info/${item.id}`)
+                  history.push(`/interfaceInfo/${item.id}`)
                 }} layout="center" style={{marginTop: -18, fontSize: 14}}>
                   {!item.description ? "暂无接口描述" : item.description.length > 15 ? item.description.slice(0, 15) + '...' : item.description}
                 </ProCard>

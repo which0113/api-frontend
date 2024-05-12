@@ -24,7 +24,7 @@
   {path: '/analyse', name: '智能分析', icon: 'barChart', component: './AddChartAsync'},
   {path: '/chart', name: '我的图表', icon: 'pieChart', access: 'canUser', component: './MyChart'},
   {
-    path: '/interface_info/:id',
+    path: '/interfaceInfo/:id',
     name: '接口详情',
     component: './InterfaceInfo',
     hideInMenu: true,

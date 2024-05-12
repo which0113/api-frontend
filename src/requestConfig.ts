@@ -36,29 +36,34 @@ export const requestConfig: RequestConfig = {
       // 拦截响应数据，进行个性化处理
       const {data} = response as unknown as ResponseStructure;
       const {code} = data;
+      const {pathname} = location;
+      const loginPath = '/user/login';
+
       if (data && code === 0) {
         return response;
       } else {
         switch (code) {
-          case 40001: {
-            if (location.pathname.includes("/interface_info/")) {
-              break
+          case 40001:
+            if (!pathname.includes('/interfaceInfo/')) {
+              message.error(data.message);
+              history.push(loginPath);
             }
-            message.error(data.message);
-            history.push('/user/login');
-          }
             break;
           case 40100:
-            if (!/^\/\w+\/?$/.test(location.pathname) && location.pathname !== '/' && location.pathname !== '/interface/list') {
+            if (pathname !== '/'
+              && pathname !== '/interface/list'
+              && pathname !== '/user/login'
+              && pathname !== '/user/register'
+              && pathname !== '/analyse'
+            ) {
               message.error(data.message);
-              history.push('/user/login');
+              history.push(loginPath);
             }
             break;
           default:
-            if (location.pathname.includes("/interface_info/")) {
-              break
+            if (!pathname.includes('/interfaceInfo/')) {
+              message.error(data.message);
             }
-            message.error(data.message);
             break;
         }
       }

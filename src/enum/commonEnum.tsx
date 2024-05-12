@@ -1,6 +1,6 @@
 export const InterfaceRequestMethodEnum: any = {
   GET: 'blue',
-  Post: 'red',
+  POST: 'red',
   PUT: 'green',
   DELETE: 'orange',
 };
