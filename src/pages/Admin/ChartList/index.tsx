@@ -49,7 +49,7 @@ const ChartList: React.FC = () => {
       }
     } catch (error: any) {
       hide();
-      message.error('添加失败! ' + error.message);
+      message.error('添加失败');
       return false;
     }
   };
@@ -71,7 +71,7 @@ const ChartList: React.FC = () => {
       }
     } catch (error: any) {
       hide();
-      message.error('修改失败' + error.message);
+      message.error('修改失败');
       return false;
     }
   };
@@ -97,7 +97,7 @@ const ChartList: React.FC = () => {
       return true;
     } catch (error: any) {
       hide();
-      message.error('删除失败', error.message);
+      message.error('删除失败');
       return false;
     }
   };

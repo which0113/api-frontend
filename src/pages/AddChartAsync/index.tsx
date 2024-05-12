@@ -37,7 +37,7 @@ const AddChartAsync: React.FC = () => {
       if (!res?.data) {
         // message.error('分析失败');
       } else {
-        message.success('分析任务提交成功，稍后请在我的图表页面查看');
+        message.success('提交成功，请稍后在我的图表页面查看结果');
         form.resetFields();
       }
     setSubmitting(false);

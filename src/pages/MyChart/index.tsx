@@ -123,7 +123,7 @@ const MyChartPage: React.FC = () => {
         return true;
       } catch (error: any) {
         hide();
-        message.error('删除失败', error.message);
+        message.error('删除失败');
         return false;
       }
     };

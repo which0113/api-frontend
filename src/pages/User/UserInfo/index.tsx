@@ -144,11 +144,11 @@ const UserInfo: React.FC = () => {
     const beforeUpload = async (file: RcFile) => {
       const fileType = unloadFileTypeList.includes(file.type)
       if (!fileType) {
-        message.error('图片类型有误,请上传jpg/png/svg/jpeg/webp格式!');
+        message.error('请上传正确的图片格式');
       }
       const isLt2M = file.size / 1024 / 1024 < 1;
       if (!isLt2M) {
-        message.error('文件大小不能超过 1M !');
+        message.error('图片大小不能超过 1M');
       }
       if (!isLt2M && !fileType) {
         const updatedFileList = [...fileList];
@@ -211,7 +211,6 @@ const UserInfo: React.FC = () => {
           const {data: {status, url}} = response
           const updatedFileList = [...fileList];
           if (response.code !== 0 || status === 'error') {
-            message.error(response.message);
             file.status = "error"
             updatedFileList[0] = {
               // @ts-ignore

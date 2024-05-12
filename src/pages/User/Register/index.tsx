@@ -92,8 +92,7 @@ const Register: React.FC = () => {
       });
       doRegister(res)
     } catch (error) {
-      const defaultLoginFailureMessage = '注册失败，请重试！';
-      message.error(defaultLoginFailureMessage);
+      message.error('注册失败');
     }
   };
 
@@ -105,8 +104,7 @@ const Register: React.FC = () => {
       });
       doRegister(res)
     } catch (error) {
-      const defaultLoginFailureMessage = '注册失败，请重试！';
-      message.error(defaultLoginFailureMessage);
+      message.error('注册失败');
     }
   };
 
