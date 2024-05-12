@@ -50,7 +50,6 @@ const UserList: React.FC = () => {
         return true;
       }
     } catch (error: any) {
-      hide();
       message.error('添加失败');
       return false;
     }
@@ -76,7 +75,6 @@ const UserList: React.FC = () => {
       }
       return true;
     } catch (error: any) {
-      hide();
       message.error('解封失败');
       return false;
     }
@@ -102,7 +100,6 @@ const UserList: React.FC = () => {
       }
       return true;
     } catch (error: any) {
-      hide();
       message.error('封号失败');
       return false;
     }
@@ -124,7 +121,6 @@ const UserList: React.FC = () => {
         return true;
       }
     } catch (error: any) {
-      hide();
       message.error('修改失败');
       return false;
     }
@@ -150,7 +146,6 @@ const UserList: React.FC = () => {
       }
       return true;
     } catch (error: any) {
-      hide();
       message.error('删除失败');
       return false;
     }

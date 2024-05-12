@@ -174,9 +174,11 @@ export const ChartColumns: ProColumns<API.Chart>[] = [
     valueEnum: {
       "wait": {
         text: '等待',
+        status: 'default',
       },
       "running": {
         text: '生成中',
+        status: 'processing',
       },
       "succeed": {
         text: '成功生成',

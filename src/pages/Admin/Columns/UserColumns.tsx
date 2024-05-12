@@ -88,9 +88,11 @@ export const UserAddModalFormColumns: ProFormColumnsType<API.UserAddRequest, "te
     valueEnum: {
       "visitor": {
         text: '游客',
+        status: 'default',
       },
       "user": {
         text: '普通用户',
+        status: 'processing',
       },
       "admin": {
         text: '管理员',
@@ -172,9 +174,11 @@ export const UserUpdateModalFormColumns: ProFormColumnsType<API.UserUpdateReques
     valueEnum: {
       "visitor": {
         text: '游客',
+        status: 'default',
       },
       "user": {
         text: '普通用户',
+        status: 'processing',
       },
       "admin": {
         text: '管理员',
@@ -281,9 +285,11 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
     valueEnum: {
       "visitor": {
         text: '游客',
+        status: 'default',
       },
       "user": {
         text: '普通用户',
+        status: 'processing',
       },
       "admin": {
         text: '管理员',

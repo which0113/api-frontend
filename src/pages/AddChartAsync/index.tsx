@@ -49,8 +49,8 @@ const AddChartAsync: React.FC = () => {
    */
   const handleFileUpload = (info: any) => {
     // 如果图表名称为空，则自动填充文件名
-    const newName = info?.fileList[0]?.name?.split('.')[0].trim();
-    const currentName = form.getFieldValue('name').trim();
+    const newName = info?.fileList[0]?.name?.split('.')[0]?.trim();
+    const currentName = form?.getFieldValue('name')?.trim();
     if (!currentName && newName) {
       form.setFieldsValue({name: newName});
     }

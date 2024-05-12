@@ -387,15 +387,15 @@ const InterfaceInfoColumns: ProColumns<API.InterfaceInfoVO>[] = [
     valueEnum: {
       0: {
         text: '审核中',
-        status: 'Default',
+        status: 'default',
       },
       2: {
         text: '已下线',
-        status: 'Error',
+        status: 'error',
       },
       1: {
         text: '已上线',
-        status: 'Processing',
+        status: 'processing',
       },
     },
   },

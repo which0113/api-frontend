@@ -78,15 +78,15 @@ declare namespace API {
   };
 
   type ChartAddRequest = {
-    chartData?: string;
     chartType?: string;
+    execMessage?: string;
     goal?: string;
     name?: string;
   };
 
   type ChartUpdateRequest = {
-    chartData?: string;
     chartType?: string;
+    execMessage?: string;
     goal?: string;
     id?: string;
     name?: string;
