@@ -4,7 +4,6 @@ import {Button, Card, Form, Input, message, Select, Space, Upload} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
-import {history} from '@umijs/max';
 
 /**
  * 添加图表（异步）页面
@@ -13,13 +12,17 @@ import {history} from '@umijs/max';
 const AddChartAsync: React.FC = () => {
   const [form] = useForm();
   const [submitting, setSubmitting] = useState<boolean>(false);
-  const loginPath = '/user/login';
 
   /**
    * 提交
    * @param values
    */
   const onFinish = async (values: any) => {
+    const fileObj = values?.file?.file?.originFileObj;
+    if (!fileObj) {
+      message.info('请上传文件');
+      return;
+    }
     // 避免重复提交
     if (submitting) {
       return;
@@ -30,23 +33,13 @@ const AddChartAsync: React.FC = () => {
       ...values,
       file: undefined,
     };
-    try {
-      const res = await genChartByAiUsingPost(params, {}, values.file.file.originFileObj);
-      // const res = await genChartByAiAsyncMqUsingPost(params, {}, values.file.file.originFileObj);
-      if (res?.code === 40100) {
-        message.error('未登录');
-        history.push(loginPath);
-        return;
-      }
+      const res = await genChartByAiUsingPost(params, {}, fileObj);
       if (!res?.data) {
         // message.error('分析失败');
       } else {
         message.success('分析任务提交成功，稍后请在我的图表页面查看');
         form.resetFields();
       }
-    } catch (e: any) {
-      message.error('分析失败，' + e.message);
-    }
     setSubmitting(false);
   };
 
@@ -55,9 +48,11 @@ const AddChartAsync: React.FC = () => {
    * @param info
    */
   const handleFileUpload = (info: any) => {
-    if (info.fileList.length > 0) {
-      const fileName = info.fileList[0].name.split('.')[0];
-      form.setFieldsValue({name: fileName});
+    // 如果图表名称为空，则自动填充文件名
+    const newName = info?.fileList[0]?.name?.split('.')[0].trim();
+    const currentName = form.getFieldValue('name').trim();
+    if (!currentName && newName) {
+      form.setFieldsValue({name: newName});
     }
   };
 
@@ -80,10 +75,19 @@ const AddChartAsync: React.FC = () => {
           >
             <TextArea placeholder="请输入你的分析需求（消费积分：6个），比如：分析网站用户的增长情况"/>
           </Form.Item>
-          <Form.Item name="name" label="图表名称">
+          <Form.Item
+            name="name"
+            label="图表名称"
+            rules={[{required: true, message: '请输入图表名称'}]}
+            colon={false}
+          >
             <Input placeholder="请输入图表名称"/>
           </Form.Item>
-          <Form.Item name="chartType" label="图表类型" initialValue="折线图">
+          <Form.Item
+            name="chartType"
+            label="图表类型"
+            initialValue="折线图"
+          >
             <Select
               options={[
                 {value: '折线图', label: '折线图'},

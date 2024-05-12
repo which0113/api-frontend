@@ -23,7 +23,6 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({children}) => 
   const {initialState, setInitialState} = useModel('@@initialState');
   const {loginUser} = initialState || {};
   const loginPath = '/user/login';
-  const SOCKET_KEY = 'socket';
 
   /**
    * 退出登录，并且将当前的 url 保存
@@ -34,7 +33,6 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({children}) => 
       return;
     }
     localStorage.removeItem("token");
-    localStorage.removeItem(SOCKET_KEY);
     message.success("已退出");
     history.push(loginPath);
   };

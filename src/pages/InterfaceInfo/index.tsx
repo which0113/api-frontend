@@ -51,7 +51,6 @@ const InterfaceInfo: React.FC = () => {
       return;
     }
     setLoading(true);
-    try {
       // @ts-ignore
       const res = await getInterfaceInfoByIdUsingGet({id: params.id});
       if (res.data && res.code === 0) {
@@ -74,9 +73,6 @@ const InterfaceInfo: React.FC = () => {
         setReturnCode(convertedParams)
       }
       setLoading(false);
-    } catch (e: any) {
-      message.error(e.message);
-    }
   };
   useEffect(() => {
     loadedData();

@@ -13,7 +13,7 @@ const InterfaceSquare: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const loadData = async (current = 1) => {
-    setLoading(true)
+    setLoading(true);
     const res = await listInterfaceInfoBySearchPageUsingGet({
       current: current.toString(),
       name: searchText,
@@ -26,10 +26,8 @@ const InterfaceSquare: React.FC = () => {
       setData(res?.data?.records || []);
       // @ts-ignore
       setTotal(res.data.total)
-      setLoading(false)
-    } else {
-      setLoading(false)
     }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -37,17 +35,7 @@ const InterfaceSquare: React.FC = () => {
   }, []);
 
   const onSearch = async () => {
-    const res = await listInterfaceInfoBySearchPageUsingGet({
-      // @ts-ignore
-      current: 1,
-      name: searchText,
-      description: searchText,
-    });
-    if (res.data) {
-      setData(res?.data?.records || []);
-      // @ts-ignore
-      setTotal(res?.data?.total || 0)
-    }
+    loadData();
   };
 
   return (

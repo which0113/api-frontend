@@ -8,8 +8,6 @@ import Search from "antd/es/input/Search";
 import ProCard from "@ant-design/pro-card";
 import html2canvas from "html2canvas";
 
-const SOCKET_KEY = 'socket';
-
 /**
  * 我的图表页面
  * @constructor
@@ -28,52 +26,35 @@ const MyChartPage: React.FC = () => {
     const [chartList, setChartList] = useState<API.ChartVO[]>();
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState<boolean>(true);
-    const [socket, setSocket] = useState<WebSocket | undefined>(() => {
-      // 从本地存储中获取 WebSocket 实例
-      const storedSocket = localStorage.getItem(SOCKET_KEY);
-      if (storedSocket) {
-        return JSON.parse(storedSocket);
-      }
-      return undefined;
-    });
+    const [socket, setSocket] = useState<WebSocket | undefined>();
+
+    // 构建 WebSocket 连接 url
+    const socketPreUrl = process.env.NODE_ENV === 'production' ?
+      "wss://back.freefish.love/api/ws/" :
+      "ws://localhost:9001/api/ws/";
+    const socketUrl = socketPreUrl + loginUser?.id;
 
     const handleChartData = (res: any) => {
-      if (res.data) {
-        setChartList(res.data.records ?? []);
-        let dataTotal = res.data.total;
-        setTotal(dataTotal ?? 0);
-        // 隐藏图表的 title
-        if (res.data.records) {
-          res.data.records.forEach((data: any) => {
-            if (data.chartStatus === 'succeed') {
-              JSON.parse(data.genChart ?? '{}');
-              const chartOption = JSON.parse(data.genChart ?? '{}');
-              chartOption.title = undefined;
-              data.genChart = JSON.stringify(chartOption);
-            }
-          })
-        }
-      } else {
-        message.error('获取图表失败');
-      }
-    };
-
-    const fetchData = async () => {
-      try {
-        const res = await listChartByMyPageUsingGet(searchParams);
-        handleChartData(res);
-      } catch (e: any) {
-        message.error('获取图表失败，' + e.message);
+      setChartList(res.data.records ?? []);
+      let dataTotal = res.data.total;
+      setTotal(dataTotal ?? 0);
+      // 隐藏图表的 title
+      if (res.data.records) {
+        res.data.records.forEach((data: any) => {
+          if (data.chartStatus === 'succeed') {
+            JSON.parse(data.genChart ?? '{}');
+            const chartOption = JSON.parse(data.genChart ?? '{}');
+            chartOption.title = undefined;
+            data.genChart = JSON.stringify(chartOption);
+          }
+        })
       }
     };
 
     const loadData = async () => {
       setLoading(true);
-      try {
-        fetchData();
-      } catch (e: any) {
-        message.error('获取图表失败，' + e.message);
-      }
+      const res = await listChartByMyPageUsingGet(searchParams);
+      handleChartData(res);
       setLoading(false);
     };
 
@@ -82,34 +63,26 @@ const MyChartPage: React.FC = () => {
         loadData();
 
         if (!socket) {
-          // 建立 WebSocket 连接
-          const socketPreUrl = process.env.NODE_ENV === 'production' ?
-            "wss://back.freefish.love/api/ws/" :
-            "ws://localhost:9001/api/ws/";
-          const socketUrl = socketPreUrl + loginUser?.id;
           try {
             const newSocket = new WebSocket(socketUrl);
             newSocket.onopen = () => {
-              message.success('ws连接成功');
-              // 将 WebSocket 实例保存到本地存储中
-              localStorage.setItem(SOCKET_KEY, JSON.stringify(newSocket));
+              // message.success('ws连接成功');
+              // newSocket.send('我上线了');
             };
             newSocket.onclose = () => {
-              message.info('ws连接断开');
-              // 在连接关闭时，清除本地存储中的 WebSocket 实例
-              localStorage.removeItem(SOCKET_KEY);
+              // message.info('ws连接断开');
             };
             // 收到消息时重新加载数据
             newSocket.onmessage = () => {
-              message.success('消息来喽~');
+              // message.success('消息来喽~');
               loadData();
+              // newSocket.send('我收到消息了');
             };
             setSocket(newSocket);
-
           } catch
             (e: any) {
-            console.log('ws连接失败：' + e.message);
-            message.error('ws连接失败');
+            // console.log('ws连接失败：' + e.message);
+            // message.error('ws连接失败');
           }
         }
 
@@ -122,8 +95,7 @@ const MyChartPage: React.FC = () => {
           }
         };
       }, [searchParams]
-    )
-    ;
+    );
 
     /**
      *  Delete node
