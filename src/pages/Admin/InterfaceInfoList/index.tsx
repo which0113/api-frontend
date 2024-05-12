@@ -52,7 +52,7 @@ const InterfaceInfoList: React.FC = () => {
       }
     } catch (error: any) {
       hide();
-      message.error('添加失败' );
+      message.error('添加失败');
       return false;
     }
   };

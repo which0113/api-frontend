@@ -33,13 +33,13 @@ const AddChartAsync: React.FC = () => {
       ...values,
       file: undefined,
     };
-      const res = await genChartByAiUsingPost(params, {}, fileObj);
-      if (!res?.data) {
-        // message.error('分析失败');
-      } else {
-        message.success('提交成功，请稍后在我的图表页面查看结果');
-        form.resetFields();
-      }
+    const res = await genChartByAiUsingPost(params, {}, fileObj);
+    if (!res?.data) {
+      // message.error('分析失败');
+    } else {
+      message.success('提交成功，请稍后在我的图表页面查看结果');
+      form.resetFields();
+    }
     setSubmitting(false);
   };
 

@@ -17,7 +17,8 @@ import {RcFile} from "antd/es/upload";
 import {EditOutlined, PlusOutlined, VerticalAlignBottomOutlined} from "@ant-design/icons";
 import ImgCrop from "antd-img-crop";
 import {
-  getLoginUserUsingGet, updateUserPasswordUsingPost,
+  getLoginUserUsingGet,
+  updateUserPasswordUsingPost,
   updateUserUsingPost,
   updateVoucherUsingPost,
   userBindEmailUsingPost,
