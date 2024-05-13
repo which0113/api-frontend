@@ -7,6 +7,7 @@ import React, {useEffect, useState} from 'react';
 import Search from "antd/es/input/Search";
 import ProCard from "@ant-design/pro-card";
 import html2canvas from "html2canvas";
+import {UserOutlined} from "@ant-design/icons";
 
 /**
  * 我的图表页面
@@ -34,13 +35,17 @@ const MyChartPage: React.FC = () => {
       "ws://localhost:9001/api/ws/";
     const socketUrl = socketPreUrl + loginUser?.id;
 
+    // 头像
+    const avatarUrl = (loginUser?.userAvatar ? loginUser?.userAvatar :
+      'https://img.freefish.love/notLogin.png') + '?' + new Date().getTime()
+
     const handleChartData = (res: any) => {
-      setChartList(res.data.records ?? []);
-      let dataTotal = res.data.total;
+      setChartList(res?.data?.records ?? []);
+      let dataTotal = res?.data?.total;
       setTotal(dataTotal ?? 0);
       // 隐藏图表的 title
-      if (res.data.records) {
-        res.data.records.forEach((data: any) => {
+      if (res?.data?.records) {
+        res?.data?.records.forEach((data: any) => {
           if (data.chartStatus === 'succeed') {
             JSON.parse(data.genChart ?? '{}');
             const chartOption = JSON.parse(data.genChart ?? '{}');
@@ -66,23 +71,22 @@ const MyChartPage: React.FC = () => {
           try {
             const newSocket = new WebSocket(socketUrl);
             newSocket.onopen = () => {
-              // message.success('ws连接成功');
-              // newSocket.send('我上线了');
+              message.success('ws连接成功');
+              newSocket.send('我上线了');
             };
             newSocket.onclose = () => {
-              // message.info('ws连接断开');
+              message.info('ws连接断开');
             };
             // 收到消息时重新加载数据
             newSocket.onmessage = () => {
-              // message.success('消息来喽~');
+              message.success('消息来喽~');
               loadData();
-              // newSocket.send('我收到消息了');
+              newSocket.send('我收到消息了');
             };
             setSocket(newSocket);
-          } catch
-            (e: any) {
-            // console.log('ws连接失败：' + e.message);
-            // message.error('ws连接失败');
+          } catch (e: any) {
+            console.log('ws连接失败：' + e.message);
+            message.error('ws连接失败');
           }
         }
 
@@ -251,7 +255,8 @@ const MyChartPage: React.FC = () => {
                       avatar={
                         <Avatar
                           crossOrigin={'anonymous'}
-                          src={loginUser && loginUser.userAvatar + '?' + new Date().getTime()}
+                          src={avatarUrl}
+                          icon={<UserOutlined/>}
                         />
                       }
                       title={item.name}
@@ -281,8 +286,8 @@ const MyChartPage: React.FC = () => {
                     {
                       item.chartStatus === 'succeed' && <>
                         <div style={{marginBottom: 16}}/>
-                        <p>{'分析目标：' + item.goal}</p>
-                        <p>{'分析目标结论：' + item.genResult}</p>
+                        <p><strong>目标：</strong> {item.goal}</p>
+                        <p><strong>分析结论：</strong> {item.genResult}</p>
                         <div style={{marginBottom: 16}}/>
                         <ReactECharts option={item.genChart && JSON.parse(item.genChart)}/>
                       </>

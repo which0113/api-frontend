@@ -56,7 +56,7 @@ const InterfaceInfo: React.FC = () => {
     if (res.data && res.code === 0) {
       setDate(res.data || {});
       // @ts-ignore
-      setTotalInvokes(res.data.totalInvokes || 0)
+      setTotalInvokes(res?.data?.totalInvokes || 0)
       let requestParams = res.data.requestParams
       let responseParams = res.data.responseParams
       try {

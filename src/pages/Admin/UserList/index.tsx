@@ -250,9 +250,9 @@ const UserList: React.FC = () => {
           if (res.data) {
             setLoading(false)
             return {
-              data: res.data.records || [],
+              data: res?.data?.records || [],
               success: true,
-              total: res.data.total,
+              total: res?.data?.total,
             };
           } else {
             return {

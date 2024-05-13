@@ -44,7 +44,6 @@ const UserInfo: React.FC = () => {
     const [voucherLoading, setVoucherLoading] = useState<boolean>(false);
     const [loading, setLoading] = useState(false);
     const [previewImage, setPreviewImage] = useState('');
-    const [previewTitle, setPreviewTitle] = useState('');
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const handleCancel = () => setPreviewOpen(false);
     const [userName, setUserName] = useState<string | undefined>('');
@@ -130,7 +129,6 @@ const UserInfo: React.FC = () => {
       }
       setPreviewImage(file.url || (file.preview as string));
       setPreviewOpen(true);
-      setPreviewTitle(file.name || file.url!.substring(file.url!.lastIndexOf('-') + 1));
     };
 
     const uploadButton = () => {
@@ -371,8 +369,10 @@ const UserInfo: React.FC = () => {
                   {fileList.length >= 1 ? undefined : uploadButton()}
                 </Upload>
               </ImgCrop>
-              <Modal open={previewOpen} title={previewTitle} footer={null} onCancel={handleCancel}>
-                <img alt="example" style={{width: '100%'}} src={previewImage}/>
+              <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
+                <img alt={''}
+                     style={{width: '100%'}}
+                     src={previewImage ? previewImage : 'https://img.freefish.love/notLogin.png'}/>
               </Modal>
             </Descriptions.Item>
             <Descriptions column={1}>

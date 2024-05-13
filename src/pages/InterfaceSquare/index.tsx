@@ -25,7 +25,7 @@ const InterfaceSquare: React.FC = () => {
     if (res.code === 0 && res.data) {
       setData(res?.data?.records || []);
       // @ts-ignore
-      setTotal(res.data.total)
+      setTotal(res?.data?.total)
     }
     setLoading(false);
   };
