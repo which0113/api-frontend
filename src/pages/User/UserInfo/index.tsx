@@ -48,7 +48,7 @@ const UserInfo: React.FC = () => {
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const handleCancel = () => setPreviewOpen(false);
     const [userName, setUserName] = useState<string | undefined>('');
-    const [gender, setGender] = useState<string | undefined>('');
+    const [gender, setGender] = useState<string | undefined>(loginUser?.gender);
     const [open, setOpen] = useState(false);
     const [openEmailModal, setOpenEmailModal] = useState(false);
     const [openPasswordModal, setOpenPasswordModal] = useState(false);
@@ -98,8 +98,9 @@ const UserInfo: React.FC = () => {
           }
           setFileList(updatedFileList);
         }
-        setUserName(loginUser?.userName)
-        setLoading(false)
+        setUserName(loginUser?.userName);
+        setGender(loginUser?.gender);
+        setLoading(false);
       }
       // PC端显示指引
       const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -115,7 +116,7 @@ const UserInfo: React.FC = () => {
 
     useEffect(() => {
       loadData();
-    }, [])
+    }, [loginUser])
 
     const getBase64 = (file: RcFile): Promise<string> =>
       new Promise((resolve, reject) => {
