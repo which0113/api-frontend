@@ -12,6 +12,7 @@ import React, {useState} from 'react';
 const AddChartAsync: React.FC = () => {
   const [form] = useForm();
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const allowedExtensions = ['.csv', '.xls', '.xlsx'];
 
   /**
    * 提交
@@ -21,6 +22,11 @@ const AddChartAsync: React.FC = () => {
     const fileObj = values?.file?.file?.originFileObj;
     if (!fileObj) {
       message.info('请上传文件');
+      return;
+    }
+    const fileExtension = fileObj.name.substring(fileObj.name.lastIndexOf('.'));
+    if (!allowedExtensions.includes(fileExtension)) {
+      message.info('文件格式限定为csv、xls和xlsx');
       return;
     }
     // 避免重复提交

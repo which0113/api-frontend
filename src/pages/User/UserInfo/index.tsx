@@ -149,7 +149,7 @@ const UserInfo: React.FC = () => {
       }
       const isLt2M = file.size / 1024 / 1024 < 1;
       if (!isLt2M) {
-        message.error('图片大小不能超过 1M');
+        message.error('图片大小不能超过1M');
       }
       if (!isLt2M && !fileType) {
         const updatedFileList = [...fileList];
