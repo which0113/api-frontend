@@ -37,7 +37,7 @@ const MyChartPage: React.FC = () => {
 
     // 头像
     const avatarUrl = (loginUser?.userAvatar ? loginUser?.userAvatar :
-      'https://img.freefish.love/notLogin.png') + '?' + new Date().getTime()
+      'https://img.freefish.love/defaultAvatar.png') + '?' + new Date().getTime()
 
     const handleChartData = (res: any) => {
       setChartList(res?.data?.records ?? []);
@@ -71,22 +71,22 @@ const MyChartPage: React.FC = () => {
           try {
             const newSocket = new WebSocket(socketUrl);
             newSocket.onopen = () => {
-              message.success('ws连接成功');
-              newSocket.send('我上线了');
+              // message.success('ws连接成功');
+              // newSocket.send('我上线了');
             };
             newSocket.onclose = () => {
-              message.info('ws连接断开');
+              // message.info('ws连接断开');
             };
             // 收到消息时重新加载数据
             newSocket.onmessage = () => {
-              message.success('消息来喽~');
+              // message.success('消息来喽~');
               loadData();
-              newSocket.send('我收到消息了');
+              // newSocket.send('我收到消息了');
             };
             setSocket(newSocket);
           } catch (e: any) {
-            console.log('ws连接失败：' + e.message);
-            message.error('ws连接失败');
+            // console.log('ws连接失败：' + e.message);
+            // message.error('ws连接失败');
           }
         }
 

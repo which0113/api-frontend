@@ -125,7 +125,7 @@ const ChartList: React.FC = () => {
         </a>,
         <Popconfirm
           key={'Delete'}
-          title="请确认是否删除该用户!"
+          title="请确认是否删除该图表！"
           onConfirm={confirm}
           onCancel={cancel}
           okText="Yes"

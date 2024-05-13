@@ -401,7 +401,6 @@ declare namespace API {
   type UserLoginVO = {
     accessKey?: string;
     balance?: string;
-    createTime?: string;
     email?: string;
     gender?: string;
     id?: string;
@@ -451,7 +450,6 @@ declare namespace API {
   type UserVO = {
     accessKey?: string;
     balance?: string;
-    createTime?: string;
     email?: string;
     gender?: string;
     id?: string;

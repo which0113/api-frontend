@@ -238,7 +238,7 @@ const InterfaceInfoList: React.FC = () => {
         ) : null,
         <Popconfirm
           key={'Delete'}
-          title="请确认是否删除该接口!"
+          title="请确认是否删除该接口！"
           onConfirm={confirm}
           onCancel={cancel}
           okText="Yes"

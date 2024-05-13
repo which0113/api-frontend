@@ -102,7 +102,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
     </>,
     avatarProps: {
       src: valueLength(initialState?.loginUser?.userAvatar) ? initialState?.loginUser?.userAvatar :
-        "https://img.freefish.love/notLogin.png",
+        "https://img.freefish.love/defaultAvatar.png",
       title: initialState?.loginUser ? <AvatarName/> : "游客",
       render: (_, avatarChildren) => {
         return <AvatarDropdown>{avatarChildren}</AvatarDropdown>

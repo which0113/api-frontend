@@ -4,6 +4,7 @@ import {
   Descriptions,
   message,
   Modal,
+  Radio,
   Spin,
   Tooltip,
   Tour,
@@ -47,6 +48,7 @@ const UserInfo: React.FC = () => {
     const [fileList, setFileList] = useState<UploadFile[]>([]);
     const handleCancel = () => setPreviewOpen(false);
     const [userName, setUserName] = useState<string | undefined>('');
+    const [gender, setGender] = useState<string | undefined>('');
     const [open, setOpen] = useState(false);
     const [openEmailModal, setOpenEmailModal] = useState(false);
     const [openPasswordModal, setOpenPasswordModal] = useState(false);
@@ -187,7 +189,8 @@ const UserInfo: React.FC = () => {
         // @ts-ignore
         userAvatar: avatarUrl,
         id: loginUser?.id,
-        userName: userName
+        userName: userName,
+        gender: gender,
       })
       if (res.data && res.code === 0) {
         setInitialState({loginUser: res.data, settings: Settings})
@@ -372,7 +375,7 @@ const UserInfo: React.FC = () => {
               <Modal open={previewOpen} footer={null} onCancel={handleCancel}>
                 <img alt={''}
                      style={{width: '100%'}}
-                     src={previewImage ? previewImage : 'https://img.freefish.love/notLogin.png'}/>
+                     src={previewImage ? previewImage : 'https://img.freefish.love/defaultAvatar.png'}/>
               </Modal>
             </Descriptions.Item>
             <Descriptions column={1}>
@@ -397,11 +400,18 @@ const UserInfo: React.FC = () => {
                   onClick={() => setOpenPasswordModal(true)}>修改密码</Button>
               </div>
               <div>
-                <h4>我的id：</h4>
-                <Paragraph
-                  copyable={valueLength(loginUser?.id)}
-                >
-                  {loginUser?.id}
+                <h4>性别：</h4>
+                <Paragraph>
+                  <Radio.Group
+                    onChange={(e) => setGender(e?.target?.value)}
+                    value={gender}
+                    defaultValue={
+                      valueLength(loginUser?.gender) ? loginUser?.gender : '2'
+                    }>
+                    <Radio value="0">男</Radio>
+                    <Radio value="1">女</Radio>
+                    <Radio value="2">保密</Radio>
+                  </Radio.Group>
                 </Paragraph>
               </div>
               <div>
