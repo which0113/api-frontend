@@ -53,12 +53,12 @@ const InterfaceInfo: React.FC = () => {
     setLoading(true);
     // @ts-ignore
     const res = await getInterfaceInfoByIdUsingGet({id: params.id});
-    if (res.data && res.code === 0) {
-      setDate(res.data || {});
+    if (res?.data && res?.code === 0) {
+      setDate(res?.data || {});
       // @ts-ignore
       setTotalInvokes(res?.data?.totalInvokes || 0)
-      let requestParams = res.data.requestParams
-      let responseParams = res.data.responseParams
+      let requestParams = res?.data.requestParams
+      let responseParams = res?.data.responseParams
       try {
         setRequestParams(requestParams ? JSON.parse(requestParams) : [])
         setResponseParams(responseParams ? JSON.parse(responseParams) : [])
@@ -66,10 +66,10 @@ const InterfaceInfo: React.FC = () => {
         setRequestParams([])
         setResponseParams([])
       }
-      const response = res.data.responseParams ? JSON.parse(res.data.responseParams) : [] as API.RequestParamsField;
+      const response = res?.data.responseParams ? JSON.parse(res?.data.responseParams) : [] as API.RequestParamsField;
       const convertedParams = convertResponseParams(response);
-      setAxiosCode(axiosExample(res.data?.url, res.data?.method?.toLowerCase()))
-      setJavaCode(javaExample(res.data?.url, res.data?.method?.toUpperCase()))
+      setAxiosCode(axiosExample(res?.data?.url, res?.data?.method?.toLowerCase()))
+      setJavaCode(javaExample(res?.data?.url, res?.data?.method?.toUpperCase()))
       setReturnCode(convertedParams)
     }
     setLoading(false);
@@ -114,7 +114,7 @@ const InterfaceInfo: React.FC = () => {
       id: data?.id,
       ...values
     })
-    if (res.code === 0) {
+    if (res?.code === 0) {
       setTotalInvokes(Number(totalInvokes) + 1)
     }
     setResult(JSON.stringify(res, null, 4))

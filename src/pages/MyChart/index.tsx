@@ -119,7 +119,7 @@ const MyChartPage: React.FC = () => {
           id: chart.id,
         });
         hide();
-        if (res.data) {
+        if (res?.data) {
           message.success('删除成功');
           // 刷新数据
           loadData();

@@ -123,7 +123,7 @@ const EmailModal: React.FC<Props> = (props) => {
           ]}
           onGetCaptcha={async (emailAccount) => {
             const res = await getEmailCaptchaUsingGet({emailAccount})
-            if (res.data && res.code === 0) {
+            if (res?.data && res?.code === 0) {
               message.success("验证码发送成功")
               return
             }

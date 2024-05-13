@@ -45,7 +45,7 @@ const InterfaceInfoList: React.FC = () => {
       const res = await addInterfaceInfoUsingPost({
         ...fields,
       });
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         hide();
         message.success('添加成功');
         return true;
@@ -66,7 +66,7 @@ const InterfaceInfoList: React.FC = () => {
     const hide = message.loading('修改中');
     try {
       const res = await updateInterfaceInfoUsingPost({id: currentRow?.id, ...fields});
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         hide();
         message.success('修改成功');
         return true;
@@ -91,7 +91,7 @@ const InterfaceInfoList: React.FC = () => {
           avatarUrl: url
         }
       );
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         hide();
         message.success('修改成功');
         actionRef.current?.reload()
@@ -117,7 +117,7 @@ const InterfaceInfoList: React.FC = () => {
         id: record.id,
       });
       hide();
-      if (res.data) {
+      if (res?.data) {
         message.success('发布成功');
         actionRef.current?.reload();
       }
@@ -142,7 +142,7 @@ const InterfaceInfoList: React.FC = () => {
         id: record.id,
       });
       hide();
-      if (res.data) {
+      if (res?.data) {
         message.success('下线成功');
         actionRef.current?.reload();
       }
@@ -167,7 +167,7 @@ const InterfaceInfoList: React.FC = () => {
         id: record.id,
       });
       hide();
-      if (res.data) {
+      if (res?.data) {
         message.success('删除成功');
         actionRef.current?.reload();
       }
@@ -293,7 +293,7 @@ const InterfaceInfoList: React.FC = () => {
           setLoading(true)
           // @ts-ignore
           const res = await listInterfaceInfoByPageUsingGet({...params});
-          if (res.data) {
+          if (res?.data) {
             setLoading(false)
             return {
               data: res?.data?.records || [],

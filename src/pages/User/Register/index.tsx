@@ -76,7 +76,7 @@ const Register: React.FC = () => {
   });
 
   const doRegister = (res: any) => {
-    if (res.data && res.code === 0) {
+    if (res?.data && res?.code === 0) {
       message.success('注册成功');
       setTimeout(() => {
         history.push(loginPath);
@@ -269,7 +269,7 @@ const Register: React.FC = () => {
                 ]}
                 onGetCaptcha={async (emailAccount) => {
                   const res = await getEmailCaptchaUsingGet({emailAccount})
-                  if (res.data && res.code === 0) {
+                  if (res?.data && res?.code === 0) {
                     message.success("验证码发送成功")
                     return
                   }

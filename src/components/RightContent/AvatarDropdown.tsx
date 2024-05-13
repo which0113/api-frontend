@@ -29,7 +29,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({children}) => 
    */
   const loginOut = async () => {
     const res = await userLogoutUsingPost();
-    if (!res.data) {
+    if (!res?.data) {
       return;
     }
     localStorage.removeItem("token");

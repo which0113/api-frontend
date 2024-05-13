@@ -42,7 +42,7 @@ const ChartList: React.FC = () => {
       const res = await addChartUsingPost({
         ...fields,
       });
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         hide();
         message.success('添加成功');
         return true;
@@ -63,7 +63,7 @@ const ChartList: React.FC = () => {
     const hide = message.loading('修改中');
     try {
       const res = await updateChartUsingPost({id: currentRow?.id, ...fields});
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         hide();
         message.success('修改成功');
         return true;
@@ -88,7 +88,7 @@ const ChartList: React.FC = () => {
         id: record.id,
       });
       hide();
-      if (res.data) {
+      if (res?.data) {
         message.success('删除成功');
         actionRef.current?.reload();
       }
@@ -172,7 +172,7 @@ const ChartList: React.FC = () => {
           setLoading(true)
           // @ts-ignore
           const res = await listChartByPageUsingGet({...params});
-          if (res.data) {
+          if (res?.data) {
             setLoading(false)
             return {
               data: res?.data?.records || [],

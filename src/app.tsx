@@ -33,8 +33,8 @@ export async function getInitialState(): Promise<InitialState> {
   // console.log(`%c${helloWord}`, 'color:#e59de3')
   try {
     const res = await getLoginUserUsingGet();
-    if (res.data && res.code === 0) {
-      stats.loginUser = res.data;
+    if (res?.data && res?.code === 0) {
+      stats.loginUser = res?.data;
     }
   } catch (error) {
     history.push(loginPath);

@@ -80,11 +80,11 @@ const UserInfo: React.FC = () => {
     const loadData = async () => {
       setLoading(true)
       const res = await getLoginUserUsingGet();
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         if (initialState?.settings.navTheme === "light") {
-          setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "light"}})
+          setInitialState({loginUser: res?.data, settings: {...Settings, navTheme: "light"}})
         } else {
-          setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "realDark"}})
+          setInitialState({loginUser: res?.data, settings: {...Settings, navTheme: "realDark"}})
         }
         const updatedFileList = [...fileList];
         if (loginUser && loginUser.userAvatar) {
@@ -170,8 +170,8 @@ const UserInfo: React.FC = () => {
     const updateVoucher = async () => {
       setVoucherLoading(true)
       const res = await updateVoucherUsingPost();
-      if (res.data && res.code === 0) {
-        setInitialState({loginUser: res.data, settings: Settings})
+      if (res?.data && res?.code === 0) {
+        setInitialState({loginUser: res?.data, settings: Settings})
         setTimeout(() => {
           message.success(`凭证更新成功`);
           setVoucherLoading(false)
@@ -192,8 +192,8 @@ const UserInfo: React.FC = () => {
         userName: userName,
         gender: gender,
       })
-      if (res.data && res.code === 0) {
-        setInitialState({loginUser: res.data, settings: Settings})
+      if (res?.data && res?.code === 0) {
+        setInitialState({loginUser: res?.data, settings: Settings})
         message.success(`信息更新成功`);
       }
     }
@@ -261,11 +261,11 @@ const UserInfo: React.FC = () => {
       const res = await userBindEmailUsingPost({
         ...values,
       });
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         if (initialState?.settings.navTheme === "light") {
-          setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "light"}})
+          setInitialState({loginUser: res?.data, settings: {...Settings, navTheme: "light"}})
         } else {
-          setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "realDark"}})
+          setInitialState({loginUser: res?.data, settings: {...Settings, navTheme: "realDark"}})
         }
         setOpenEmailModal(false)
         message.success('绑定成功');
@@ -275,11 +275,11 @@ const UserInfo: React.FC = () => {
     const handleUnBindEmailSubmit = async (values: API.UserUnBindEmailRequest) => {
       // 解绑邮箱
       const res = await userUnBindEmailUsingPost({...values});
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         if (initialState?.settings.navTheme === "light") {
-          setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "light"}})
+          setInitialState({loginUser: res?.data, settings: {...Settings, navTheme: "light"}})
         } else {
-          setInitialState({loginUser: res.data, settings: {...Settings, navTheme: "realDark"}})
+          setInitialState({loginUser: res?.data, settings: {...Settings, navTheme: "realDark"}})
         }
         setOpenEmailModal(false)
         message.success('解绑成功');
@@ -304,8 +304,8 @@ const UserInfo: React.FC = () => {
         ...values,
         id: loginUser?.id
       });
-      if (res.data && res.code === 0) {
-        if (res.data === true) {
+      if (res?.data && res?.code === 0) {
+        if (res?.data === true) {
           setOpenPasswordModal(false)
           message.success('修改密码成功');
         } else {
@@ -320,8 +320,8 @@ const UserInfo: React.FC = () => {
     const handleCheckIn = async () => {
       try {
         const res = await userCheckInUsingPost();
-        if (res.code === 0) {
-          if (res.data) {
+        if (res?.code === 0) {
+          if (res?.data) {
             message.success('签到成功 积分+5');
             loadData();
           } else {

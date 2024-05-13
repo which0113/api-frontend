@@ -22,7 +22,7 @@ const InterfaceSquare: React.FC = () => {
       sortOrder: 'descend',
       description: searchText,
     });
-    if (res.code === 0 && res.data) {
+    if (res?.code === 0 && res?.data) {
       setData(res?.data?.records || []);
       // @ts-ignore
       setTotal(res?.data?.total)

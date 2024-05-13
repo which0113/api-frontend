@@ -60,15 +60,15 @@ const Login: React.FC = () => {
     };
   });
   const doLogin = (res: any) => {
-    if (res.data && res.code === 0) {
-      localStorage.setItem("token", JSON.stringify(res.data.token));
+    if (res?.data && res?.code === 0) {
+      localStorage.setItem("token", JSON.stringify(res?.data.token));
       message.success('登录成功').then(() => {
       });
       setTimeout(() => {
         const urlParams = new URL(window.location.href).searchParams;
         history.push(urlParams.get('redirect') || '/');
       }, 100);
-      setInitialState({loginUser: res.data, settings: Settings});
+      setInitialState({loginUser: res?.data, settings: Settings});
     }
   }
   const handleSubmit = async (values: API.UserLoginRequest) => {
@@ -219,7 +219,7 @@ const Login: React.FC = () => {
                 ]}
                 onGetCaptcha={async (emailAccount) => {
                   const res = await getEmailCaptchaUsingGet({emailAccount})
-                  if (res.data && res.code === 0) {
+                  if (res?.data && res?.code === 0) {
                     message.success("验证码发送成功")
                     return
                   }

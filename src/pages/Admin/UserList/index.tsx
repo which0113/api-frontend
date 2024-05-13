@@ -44,7 +44,7 @@ const UserList: React.FC = () => {
       const res = await addUserUsingPost({
         ...fields,
       });
-      if (res.data && res.code === 0) {
+      if (res?.code === 0) {
         hide();
         message.success('添加成功');
         return true;
@@ -69,7 +69,7 @@ const UserList: React.FC = () => {
         id: record.id,
       });
       hide();
-      if (res.data) {
+      if (res?.data) {
         message.success('解封成功');
         actionRef.current?.reload();
       }
@@ -94,7 +94,7 @@ const UserList: React.FC = () => {
         id: record.id,
       });
       hide();
-      if (res.data) {
+      if (res?.data) {
         message.success('封号成功');
         actionRef.current?.reload();
       }
@@ -115,7 +115,7 @@ const UserList: React.FC = () => {
     const hide = message.loading('修改中');
     try {
       const res = await updateUserUsingPost({id: currentRow?.id, ...fields});
-      if (res.data && res.code === 0) {
+      if (res?.data && res?.code === 0) {
         hide();
         message.success('修改成功');
         return true;
@@ -140,7 +140,7 @@ const UserList: React.FC = () => {
         id: record.id,
       });
       hide();
-      if (res.data) {
+      if (res?.data) {
         message.success('删除成功');
         actionRef.current?.reload();
       }
@@ -247,7 +247,7 @@ const UserList: React.FC = () => {
           setLoading(true)
           // @ts-ignore
           const res = await listUserByPageUsingGet({...params});
-          if (res.data) {
+          if (res?.data) {
             setLoading(false)
             return {
               data: res?.data?.records || [],
