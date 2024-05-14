@@ -75,6 +75,7 @@ declare namespace API {
     chartId?: string;
     genChat?: string;
     genResult?: string;
+    updateTime?: string;
   };
 
   type ChartAddRequest = {
@@ -149,6 +150,7 @@ declare namespace API {
     name?: string;
     status?: string;
     uid?: string;
+    updateTime?: string;
     url?: string;
   };
 
