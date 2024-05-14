@@ -139,7 +139,6 @@ const Welcome: React.FC = () => {
                 <br/>
                 <br/>
                 💻 作为开发者，我们提供了
-                {/*todo 地址修改*/}
                 <a href="https://github.com/which0113/api-sdk" target="_blank" rel="noreferrer">
                   客户端SDK
                 </a>
@@ -151,7 +150,11 @@ const Welcome: React.FC = () => {
                 即可将轻松集成接口到您的项目中，实现更高效的开发和调用。
                 <br/>
                 <br/>
-                🔎 您只需要导入最原始的数据集，输入需要分析的目标，就能利用 AI 智能生成一个可选择的数据分析图表和分析结论。
+                🔎 您只需要导入最原始的数据集，输入需要分析的目标，就能利用
+                <Link to="/analyse">
+                  AI智能生成
+                </Link>
+                一个可下载的数据分析图表和分析结论。
                 <br/>
                 <br/>
                 🤝 您可以将自己的接口接入到咸鱼-API 接口开放平台平台上，并发布给其他用户使用。
