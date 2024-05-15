@@ -209,6 +209,10 @@ const UserInfo: React.FC = () => {
       withCredentials: true,
       action: `${requestConfig.baseURL}api/file/upload?biz=user_avatar`,
       onChange: async function ({file, fileList: newFileList}) {
+        if (loginUser?.userRole === 'demo') {
+          message.error('无权限');
+          return;
+        }
         const {response} = file;
         if (file.response && response.data) {
           const {data: {status, url}} = response
