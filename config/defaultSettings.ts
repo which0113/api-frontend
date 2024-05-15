@@ -15,7 +15,6 @@ const Settings: ProLayoutProps & {
   splitMenus: false,
   title: '咸鱼-API 接口开放平台',
   pwa: false,
-  // logo: 'public/logo.ico',
-  iconfontUrl: 'public/logo.ico',
+  iconfontUrl: 'public/favicon.ico',
 };
 export default Settings;
