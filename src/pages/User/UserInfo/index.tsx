@@ -146,13 +146,13 @@ const UserInfo: React.FC = () => {
     const beforeUpload = async (file: RcFile) => {
       const fileType = unloadFileTypeList.includes(file.type)
       if (!fileType) {
-        message.error('请上传正确的图片格式');
+        message.info('请上传正确的图片格式');
       }
-      const isLt2M = file.size / 1024 / 1024 < 1;
-      if (!isLt2M) {
-        message.error('图片大小不能超过1M');
+      const isLt1M = file?.size / 1024 / 1024 < 1;
+      if (!isLt1M) {
+        message.info('图片大小不能超过1M');
       }
-      if (!isLt2M && !fileType) {
+      if (!isLt1M && !fileType) {
         const updatedFileList = [...fileList];
         updatedFileList[0] = {
           // @ts-ignore
@@ -165,7 +165,7 @@ const UserInfo: React.FC = () => {
         setFileList(updatedFileList);
         return false
       }
-      return fileType && isLt2M;
+      return fileType && isLt1M;
     };
 
     const updateVoucher = async () => {

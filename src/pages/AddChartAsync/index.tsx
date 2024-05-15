@@ -29,6 +29,11 @@ const AddChartAsync: React.FC = () => {
       message.info('文件格式限定为csv、xls和xlsx');
       return;
     }
+    const fileSizeInMB = fileObj?.size / (1024 * 1024);
+    if (fileSizeInMB > 10) {
+      message.info('文件大小限定为10MB以内');
+      return;
+    }
     // 避免重复提交
     if (submitting) {
       return;
