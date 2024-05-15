@@ -27,6 +27,18 @@ export const ChartAddModalFormColumns: ProFormColumnsType<API.ChartAddRequest, "
     dataIndex: 'goal',
     key: "goal",
     valueType: 'textarea',
+    formItemProps: {
+      rules: [
+        () => ({
+          validator(_, value) {
+            if (!value || value.length < 0) {
+              return Promise.reject(new Error("分析目标为必填项"));
+            }
+            return Promise.resolve();
+          },
+          required: true
+        })],
+    },
   },
   {
     title: '图表信息',
@@ -90,6 +102,18 @@ export const ChartUpdateModalFormColumns: ProFormColumnsType<API.ChartUpdateRequ
     dataIndex: 'goal',
     key: "goal",
     valueType: 'textarea',
+    formItemProps: {
+      rules: [
+        () => ({
+          validator(_, value) {
+            if (!value || value.length < 0) {
+              return Promise.reject(new Error("分析目标为必填项"));
+            }
+            return Promise.resolve();
+          },
+          required: true
+        })],
+    },
   },
   {
     title: '图表信息',
@@ -132,18 +156,8 @@ export const ChartColumns: ProColumns<API.Chart>[] = [
     title: '名称',
     dataIndex: 'name',
     key: "name",
-    formItemProps: {
-      rules: [
-        () => ({
-          validator(_, value) {
-            if (!value || value.length < 0) {
-              return Promise.reject(new Error("图表名称为必填项"));
-            }
-            return Promise.resolve();
-          },
-          required: true
-        })],
-    },
+    ellipsis: true,
+    copyable: true,
   },
   {
     title: '图表类型',
@@ -157,14 +171,6 @@ export const ChartColumns: ProColumns<API.Chart>[] = [
       '饼图': '饼图',
       '雷达图': '雷达图',
     }
-  },
-  {
-    title: '更新时间',
-    dataIndex: 'updateTime',
-    key: "updateTime",
-    hideInSearch: true,
-    valueType: "text",
-    render: (text: any) => text.split('T')[0],
   },
   {
     title: '图表状态',
@@ -195,6 +201,15 @@ export const ChartColumns: ProColumns<API.Chart>[] = [
     dataIndex: 'createUser',
     key: "createUser",
     valueType: "text",
+    ellipsis: true,
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'updateTime',
+    key: "updateTime",
+    valueType: "text",
+    hideInSearch: true,
+    render: (text: any) => text ? text.split('T')[0] : '',
   },
 ];
 

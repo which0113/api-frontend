@@ -425,19 +425,14 @@ const InterfaceInfoColumns: ProColumns<API.InterfaceInfoVO>[] = [
       },
     },
   },
-  // {
-  //   title: '更新时间',
-  //   dataIndex: 'updateTime',
-  //   valueType: 'dateTime',
-  //   key: 'updateTime',
-  // },
-  // {
-  //   title: '创建时间',
-  //   dataIndex: 'createTime',
-  //   valueType: 'dateTime',
-  //   key: 'createTime',
-  //   search: false,
-  // },
+  {
+    title: '更新时间',
+    dataIndex: 'updateTime',
+    key: 'updateTime',
+    valueType: 'text',
+    hideInSearch: true,
+    render: (text: any) => text ? text.split('T')[0] : '',
+  },
 ];
 
 export default InterfaceInfoColumns;

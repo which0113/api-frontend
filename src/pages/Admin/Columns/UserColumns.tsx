@@ -241,7 +241,6 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
   {
     title: '昵称',
     dataIndex: 'userName',
-    copyable: true,
     ellipsis: true,
     key: 'userName',
   },
@@ -249,7 +248,7 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
     title: '账号',
     dataIndex: 'userAccount',
     valueType: 'text',
-    copyable: true,
+    ellipsis: true,
     key: 'userAccount',
   },
   {
@@ -265,12 +264,12 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
     valueType: 'text',
     copyable: true,
     key: 'email',
+    ellipsis: true,
   },
   {
     title: '积分',
     dataIndex: 'balance',
     valueType: 'text',
-    copyable: true,
     key: 'balance',
     // @ts-ignore
     sorter: (a, b) => a.balance - b.balance,
@@ -318,6 +317,14 @@ export const UserColumns: ProColumns<API.UserVO>[] = [
         text: '女',
       }
     }
+  },
+  {
+    title: '更新时间',
+    dataIndex: 'updateTime',
+    key: "updateTime",
+    valueType: "text",
+    hideInSearch: true,
+    render: (text: any) => text ? text.split('T')[0] : '',
   },
 ];
 
