@@ -298,7 +298,7 @@ const UserInfo: React.FC = () => {
       const userNewPassword = values.userNewPassword;
       // @ts-ignore
       if (userOldPassword.length < 8 || userNewPassword?.length < 8) {
-        message.error('密码过短，不能低于8位字符');
+        message.info('密码过短，不能低于8位字符');
         return;
       }
       if (userOldPassword === userNewPassword) {

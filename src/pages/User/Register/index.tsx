@@ -85,6 +85,18 @@ const Register: React.FC = () => {
   }
 
   const handleSubmit = async (values: API.UserRegisterRequest) => {
+    // 修改密码
+    const userPassword = values?.userPassword;
+    const checkPassword = values?.checkPassword;
+    // @ts-ignore
+    if (userPassword.length < 8 || checkPassword?.length < 8) {
+      message.info('密码过短，不能低于8位字符');
+      return;
+    }
+    if (userPassword !== checkPassword) {
+      message.info('两次输入的密码不一致');
+      return;
+    }
     try {
       // 登录
       const res = await userRegisterUsingPost({

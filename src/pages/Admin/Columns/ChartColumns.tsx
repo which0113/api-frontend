@@ -143,8 +143,7 @@ export const ChartUpdateModalFormColumns: ProFormColumnsType<API.ChartUpdateRequ
   },
 ];
 
-// @ts-ignore
-export const ChartColumns: ProColumns<API.Chart>[] = [
+export const ChartColumns: ProColumns<API.ChartVO>[] = [
   {
     title: 'id',
     dataIndex: 'id',

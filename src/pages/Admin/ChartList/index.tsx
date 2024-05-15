@@ -146,7 +146,6 @@ const ChartList: React.FC = () => {
   ];
   return (
     <Card>
-
       <ProTable<API.ChartVO>
         headerTitle={'图表管理'}
         actionRef={actionRef}
