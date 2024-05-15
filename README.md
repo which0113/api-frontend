@@ -116,7 +116,7 @@
 
 环境要求：Node.js >= 18
 
-### 安装依赖：
+### 安装依赖
 
 ```bash
 yarn 
@@ -128,7 +128,7 @@ or
 npm install
 ```
 
-### 启动：
+### 启动
 
 ```bash
 yarn run dev 
@@ -140,7 +140,7 @@ or
 npm run start:dev
 ```
 
-### 部署：
+### 部署
 
 ```bash
 yarn build 
