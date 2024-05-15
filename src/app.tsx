@@ -1,4 +1,4 @@
-import {BarsOutlined, GithubOutlined, WechatOutlined} from '@ant-design/icons';
+import {BarsOutlined, GithubOutlined, MoonOutlined, WechatOutlined} from '@ant-design/icons';
 import type {RunTimeLayoutConfig} from '@umijs/max';
 import {history} from '@umijs/max';
 import {AvatarDropdown, AvatarName} from './components/RightContent/AvatarDropdown';
@@ -10,8 +10,6 @@ import {getLoginUserUsingGet} from "@/services/api-backend/userController";
 import {FloatButton} from 'antd';
 import React from "react";
 import wechat from '@/../public/assets/WeChat.jpg';
-import LightColor from "@/components/Icon/LightColor";
-import SendGift from "@/components/Gift/SendGift";
 import NoFoundPage from "@/pages/404";
 
 const loginPath = '/user/login';
@@ -83,7 +81,7 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
         />
         <FloatButton
           tooltip={"切换主题"}
-          icon={<LightColor/>}
+          icon={<MoonOutlined/>}
           onClick={() => {
             if (initialState?.settings.navTheme === "light") {
               setInitialState({loginUser: initialState?.loginUser, settings: {...Settings, navTheme: "realDark"}})
@@ -94,11 +92,6 @@ export const layout: RunTimeLayoutConfig = ({initialState, setInitialState}) => 
           }
         />
       </FloatButton.Group>
-      <SendGift
-        invitationCode={initialState?.loginUser?.invitationCode}
-        open={initialState?.open}
-        onCancel={() => setInitialState({loginUser: initialState?.loginUser, settings: Settings, open: false})
-        }></SendGift>
     </>,
     avatarProps: {
       src: valueLength(initialState?.loginUser?.userAvatar) ? initialState?.loginUser?.userAvatar :

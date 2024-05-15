@@ -30,7 +30,6 @@ import Settings from '../../../../config/defaultSettings';
 import Paragraph from "antd/lib/typography/Paragraph";
 import ProCard from "@ant-design/pro-card";
 import {requestConfig} from "@/requestConfig";
-import SendGiftModal from "@/components/Gift/SendGift";
 import EmailModal from "@/components/EmailModal";
 import PasswordModal from "@/components/PasswordModal";
 
@@ -49,7 +48,6 @@ const UserInfo: React.FC = () => {
     const handleCancel = () => setPreviewOpen(false);
     const [userName, setUserName] = useState<string | undefined>('');
     const [gender, setGender] = useState<string | undefined>(loginUser?.gender);
-    const [open, setOpen] = useState(false);
     const [openEmailModal, setOpenEmailModal] = useState(false);
     const [openPasswordModal, setOpenPasswordModal] = useState(false);
 
@@ -482,9 +480,6 @@ const UserInfo: React.FC = () => {
             </Button>
           </ProCard>
         </ProCard>
-        <SendGiftModal invitationCode={loginUser?.invitationCode} onCancel={() => {
-          setOpen(false)
-        }} open={open}/>
         <EmailModal unbindSubmit={handleUnBindEmailSubmit}
                     bindSubmit={handleBindEmailSubmit} data={loginUser}
                     onCancel={() => setOpenEmailModal(false)}

@@ -1,6 +1,6 @@
 import {genChartByAiUsingPost} from '@/services/api-backend/chartController';
 import {UploadOutlined} from '@ant-design/icons';
-import {Button, Card, Form, Input, message, Select, Space, Upload} from 'antd';
+import {Button, Card, Form, Input, message, Select, Space, Tooltip, Upload} from 'antd';
 import {useForm} from 'antd/es/form/Form';
 import TextArea from 'antd/es/input/TextArea';
 import React, {useState} from 'react';
@@ -26,7 +26,7 @@ const AddChartAsync: React.FC = () => {
     }
     const fileExtension = fileObj.name.substring(fileObj.name.lastIndexOf('.'));
     if (!allowedExtensions.includes(fileExtension)) {
-      message.info('文件格式限定为csv、xls和xlsx');
+      message.info('文件格式限定为csv、xls、xlsx');
       return;
     }
     const fileSizeInMB = fileObj?.size / (1024 * 1024);
@@ -111,7 +111,9 @@ const AddChartAsync: React.FC = () => {
           </Form.Item>
           <Form.Item name="file" label="原始数据">
             <Upload name="file" maxCount={1} onChange={handleFileUpload}>
-              <Button icon={<UploadOutlined/>}>上传 CSV 文件</Button>
+              <Tooltip color="blue" title="文件格式限定为csv、xls、xlsx" placement={"right"}>
+                <Button icon={<UploadOutlined/>}>上传 Excel 文件</Button>
+              </Tooltip>
             </Upload>
           </Form.Item>
 

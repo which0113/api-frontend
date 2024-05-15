@@ -1,2 +1,0 @@
-# 请在外部使用acme.sh（如git.bash）
-acme.sh --issue -d freefish.love -d *.freefish.love --dns dns_dp --server https://acme.freessl.cn/v2/DV90/directory/xxx

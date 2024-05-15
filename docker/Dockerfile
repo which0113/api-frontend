@@ -5,7 +5,6 @@ USER root
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY dist .
-COPY cert /usr/cert
 
 EXPOSE 80
 
