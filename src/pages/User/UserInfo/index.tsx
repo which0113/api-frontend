@@ -98,6 +98,7 @@ const UserInfo: React.FC = () => {
         }
         setUserName(loginUser?.userName);
         setGender(loginUser?.gender);
+        setPreviewImage(loginUser?.userAvatar as string);
         setLoading(false);
       }
       // PC端显示指引
@@ -179,13 +180,15 @@ const UserInfo: React.FC = () => {
     }
 
     const updateUserInfo = async () => {
+      if (!fileList || !fileList[0]) {
+        message.info('请上传头像');
+        return;
+      }
       let avatarUrl = ''
-      if (fileList && fileList[0] && valueLength(fileList[0].url)) {
-        // @ts-ignore
-        avatarUrl = fileList[0].url
+      if (valueLength(fileList[0]?.url)) {
+        avatarUrl = fileList[0]?.url as string;
       }
       const res = await updateUserUsingPost({
-        // @ts-ignore
         userAvatar: avatarUrl,
         id: loginUser?.id,
         userName: userName,
@@ -193,7 +196,7 @@ const UserInfo: React.FC = () => {
       })
       if (res?.data && res?.code === 0) {
         setInitialState({loginUser: res?.data, settings: Settings})
-        message.success(`信息更新成功`);
+        message.success('信息更新成功');
       }
     }
 
