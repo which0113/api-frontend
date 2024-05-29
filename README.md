@@ -38,6 +38,61 @@
 - [项目前端地址 🔗](https://github.com/which0113/api-frontend)
 - [项目后端地址 🔗](https://github.com/which0113/freefish-api)
 
+## 使用指导
+
+### 克隆项目到本地
+
+```bash
+git clone git@github.com:which0113/freefish-api.git
+```
+
+### 运行前端
+
+确保 node >= 18，查看 node 版本
+
+```bash
+node -v
+```
+
+#### 安装依赖
+
+```bash
+npm install
+```
+
+#### 启动
+
+```bash
+npm run dev
+```
+
+#### 其他
+
+- [config.ts](config%2Fconfig.ts) 文件可修改对接后端服务器接口的地址，默认：http://localhost:9001
+- 如果更改后端服务器接口的地址，则需要更改 WebSocket 连接地址，默认：ws://localhost:9001/api/ws/
+
+#### 部署前端
+
+方法一：生成 dist 文件部署
+
+```bash
+npm run build
+```
+
+方法二：使用 docker 容器部署
+
+构建：
+
+```bash
+docker build -t freefish-api-frontend:v0.0.1 .
+```
+
+运行：
+
+```bash
+docker run -p 80:80 -d freefish-api-frontend:v0.0.1
+```
+
 ## 项目展示
 
 ### 首页
@@ -111,46 +166,6 @@
 #### 用户管理
 
 ![user-management.png](doc%2Fuser-management.png)
-
-## 快速启动
-
-环境要求：Node.js >= 18
-
-### 安装依赖
-
-```bash
-yarn 
-```
-
-or
-
-```bash
-npm install
-```
-
-### 启动
-
-```bash
-yarn run dev 
-```
-
-or
-
-```bash
-npm run start:dev
-```
-
-### 部署
-
-```bash
-yarn build 
-```
-
-or
-
-```bash
-npm run build
-```
 
 ## 技术栈
 
