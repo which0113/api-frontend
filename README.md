@@ -68,8 +68,8 @@ npm run dev
 
 #### 其他
 
-- [config.ts](config%2Fconfig.ts) 文件可修改对接后端服务器接口的地址，默认：http://localhost:9001
-- 如果更改后端服务器接口的地址，则需要更改 WebSocket 连接地址，默认：ws://localhost:9001/api/ws/
+- [requestConfig.ts](src%2FrequestConfig.ts) 文件可修改对接后端服务器接口的地址，默认：http://localhost:9001
+- [index.tsx](src%2Fpages%2FMyChart%2Findex.tsx) 可修改 WebSocket 自定义连接地址，默认：ws://localhost:9001/api/ws/
 
 #### 部署前端
 
