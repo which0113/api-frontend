@@ -43,7 +43,7 @@
 ### 克隆项目到本地
 
 ```bash
-git clone git@github.com:which0113/freefish-api.git
+git clone git@github.com:which0113/api-frontend.git
 ```
 
 ### 运行前端
