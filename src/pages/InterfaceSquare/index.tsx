@@ -86,8 +86,7 @@ const InterfaceSquare: React.FC = () => {
                 }}>
                   <Badge count={item.totalInvokes} overflowCount={999999999} color='#eb4d4b'>
                     <Image style={{width: 80, borderRadius: 8, marginLeft: 10}}
-                           src={item?.avatarUrl ?? "public/logo.ico"}
-                           fallback={"public/logo.ico"}
+                           src={item?.avatarUrl}
                            alt={item.name}
                            preview={false}
                     />
